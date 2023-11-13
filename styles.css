@@ -37,6 +37,9 @@ h2 {
     justify-content: center;
    
 }
+.ContOne_three{
+    display: block;
+}
 
 .hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7 {
     display: none;
@@ -51,8 +54,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    position: fixed; /* фиксированная позиция */
-    bottom: 0; /* расположение внизу */
+    margin-top: 25%;
     width: 100%; /* 100% ширины родительского контейнера */
 }
     
@@ -69,4 +71,3 @@ button {
 .Count h2 .th-part {
     margin-left: 25px; /* значение отступа */
 }
-
