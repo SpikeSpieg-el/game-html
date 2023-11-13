@@ -30,7 +30,7 @@ function incrementClick() {
     }
     document.getElementById("clickCount").innerText = clickCount;
     document.getElementById("clickValue").innerText = clickValue;
-    document.getElementById("autoClick").innerText = autoClick;
+
 
     for (let i = 1; i <= UPGRADE_COUNT; i++) {
         const upgrade = upgrades[i - 1];
