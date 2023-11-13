@@ -47,6 +47,14 @@ button {
     font-size: 16px;
     margin: 15px;
 }
+.clickButton {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed; /* фиксированная позиция */
+    bottom: 0; /* расположение внизу */
+    width: 100%; /* 100% ширины родительского контейнера */
+    
 .Count{
     display: flex;
     flex-direction: row;
@@ -55,9 +63,9 @@ button {
     flex-wrap: nowrap;
 }
 .Count h2 .first-part{
-    margin-right: 25px; /* Выберите подходящее значение отступа */
+    margin-right: 25px;
 }
 .Count h2 .th-part {
-    margin-left: 25px; /* Выберите подходящее значение отступа */
+    margin-left: 25px; /* значение отступа */
 }
 
