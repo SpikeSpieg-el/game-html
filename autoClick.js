@@ -1,0 +1,2 @@
+// autoClick.js
+

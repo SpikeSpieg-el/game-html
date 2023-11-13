@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    
+    margin: 0;
+    color: rgb(137, 43, 226);
+    background-color: black;
+    flex-wrap: nowrap;
+    
+        background-image: url('_1a79a47e-c117-4e60-a431-cea9c0ac4025.jpg');
+        background-size: cover; /* Растянуть изображение, чтобы оно полностью покрывало фон */
+        
+    
+    
+}
+h2 {
+    color: aquamarine;
+    font-family: 'Montserrat';
+    font-size: medium;
+    border-left: 20px;
+}
+.img-size {
+    width: 80px;
+    height: 80px;
+}
+
+
+.clicker-container {
+    text-align: center;
+}
+
+#upgradeContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7 {
+    display: none;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+}
+.Count{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.Count h2 .first-part{
+    margin-right: 25px; /* Выберите подходящее значение отступа */
+}
+.Count h2 .th-part {
+    margin-left: 25px; /* Выберите подходящее значение отступа */
+}
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Clicker Game</title>
+    <link rel="icon" href="cating.png" type="image/png">
+</head>
+<body>
+    <div class="clicker-container">
+        <h1>Clicker Game</h1>
+        <a><img src="cating.png" alt="img" class="img-size"></a>
+        <div class="Count">
+            
+            <h2>
+                
+                <span class="first-part">For click: <span id="clickValue">0</span></span>
+                <span class="second-part">Clicks count: <span id="clickCount">0</span></span>
+                <span class="th-part">Cat count: <span id="autoClick">0???</span></span>
+            </h2>
+        </div>
+    
+        <button id="clickButton" onclick="incrementClick()">Click me!</button>
+    
+        <div id="upgradeContainer">
+
+           
+
+            <div class="hidden1">
+                <button id="upgrade1" onclick="buyUpgrade1()">
+                    <p> Upgrade Cost: <span class="upgradeCost1" id="upgradeCost1">20</span></p>
+                </button>
+        </div>
+
+            <div class="hidden2">
+                <button id="upgrade2" onclick="buyUpgrade2()">
+                    <p>Upgrade Cost: <span class="upgradeCost" id="upgradeCost2">200</span></p>
+                </button>
+                
+            </div>
+
+            <div class="hidden3">
+                <button id="upgrade3" onclick="buyUpgrade3()">
+                    <p>Upgrade Cost: <span class="upgradeCost" id="upgradeCost3">500</span></p>
+                </button>
+                
+            </div>
+
+            <div class="hidden4">
+                <button id="upgrade4" onclick="buyUpgrade4()">
+                    <p>Upgrade Cost: <span class="upgradeCost" id="upgradeCost4">1000</span></p>
+                </button>
+                
+            </div>
+
+            <div class="hidden5">
+                <button id="upgrade5" onclick="buyUpgrade5()">
+                    <p>Upgrade Cost: <span class="upgradeCost" id="upgradeCost5">3000</span></p>
+                </button>
+                
+            </div>
+
+            <div class="hidden6">
+                <button id="upgrade6" onclick="buyUpgrade6()">
+                    <p>Upgrade Cost: <span class="upgradeCost" id="upgradeCost6">5000</span></p>
+                </button>
+                
+            </div>
+             <div class="hidden7">
+                <button id="upgrade7" onclick="buyUpgrade7()">
+                    <p> Cat <span class="upgradeCost7" id="upgradeCost7">12</span></p>
+                </button>
+            </div>
+        </div>
+        <!-- Добавляем кнопку сохранения -->
+        <button onclick="saveGame()">Save Game</button>
+        <!-- Добавляем кнопку загрузки -->
+        <button onclick="loadGame()">Load Game</button>
+    </div>
+    <!-- Подключение script.js -->
+<script src="script.js"></script>
+<!-- Подключение saveLoad.js после script.js -->
+<script src="saveLoad.js"></script>
+
+</body>
+</html>
