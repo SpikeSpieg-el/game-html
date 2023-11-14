@@ -1,15 +1,13 @@
 body {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-around;
-    
-    margin: 0;
+   margin-left: 5%;
+    margin-right: 5%;
     color: rgb(137, 43, 226);
     background-color: black;
     flex-wrap: nowrap;
     background-size: cover;
 
     background-image: url('OIG.nEJp58LK_kMl.jpg');
+    
     
     
    
