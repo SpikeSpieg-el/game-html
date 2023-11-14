@@ -8,15 +8,60 @@ body {
     background-color: black;
     flex-wrap: nowrap;
     background-size: cover;
+
+    background-image: url('OIG.nEJp58LK_kMl.jpg');
+    
+    background-attachment: fixed; /* Фиксируем фон при прокрутке страницы */
+    background-position: center; /* Выравниваем изображение по центру */
+
+    /* Изменяем ширину и высоту */
+    width: 100vw; /* 100% ширины окна браузера */
+    height: 70vh; /* 100% высоты окна браузера */
+    
 }
+
 .name{
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    margin-right: auto;
-    margin-right: 20px;
+    
+    padding-right:  20px;
+    background: #feb47b;
+    background-blend-mode: color;
+    
+}
+/*.image-container {
+    width: 681px;
+    height: auto;
+    
+}
+
+.clipped-image {
+    width: 248px;
+    height: auto;
+    display: block;
+}*/
+.imageMIDLE{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+     background-blend-mode: color;
+    background: linear-gradient(to top, black, #feb47b);
+   
+   
+}
+
+.img-sizeBG{
+    width: 240px;
+    height: auto;
+}
+.img-sizeBGG{
+    width: 211px;
+    height: auto;
+    padding-top: 10px;
 }
 .top{
     display: flex;
@@ -24,8 +69,9 @@ body {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    margin-right: auto;
-    margin-right: 20px;
+    
+    padding-right: 20px;
+    background: #feb47b;
 }
 
 
@@ -87,6 +133,14 @@ button {
     font-size: 10px;
     margin: 2px;
     transition: transform 0.3s ease-in-out; /* Add a smooth transition for the transform property */
+    color: rgba(17, 17, 17, 0.87);
+    background-color: beige;
+    
+    border-radius: 10px; /* Закругление углов на 10 пикселей */
+            
+            color: #000000; /* Цвет текста кнопки */
+            border: none; /* Убираем границу у кнопки */
+
 }
 
 button:hover {
