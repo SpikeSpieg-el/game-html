@@ -7,7 +7,7 @@ function showColumn(columnNumber) {
     }
 
     // Show the selected column
-    document.getElementById('column' + columnNumber).style.display = 'block';
+    document.getElementById('column' + columnNumber).style.display = 'flex';
 
     currentColumn = columnNumber;
 }
