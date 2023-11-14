@@ -2,7 +2,7 @@ body {
     display: flex;
     align-items: stretch;
     justify-content: space-around;
-    flex-direction: column;
+    
     margin: 0;
     color: rgb(137, 43, 226);
     background-color: black;
@@ -11,25 +11,28 @@ body {
 
     background-image: url('OIG.nEJp58LK_kMl.jpg');
     
-    background-attachment: fixed; /* Фиксируем фон при прокрутке страницы */
+    
+   
     background-position: center; /* Выравниваем изображение по центру */
 
-    /* Изменяем ширину и высоту */
-    width: 100vw; /* 100% ширины окна браузера */
-    height: 70vh; /* 100% высоты окна браузера */
+ 
     
+}
+h1{
+    text-shadow: 1px 1px 2px rgb(0 0 0);
+    font-size: 45px;
+    color: rgb(255, 255, 255);
 }
 
 .name{
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+     background: linear-gradient(to top, #a3a3a34f, #ffffff00);
+
     
-    padding-right:  20px;
-    background: #feb47b;
-    background-blend-mode: color;
     
 }
 /*.image-container {
@@ -48,8 +51,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-     background-blend-mode: color;
-    background: linear-gradient(to top, black, #feb47b);
+    flex-wrap: nowrap;
+     background: #a3a3a34f;
    
    
 }
@@ -71,7 +74,7 @@ body {
     align-items: center;
     
     padding-right: 20px;
-    background: #feb47b;
+    background: #a3a3a34f;
 }
 
 
@@ -80,6 +83,7 @@ h2 {
     font-family: 'Montserrat';
     font-size: medium;
     border-left: 20px;
+    text-shadow: 1px 2px 0px black;
 }
 .img-size {
     width: 80px;
@@ -133,7 +137,7 @@ button {
     font-size: 10px;
     margin: 2px;
     transition: transform 0.3s ease-in-out; /* Add a smooth transition for the transform property */
-    
+   
     
     border-radius: 10px; /* Закругление углов на 10 пикселей */
             
@@ -172,6 +176,8 @@ button:active {
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
+    background: linear-gradient(to bottom, #a3a3a34f, #a3a3a300);
+
 }
 .Count h2 .first-part{
     margin-right: 25px;
