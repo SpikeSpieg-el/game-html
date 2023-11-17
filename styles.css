@@ -1,5 +1,6 @@
 body {
-   margin-left: 5%;
+    
+    margin-left: 5%;
     margin-right: 5%;
     color: rgb(137, 43, 226);
     background-color: black;
@@ -7,7 +8,6 @@ body {
     background-size: cover;
 
     background-image: url('OIG.nEJp58LK_kMl.jpg');
-    
     
     
    
@@ -24,7 +24,7 @@ h1{
 
 .name{
     display: flex;
-    flex-wrap: nowrap;
+    
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -65,13 +65,9 @@ h1{
     padding-top: 10px;
 }
 .top{
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+    display: block;
     
-    padding-right: 20px;
+    /*padding-right: 20px;*/
     background: #a3a3a34f;
 }
 
@@ -83,6 +79,11 @@ h2 {
     border-left: 20px;
     text-shadow: 1px 2px 0px black;
 }
+#clickCount{
+    font-size: 20px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .img-size {
     width: 80px;
     height: 80px;
@@ -95,6 +96,7 @@ h2 {
 
 .clicker-container {
     text-align: center;
+    
 }
 
 #upgradeContainer {
@@ -103,24 +105,55 @@ h2 {
     justify-content: center;
    
 }
-.upgradeColumn{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-content: center;
-    justify-content: space-evenly;
-    align-items: baseline;
-}
+
 
 
 .ContOne_three{
     display: block;
 }
 
-.hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7 {
+.hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7, .hidden8,
+ .hidden9, .hidden10, .hidden11, .hidden12, .hidden13, .hidden14 {
     display: none;
     
 }
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes slideDown {
+    0% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+    100% { transform: translateY(0); }
+}
+
+/* Display notifications initially with fadeInOut animation */
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 1s ease-in-out, slideDown 0.5s ease-in-out;;
+}
+
+/* Apply fade-out animation when hiding notifications */
+.notification.fadeOut {
+    animation: fadeOut 0.5s ease-in-out;
+}
+
+.success { background-color: #4CAF50; }
+.info { background-color: #3498db; }
+.warning { background-color: #f39c12; }
+.error { background-color: #e74c3c; }
+.custom { background-color: #9b59b6; }
+
+
 .catIMG{
     display: flex;
     flex-wrap: nowrap;
@@ -129,10 +162,13 @@ h2 {
     align-items: center;
     margin-left: 10px;
 }
+#catCount{
+    font-size: 24px;
+}
 
 button {
     padding: 11px 11px;
-    font-size: 10px;
+    
     margin: 2px;
     transition: transform 0.3s ease-in-out; /* Add a smooth transition for the transform property */
    
@@ -150,22 +186,32 @@ button:hover {
 
 button:active {
     transform: scale(0.9); /* Scale the button by 10% on press */
-    transform: rotate(3)
+    
 }
 
 
-.clickButton  {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    
-    width: 100%; /* 100% ширины родительского контейнера */
-    
-}
-.cliker{
+.clickButton .clicker {
     padding: 20px 60px;
-    font-size: 15px;
     margin: 10px;
+    background-color: #000000;
+    color: #fff;
+    border: 2px solid #2980b9;
+}
+
+/* Style the animated number */
+#animatedNumber {
+    font-size: 30px;
+    color: white;
+    text-shadow: 1px 2px 0px black;
+    opacity: 0;
+    transition: opacity 0.1s, transform 3s;
+    display: block;
+}
+.animated-number-container {
+    display: block;
+    z-index: 1; /* Ensure it's above other elements */
+    
+   
 }
     
 .Count{
