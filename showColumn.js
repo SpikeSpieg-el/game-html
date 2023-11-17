@@ -7,7 +7,21 @@ function showColumn(columnNumber) {
     }
 
     // Show the selected column
-    document.getElementById('column' + columnNumber).style.display = 'flex';
+    var column = document.getElementById('column' + columnNumber);
+    column.style.display = 'flex';
+    
+    // Apply flex styles only to the second column
+    if (columnNumber === 2) {
+        column.style.flexDirection = 'row';
+        column.style.flexWrap = 'wrap';
+        column.style.justifyContent = 'space-evenly';
+    }
+    if (columnNumber === 1) {
+        
+        column.style.flexWrap = 'wrap';
+        column.style.justifyContent = 'space-berween';
+        column.style.alignitems = 'center';
+    }
 
     currentColumn = columnNumber;
 }
