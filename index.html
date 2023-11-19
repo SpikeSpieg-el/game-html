@@ -13,9 +13,18 @@
     <div class="name">
         <!--<div class="image-container">
         <img class="clipped-image" src="" alt="bd1"></div> -->
-        <h1>Clicker Game</h1>
-    
+        <h1>Clicker Game
+           
+        </h1>
+     <a class="imageMIDLE" >
+           
+                <img src="cating.png" alt="img" class="img-size">
+                
+            </a>
             
+    </div>
+    <div id="notifications-container">
+        <!-- Уведомления будут добавляться сюда -->
     </div>
     <div class="top">
 
@@ -25,28 +34,32 @@
             <button onclick="loadGame()">Load Game</button>
      </div>
         
-        <a class="imageMIDLE" ><img src="B1G.png" alt="img" class="img-sizeBG">
-            <img src="cating.png" alt="img" class="img-size">
-            <img src="3BG.png" alt="img" class="img-sizeBGG">
-        </a>
+        
         
         
         <div class="Count">
             
             <h2>
-                
+                <div>Посеселение Cat: <img src="333.png" alt="cat" class="img-sizeCAT_top">
+                     <span id="catCount"> 20 </span>
+                </div>
                 <span class="first-part">For click: <span id="clickValue">0</span></span>
                 <span class="second-part">Clicks count: <span id="clickCount">0</span></span>
+                
                 
         
 
             </h2>
         </div>
+        <div class="animated-number-container">
+            <span id="animatedNumber"></span>
+        </div>
         <div class="pages">
             <span><button onclick="showColumn(1)">Upgrade</button></span>
             <span><button onclick="showColumn(2)">More</button></span>
             <!-- Column3<span><button onclick="showColumn(3)">3</button></span>-->
-            <span><button onclick="showNextColumn()">next</button></span>
+            <span><button onclick="showColumn(3)">Sity</button></span>
+            <!--<span><button onclick="showNextColumn()">next</button></span>-->
         </div>
         
         
@@ -57,7 +70,9 @@
                 <div class="hidden1">
                 <div class="catIMG">
                     <button id="upgrade1" onclick="buyUpgrade1()">
-                        Upgrade Cost: <span class="upgradeCost1" id="upgradeCost1">20</span>
+                        Upgrade <span>+1</span> Cost: 
+                        <span class="upgradeCost1" id="upgradeCost1">20</span>
+                        
                     </button>
                     
                 </div>
@@ -66,7 +81,7 @@
                 <div class="hidden2">
                     <div class="catIMG">
                     <button id="upgrade2" onclick="buyUpgrade2()">
-                        Upgrade Cost: <span class="upgradeCost" id="upgradeCost2">200</span>
+                        Upgrade <span>+2</span> Cost: <span class="upgradeCost" id="upgradeCost2">200</span>
                     </button>
                     
                 </div>
@@ -75,7 +90,7 @@
                 <div class="hidden3">
                     <div class="catIMG">
                     <button id="upgrade3" onclick="buyUpgrade3()">
-                        Upgrade Cost: <span class="upgradeCost" id="upgradeCost3">500</span>
+                        Upgrade <span>+5</span> Cost: <span class="upgradeCost" id="upgradeCost3">500</span>
                     </button>
                     
                 </div>
@@ -83,19 +98,19 @@
         
                 <div class="hidden4">
                     <button id="upgrade4" onclick="buyUpgrade4()">
-                        Upgrade Cost: <span class="upgradeCost" id="upgradeCost4">1000</span>
+                        Upgrade <span>+10</span> Cost: <span class="upgradeCost" id="upgradeCost4">1000</span>
                     </button>
                 </div>
         
                 <div class="hidden5">
                     <button id="upgrade5" onclick="buyUpgrade5()">
-                        Upgrade Cost: <span class="upgradeCost" id="upgradeCost5">3000</span>
+                        Upgrade <span>+20</span>Cost: <span class="upgradeCost" id="upgradeCost5">3000</span>
                     </button>
                 </div>
         
                 <div class="hidden6">
                     <button id="upgrade6" onclick="buyUpgrade6()">
-                        Upgrade Cost: <span class="upgradeCost" id="upgradeCost6">5000</span>
+                        Upgrade <span>+50</span>Cost: <span class="upgradeCost" id="upgradeCost6">5000</span>
                     </button>
                 </div>
         
@@ -105,35 +120,58 @@
         
             <!-- Column 2: Постройки -->
             <div class="upgradeColumn" id="column2">
-            <div>Cat count: <span id="catCount">0</span></div>
-                <div class="hidden7">
+                    <div class="hidden7">
                     <button id="upgrade7" onclick="buyUpgrade7()">
-                         Cat <span class="upgradeCost7" id="upgradeCost7">12</span>
+                         Cat <span class="upgradeCost7" id="upgradeCost7">100</span>
                          <img src="333.png" alt="acat" class="img-sizeCAT">
                     </button>
+                    </div>
+                <div class="hidden9">
+                    
+                    <button id="upgrade9" onclick="buyUpgrade9()">
+                         Построить поле <span class="upgradeCost9" id="upgradeCost9">15</span>
+                         <br>Пшено <a id="wheatTotalCount">0</a></br>
+                         <img src="Pole.png" alt="acat" class="img-sizeCAT">
+                    </button>
+                </div>
                 <div class="hidden8">
                     <button id="upgrade8" onclick="buyUpgrade8()">
                          Построить амбар <span class="upgradeCost8" id="upgradeCost8">15</span>
                          <img src="OIG.3NJJoFBIJGj4Z.png" alt="acat" class="img-sizeCAT">
                     </button>
-                </button>
-                <div class="hidden9">
-                    <button id="upgrade9" onclick="buyUpgrade9()">
-                         Построить домик <span class="upgradeCost9" id="upgradeCost9">15</span>
-                         <img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sizeCAT">
+                </div>
+                <div class="hidden10">
+                    <button id="upgrade10" onclick="buyUpgrade10()">
+                         Построить лесопилку <span class="upgradeCost10" id="upgradeCost10">15</span>
+                         <br>Дерево <a id="woodTotalCount">0</a></br>
+                         
+                         <img src="forest_pilka.png" alt="acat" class="img-sizeCAT">
                     </button>
                 </div>
-                </div>
-            </div>
-        
-            <!-- Column 3: Empty -->
-            <div class="upgradeColumn" id="column3">
-                <button>Upgrade botton cost3</button>
-                <button>Upgrade botton cost3</button>
-                <button>Upgrade botton cost3</button>
-                <button>Upgrade botton cost3</button>
+                
+                
             </div>
         </div>
+            <!-- Column 3: Empty -->
+            <div class="upgradeColumn" id="column3">
+                <div class="sity" >
+                    <div class="caption">10 Котов на один дом</div>
+                    <a>
+                        <img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity">
+                    </a>
+                
+                    <img  src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity">
+                    <a id= "hiddenimg9"></a>
+                    
+                    <a id= "hiddenimg8"> </a>
+
+                    <a id="hiddenimg10"> </a>
+                   
+
+                </div>
+            </div>
+            
+        
 
         
         
@@ -144,22 +182,19 @@
             <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
             <div class="animatedNumber" id="animatedNumber"></div>
         </div> 
-        <div class="animated-number-container">
-            <span id="animatedNumber"></span>
-        </div>
+        
 
         
-        <div id="notifications-container">
-            <!-- Уведомления будут добавляться сюда -->
-        </div>
-       
-    
+        
+  <!-- Подключение script.js -->
+<script src="script.js"></script>
+
+<!-- Подключение saveLoad.js после script.js -->
+<script src="saveLoad.js"></script>      
+        
 <script src="showColumn.js"></script>
 
-    <!-- Подключение script.js -->
-<script src="script.js"></script>
-<!-- Подключение saveLoad.js после script.js -->
-<script src="saveLoad.js"></script>
+
 
 </body>
 </html>
