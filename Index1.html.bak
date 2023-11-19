@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш Заголовок Лендинга</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('paternMINI.png');
+        }
+
+        header {
+            
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        #banner {
+            display: block;
+            text-align: center;
+            
+            
+            
+        }
+
+        #banner img {
+            max-width: 250px;
+            height: auto;
+        }
+
+        #cta {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #cta .button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px 10px;
+        }
+
+        #main-content {
+            text-align: center;
+        display: flex;
+        margin-left: 10%;
+        margin-right: 10%;
+        color: #fff;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        padding-left: 10%;
+        padding-right: 10%;
+        background-color: #3333337a;
+        border-radius: 5%;
+            
+        }
+
+        footer {
+            background-color: #3333337a;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!-- Заголовок и фоновая картинка -->
+      <h1>Ckliker Game</h1>
+    </header>
+    <div id="banner"> <img src="BG3.jpg" alt="Баннер" title="банер" style="width: 176px; height: 176px;">
+    </div>
+    <div id="cta">
+      <!-- Общий блок с кнопками -->
+      <div><a href="index.html" class="button">Играть</a>
+        <div><a><button>Связаться с командой</button></a></div>
+      </div>
+      <div id="main-content">
+        <!-- Блок с текстом -->
+        <p>Название Игры: "Кликер Королевства"</p>
+        <ul>
+          <li>Добро пожаловать в "Кликер Королевства" - захватывающий мир, где
+            каждый ваш клик приносит вам могущество и славу!</li>
+          <li>Станьте верховным правителем, развивайте своё королевство и
+            соревнуйтесь с другими игроками за звание самого могущественного
+            правителя в этом захватывающем кликер-приключении.</li>
+        </ul>
+        <p>Основные особенности:</p>
+        <ul>
+          <li>Кликайте для процветания: Нажимайте на экран, чтобы собирать
+            золото и улучшать свое королевство. Каждый клик приближает вас к
+            величайшему владыке!</li>
+          <li>Улучшайте королевство: Тратьте заработанное золото на улучшения и
+            развитие своего королевства. Разблокируйте новые здания, армию и
+            магические способности, чтобы стать непобедимым.</li>
+          <li>Соревнуйтесь с друзьями: Покажите свою мощь, сравниваясь с
+            друзьями и другими игроками в рейтинге. Кто станет королем кликеров?</li>
+          <li>Эпические задания: Вызывайте себя на выполнение эпических заданий
+            и получайте уникальные награды. Вас ждут захватывающие испытания!</li>
+          <li>Магия и приключения: Откройте для себя магические способности,
+            встречайте героев и сталкивайтесь с могущественными боссами. Вас
+            ждут невероятные приключения!</li>
+        </ul>
+        <p>Готовы ли вы стать легендой "Кликер Королевства"? Приготовьтесь к
+          кликанью, стратегии и волнующим апгрейдам!</p>
+      </div>
+      <footer>
+        <!-- Подвал -->
+        <p>© 2023 Ваше название. Все права защищены.</p>
+      </footer>
+    </div>
+  </body>
+</html>
