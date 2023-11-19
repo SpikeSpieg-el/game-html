@@ -22,6 +22,10 @@ function showColumn(columnNumber) {
         column.style.justifyContent = 'space-berween';
         column.style.alignitems = 'center';
     }
+    if (columnNumber === 3) {
+       
+        column.style.justifyContent = 'center';
+    }
 
     currentColumn = columnNumber;
 }
@@ -31,7 +35,7 @@ function showNextColumn() {
     currentColumn++;
 
     // If current column exceeds the total number of columns, reset to the first column
-    if (currentColumn > 3) {
+    if (currentColumn > 5) {
         currentColumn = 1;
     }
 
