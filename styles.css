@@ -4,8 +4,7 @@ body {
     margin-right: 5%;
     color: rgb(137, 43, 226);
     background-color: black;
-    flex-wrap: nowrap;
-    background-size: cover;
+   
 
     background-image: url('OIG.nEJp58LK_kMl.jpg');
     
@@ -44,13 +43,14 @@ h1{
     height: auto;
     display: block;
 }*/
+
 .imageMIDLE{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-end;
     flex-wrap: nowrap;
-     background: #a3a3a34f;
+    
    
    
 }
@@ -76,8 +76,10 @@ h2 {
     color: aquamarine;
     font-family: 'Montserrat';
     font-size: medium;
-    border-left: 20px;
     text-shadow: 1px 2px 0px black;
+    border: 2px solid #78beed;
+    background-color: #00000047;
+    padding: 20px 60px;
 }
 #clickCount{
     font-size: 20px;
@@ -91,6 +93,10 @@ h2 {
 .img-sizeCAT {
     width: 55px;
     height: 55px;
+}
+.img-sizeCAT_top{
+    width: 50px;
+    height: 50px;
 }
 
 
@@ -170,7 +176,7 @@ button {
     padding: 11px 11px;
     
     margin: 2px;
-    transition: transform 0.3s ease-in-out; /* Add a smooth transition for the transform property */
+    transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
    
     
     border-radius: 10px; /* Закругление углов на 10 пикселей */
@@ -189,11 +195,15 @@ button:active {
     
 }
 
+.clickButton{
+    display: flex;
+    justify-content: center;
+}
 
 .clickButton .clicker {
     padding: 20px 60px;
-    margin: 10px;
-    background-color: #000000;
+    margin: 25px;
+    background-color: #000000c7;
     color: #fff;
     border: 2px solid #2980b9;
 }
@@ -203,8 +213,8 @@ button:active {
     font-size: 30px;
     color: white;
     text-shadow: 1px 2px 0px black;
-    opacity: 0;
-    transition: opacity 0.1s, transform 3s;
+    
+    
     display: block;
 }
 .animated-number-container {
@@ -228,4 +238,28 @@ button:active {
 }
 .Count h2 .th-part {
     margin-left: 25px; /* значение отступа */
+}
+.sity{
+    padding-bottom: 200px;
+    padding-top: 50px;
+    position: relative;
+    background-color: rgba(76, 175, 79, 0.807);
+    /*background-image:url('OIG (11).jpg');
+    background-size: cover;*/
+    
+    
+}
+
+.caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.7); /* Прозрачный белый фон для текста */
+    padding: 5px; /* Добавьте отступы по вашему усмотрению */
+}
+.img-sity{
+    width: 55px;
+    height: 55px;
+    margin-left: 5px;
+    margin-right: 20px;
 }
