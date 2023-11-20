@@ -51,9 +51,7 @@
 
             </h2>
         </div>
-        <div class="animated-number-container">
-            <span id="animatedNumber"></span>
-        </div>
+        
         <div class="pages">
             <span><button onclick="showColumn(1)">Upgrade</button></span>
             <span><button onclick="showColumn(2)">More</button></span>
@@ -66,7 +64,7 @@
         <div id="upgradeContainer">
             <!-- Column 1: Апгрейды -->
             <div class="upgradeColumn" id="column1">
-                
+            <div> 
                 <div class="hidden1">
                 <div class="catIMG">
                     <button id="upgrade1" onclick="buyUpgrade1()">
@@ -95,7 +93,8 @@
                     
                 </div>
                 </div>
-        
+            </div>
+            <div>
                 <div class="hidden4">
                     <button id="upgrade4" onclick="buyUpgrade4()">
                         Upgrade <span>+10</span> Cost: <span class="upgradeCost" id="upgradeCost4">1000</span>
@@ -115,40 +114,68 @@
                 </div>
         
                 
-                </div>
+            </div>
             </div>
         
             <!-- Column 2: Постройки -->
             <div class="upgradeColumn" id="column2">
+                <div class="hidden9">
+                    
+                    <button id="upgrade9" onclick="buyUpgrade9()">
+                         Построить поле <span class="upgradeCost9" id="upgradeCost9">15</span>
+                         <img src="Pole.png" alt="acat" class="img-sizeCAT">
+                         <br>Пшено <a id="wheatTotalCount">0</a></br>
+                    </button>
+                </div>
+                
+                <div class="hidden10">
+                    <button id="upgrade10" onclick="buyUpgrade10()">
+                         Построить лесопилку <span class="upgradeCost10" id="upgradeCost10">15</span>
+                         <br>Нужно 10 пшена </br>
+                           
+                         <img src="forest_pilka.png" alt="acat" class="img-sizeCAT">
+                         <br>Дерево <a id="woodTotalCount">0</a></br>
+                    </button>
+                </div>
+
+                <div class="hidden11">
+                    <button id="upgrade11" onclick="buyUpgrade11()">
+                         Построить каменоломню <span class="upgradeCost11" id="upgradeCost11">15</span>
+                         <br>Нужно 10 пшена </rb>
+                         <br>Нужно 5 дерева </br>
+
+                         <img src="OIG.zBJ2V.jpg"alt="acat" class="img-sizeCAT">
+                         <br>Камень <a id="stoneTotalCount">0</a></br>
+                    </button>
+                </div>
+
                     <div class="hidden7">
                     <button id="upgrade7" onclick="buyUpgrade7()">
                          Cat <span class="upgradeCost7" id="upgradeCost7">100</span>
                          <img src="333.png" alt="acat" class="img-sizeCAT">
                     </button>
                     </div>
-                <div class="hidden9">
-                    
-                    <button id="upgrade9" onclick="buyUpgrade9()">
-                         Построить поле <span class="upgradeCost9" id="upgradeCost9">15</span>
-                         <br>Пшено <a id="wheatTotalCount">0</a></br>
-                         <img src="Pole.png" alt="acat" class="img-sizeCAT">
-                    </button>
-                </div>
+              
+                
                 <div class="hidden8">
                     <button id="upgrade8" onclick="buyUpgrade8()">
                          Построить амбар <span class="upgradeCost8" id="upgradeCost8">15</span>
                          <img src="OIG.3NJJoFBIJGj4Z.png" alt="acat" class="img-sizeCAT">
                     </button>
                 </div>
-                <div class="hidden10">
-                    <button id="upgrade10" onclick="buyUpgrade10()">
-                         Построить лесопилку <span class="upgradeCost10" id="upgradeCost10">15</span>
-                         <br>Дерево <a id="woodTotalCount">0</a></br>
-                         
-                         <img src="forest_pilka.png" alt="acat" class="img-sizeCAT">
-                    </button>
-                </div>
+               
+
                 
+                
+                <div class="hidden12">
+                    <button id="upgrade12" onclick="buyUpgrade12()">
+                        Построить дом <span class="upgradeCost12" id="upgradeCost12">15</span>
+                        <br>Дом <a id="hoseTotalCount">0</a></br>
+                    
+                        <img src="dom1.png"alt="acat" class="img-sizeCAT">
+                   </button>
+                </div>
+              
                 
             </div>
         </div>
@@ -156,16 +183,29 @@
             <div class="upgradeColumn" id="column3">
                 <div class="sity" >
                     <div class="caption">10 Котов на один дом</div>
-                    <a>
-                        <img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity">
+                    
+                        <img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
+                        <img  src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
+                        <a  id= "hiddenimg12">
                     </a>
                 
-                    <img  src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity">
-                    <a id= "hiddenimg9"></a>
                     
-                    <a id= "hiddenimg8"> </a>
-
-                    <a id="hiddenimg10"> </a>
+                    
+                    
+                    <a id= "hiddenimg8"></a>
+                    <a id= "hiddenimg9"></a>
+                    <div>
+                        <img  src="тайлы/Слой 4.png" alt="acat" class="img-sity_tl">
+                        <a id= "hiddenimg10"></a>
+                        <img  src="тайлы/Слой 3.png" alt="acat" class="img-sity_tl_br">
+                        
+                    </div>
+                        <div>
+                            <img  src="тайлы/Слой 5.png" alt="acat" class="img-sity_tl">
+                        <a id= "hiddenimg11"></a>
+                        <img  src="тайлы/Слой 5.png" alt="acat" class="img-sity_tl">
+                    </div>
+                    
                    
 
                 </div>
@@ -176,17 +216,18 @@
         
         
        
-         
+         <div class="animated-number-container">
+                <span id="animatedNumber"></span>
+            </div>
         <div class="clickButton"> 
-           
+            
             <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
             <div class="animatedNumber" id="animatedNumber"></div>
         </div> 
         
+        
 
-        
-        
-  <!-- Подключение script.js -->
+       
 <script src="script.js"></script>
 
 <!-- Подключение saveLoad.js после script.js -->
