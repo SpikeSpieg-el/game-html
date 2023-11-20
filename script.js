@@ -2,7 +2,7 @@
 
 let clickCount = 0;
 let clickValue = 1;
-const UPGRADE_COUNT = 10;
+const UPGRADE_COUNT = 12;
 let catCount = 20;
 
 let wheatCount = 0;  
@@ -11,8 +11,15 @@ let wheatTotalCount = 0; //количества пшена
 let woodCount = 0; 
 let woodTotalCount = 0; //количества деревьев
 
+let stoneCount = 0;
+let stoneTotalCount = 0; //количества камня
+
+let hoseCount =0;
+let hoseTotalCount=0; //домики 
+
 let isAnimating = false;
 
+let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 
 //1{ cost: 20, level: 0, clickIncrease: 1, multiplier: 2, opened: false },
 //2{ cost: 200, level: 0, clickIncrease: 2, multiplier: 3, opened: false },
@@ -24,91 +31,178 @@ let isAnimating = false;
 //8 амбар { cost: 300, level: 0, clickIncrease: 0, multiplier: 1, opened: false, image: "OIG.3NJJoFBIJGj4Z.png"},
 //9 пшено{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1, opened: false, image: "Pole.png"}
 //10 лесопилка{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"}
+//11 камень
+
+
+
+
+
+
+
+
+
 
 const upgrades = [
-    { cost: 20, level: 0, clickIncrease: 1, multiplier: 2, opened: false },
-    { cost: 200, level: 0, clickIncrease: 2, multiplier: 3, opened: false },
-    { cost: 500, level: 0, clickIncrease: 5, multiplier: 4, opened: false },
+    { cost: 20, level: 0, clickIncrease: 1, multiplier: 1.5, opened: false },
+    { cost: 200, level: 0, clickIncrease: 2, multiplier: 2.4, opened: false },
+    { cost: 500, level: 0, clickIncrease: 5, multiplier: 3.2, opened: false },
     { cost: 1000, level: 0, clickIncrease: 10, multiplier: 5, opened: false },
-    { cost: 3000, level: 0, clickIncrease: 20, multiplier: 7, opened: false },
-    { cost: 5000, level: 0, clickIncrease: 50, multiplier: 9, opened: false },
-    { cost: 100, level: 0, clickIncrease: 0, multiplier: 1, opened: false, catCountIncrease: 1 },
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1, opened: false, image: "OIG.3NJJoFBIJGj4Z.png"},
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 2, opened: false, resourceIncrease: 1, image: "Pole.png"},
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"}
+    { cost: 3000, level: 0, clickIncrease: 20, multiplier: 6.3, opened: false },
+    { cost: 5000, level: 0, clickIncrease: 50, multiplier: 7, opened: false },
+    { cost: 100, level: 0, clickIncrease: 0, multiplier: 1.1, opened: false, catCountIncrease: 1 },
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, image: "OIG.3NJJoFBIJGj4Z.png"},
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.3, opened: false, resourceIncrease: 1, image: "Pole.png"},
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.4, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"},
+    
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.jpg" },
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, home: 1, image: " dom1.png"}
 
     
 ];
+function roundCost(cost) {
+    return Math.round(cost * 10) / 10;
+}
 
-// Функция для покупки улучшения
+function formatNumber(number, notation) {
+    return number.toLocaleString('en-US', { notation: notation });
+}
+
 function buyUpgrade(index) {
     const upgrade = upgrades[index - 1];
+
     if (clickCount >= upgrade.cost) {
         clickCount -= upgrade.cost;
         upgrade.level++;
         clickValue += upgrade.clickIncrease;
         upgrade.cost = upgrade.cost * upgrade.multiplier;
+    
 
-        // Check if the upgrade affects catCount
+    // Check if the upgrade affects catCount
         if (upgrade.catCountIncrease) {
-            catCount += upgrade.catCountIncrease;
+        catCount += upgrade.catCountIncrease;
         }
         // Check if the upgrade affects wheatCount
         if (upgrade.resourceIncrease) {
-            wheatTotalCount += upgrade.resourceIncrease;
+        wheatTotalCount += upgrade.resourceIncrease;
 
-            // Обновление значения на странице
-            document.getElementById("wheatTotalCount").innerText = wheatTotalCount;
+        // Обновление значения на странице
+        document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
         }
 
         // Check if the upgrade affects woodCount
         if (upgrade.resourceIncrease_wood) {
-            woodTotalCount += upgrade.resourceIncrease_wood;
+        woodTotalCount += upgrade.resourceIncrease_wood;
 
-            // Обновление значения на странице
-            document.getElementById("woodTotalCount").innerText = woodTotalCount;
+        // Обновление значения на странице
+        document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
+        }
+        if (upgrade.resourceIncrease_stone) {
+        stoneTotalCount += upgrade.resourceIncrease_stone;
+
+        // Обновление значения на странице
+        document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
+        }
+        if (upgrade.home) {
+        hoseTotalCount += upgrade.home;
+
+        // Обновление значения на странице
+        document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
+        }
+
+        // Уменьшаем пшено только для лесопилки 
+        if (index === 10) {
+        wheatTotalCount -= 10;
+        document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+        }
+
+        if (index === 11) {
+        wheatTotalCount -= 10;
+        woodTotalCount -=5;
+        document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+        document.getElementById("woodTotalCount").innerText = woodTotalCount;
         }
 
         if (clickCount < 0) {
-            clickCount = 0;
+        clickCount = 0;
         }
 
-        document.getElementById("clickCount").innerText = clickCount;
+        document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
         document.getElementById("catCount").innerText = catCount; // Update catCount
 
-        document.getElementById(`upgradeCost${index}`).innerText = upgrade.cost;
+        document.getElementById(`upgradeCost${index}`).innerText = formatNumber(roundCost(upgrade.cost));
+
+        
+        
+        
+        
 
         // Check if the upgrade has an image property
-        if (upgrade.image) {
+            if (upgrade.image) {
             const upgradeContainer = document.getElementById(`hiddenimg${index}`);
             if (upgradeContainer) {
-                const imgElement = document.createElement('img');
-                imgElement.src = upgrade.image;
-                imgElement.alt = 'img';
-                imgElement.classList.add('img-sity');
-                upgradeContainer.appendChild(imgElement);
+            const imgElement = document.createElement('img');
+            imgElement.src = upgrade.image;
+            imgElement.alt = 'img';
+            imgElement.classList.add('img-sity');
+            upgradeContainer.appendChild(imgElement);
             } else {
-                console.error(`Container with id 'hiddenimg${index}' not found.`);
+            console.error(`Container with id 'hiddenimg${index}' not found.`);
             }
         }
-
-        checkUpgradeAvailability();
-        saveGame();
-
-        // Show notification when an upgrade is opened
-        showNotification('info', `Upgrade ${index} opened!`);
     }
+    
+    checkUpgradeAvailability();
+    
+        // Добавьте условие, что если индекс равен 10 (лесопилка), то уменьшите количество пшена
+        if (index === 10) {
+            // Проверяем, достаточно ли у нас пшена
+            if (wheatTotalCount < 10) {
+                console.log("Not enough wheat to build the sawmill!");
+                return;
+            }
+            }
+            // Проверяем, достаточно ли у нас ресурсов для покупки
+            if (clickCount < upgrade.cost) {
+            console.log("Not enough resources to buy this upgrade!");
+            return;
+            }
+    
+    
+            // Добавьте условие, что если индекс равен 10 (лесопилка), то уменьшите количество пшена
+                if (index === 11) {
+            // Проверяем, достаточно ли у нас пшена
+                if (wheatTotalCount < 10 & woodTotalCount < 5) {
+                console.log("Not enough wheat to build");
+                return;
+                }
+            }
+        // Проверяем, достаточно ли у нас ресурсов для покупки
+            if (clickCount < upgrade.cost) {
+            console.log("Not enough resources to buy this upgrade!");
+            return;
+            }
+            
+
+    checkUpgradeAvailability();
+    saveGame();
+    showNotification('info', `Upgrade opened!`);
+    
 }
-
-
 
 function saveGame() {
     localStorage.setItem("clickCount", clickCount);
     localStorage.setItem("clickValue", clickValue);
     localStorage.setItem("catCount", catCount);
-    localStorage.setItem("woodTotalCount", woodTotalCount); // Добавьте сохранение общего количества дерева
-    localStorage.setItem("wheatTotalCount", wheatTotalCount); // Добавьте сохранение общего количества пшена
+    localStorage.setItem("wheatTotalCount", wheatTotalCount);
+    localStorage.setItem("woodTotalCount", woodTotalCount);
+    localStorage.setItem("stoneTotalCount", stoneTotalCount);
+    localStorage.setItem("hoseTotalCount", hoseTotalCount);
+    localStorage.setItem("numberFormat", numberFormat);
+
     localStorage.setItem("upgrades", JSON.stringify(upgrades));
+
+    // Сохранение информации о формате чисел
+    
 }
 
 
@@ -126,18 +220,32 @@ function incrementClick() {
         wheatCount += upgrades[UPGRADE_COUNT].level * upgrades[UPGRADE_COUNT].resourceIncrease;
         wheatTotalCount += upgrades[UPGRADE_COUNT].resourceIncrease;
         // Обновление значения на странице
-        document.getElementById("wheatTotalCount").innerText = wheatTotalCount;
+        document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
     }
     if (upgrades[UPGRADE_COUNT + 1]) {
         woodCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].resourceIncrease_wood;
         woodTotalCount += upgrades[UPGRADE_COUNT + 1].resourceIncrease_wood;
         // Обновление значения на странице
-        document.getElementById("woodTotalCount").innerText = woodTotalCount;
+        document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
     }
-    // анимация
+    
+    if (upgrades[UPGRADE_COUNT + 1]) {
+        stoneCountCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].resourceIncrease_stone;
+        stoneTotalCount += upgrades[UPGRADE_COUNT + 1].resourceIncrease_stone;
+        // Обновление значения на странице
+       
+        document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
+    }
+    
+    if (upgrades[UPGRADE_COUNT + 1]) {
+        hoseTotalCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].home;
+        hoseTotalCount += upgrades[UPGRADE_COUNT + 1].home;
+        // Обновление значения на странице
+        document.getElementById("hoseTotalCount").innerText = hoseTotalCount;
+    }
     updateAnimatedNumber();
 
-    document.getElementById("clickCount").innerText = clickCount;
+    document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
     document.getElementById("clickValue").innerText = clickValue;
 
     for (let i = 1; i <= UPGRADE_COUNT; i++) {
@@ -159,6 +267,32 @@ function incrementClick() {
     checkUpgradeAvailability();
 }
 
+
+
+
+
+
+
+function checkUpgradeAvailability() {
+    for (let upgradeIndex = 1; upgradeIndex <= UPGRADE_COUNT; upgradeIndex++) {
+        const upgradeButton = document.getElementById(`upgrade${upgradeIndex}`);
+        const upgrade = upgrades[upgradeIndex - 1];
+
+        // Проверка, достаточно ли ресурсов для покупки
+        const notEnoughResources = upgrade.cost > clickCount || !upgrade.opened;
+
+        // Проверка для лесопилки (индекс 10), учитывая также количество пшена 
+        const notEnoughWheatForSawmill = upgradeIndex === 10 && wheatTotalCount < 10;
+
+        // Проверка для 11 уровня (Camencita), учитывая количество дерева и пшена
+        const notEnoughWheatForCamen = upgradeIndex === 11 && (woodTotalCount < 5 || wheatTotalCount < 10);
+
+        // Если недостаточно ресурсов, дерева или пшена, то кнопка становится неактивной
+        upgradeButton.disabled = notEnoughResources || notEnoughWheatForSawmill || notEnoughWheatForCamen;
+    }
+    
+    saveGame();
+}
     
 //Анимация +1 клик с анимацией
 let lastClickTime = 0;
@@ -214,14 +348,8 @@ function updateAnimatedNumber() {
     }
 }
 
-function checkUpgradeAvailability() {
-    for (let upgradeIndex = 1; upgradeIndex <= UPGRADE_COUNT; upgradeIndex++) {
-        const upgradeButton = document.getElementById(`upgrade${upgradeIndex}`);
-        upgradeButton.disabled = upgrades[upgradeIndex - 1].cost > clickCount || !upgrades[upgradeIndex - 1].opened;
-    }
 
-    saveGame();
-}
+
 
 // Создаем функции для каждого улучшения
 for (let i = 1; i <= UPGRADE_COUNT; i++) {
@@ -307,5 +435,5 @@ function closeNotification(notification) {
         activeNotifications.forEach((activeNotification, index) => {
             activeNotification.style.bottom = index * notificationHeight + 'px';
         });
-    }, 300); // Adjust the time to match the fadeOut animation duration
+    }, 350); // Adjust the time to match the fadeOut animation duration
 }
