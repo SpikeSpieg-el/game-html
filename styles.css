@@ -174,25 +174,19 @@ h2 {
 
 button {
     padding: 11px 11px;
-    
     margin: 2px;
     transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
-   
-    
-    border-radius: 10px; /* Закругление углов на 10 пикселей */
-            
-            color: #000000; /* Цвет текста кнопки */
-            border: none; /* Убираем границу у кнопки */
-
+    border-radius: 10px;
+    color: #000000;
+    border: none;
 }
 
 button:hover {
-    transform: scale(1.1); /* Scale the button by 10% on hover */
+    transform: translate(-5px, -5px); /* Смещаем кнопку на 5 пикселей влево и вверх при наведении */
 }
 
 button:active {
-    transform: scale(0.9); /* Scale the button by 10% on press */
-    
+    transform: scale(0.9);
 }
 
 .clickButton{
@@ -200,12 +194,22 @@ button:active {
     justify-content: center;
 }
 
+
 .clickButton .clicker {
     padding: 20px 60px;
     margin: 25px;
     background-color: #000000c7;
     color: #fff;
     border: 2px solid #2980b9;
+    transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
+}
+
+.clickButton .clicker:hover {
+    transform: scale(1.1); /* Уменьшаем элемент при нажатии */
+}
+
+.clickButton .clicker:active {
+    transform: scale(0.9); /* Уменьшаем элемент при нажатии */
 }
 
 /* Style the animated number */
@@ -244,6 +248,9 @@ button:active {
     padding-top: 50px;
     position: relative;
     background-color: rgba(76, 175, 79, 0.807);
+
+
+
     /*background-image:url('OIG (11).jpg');
     background-size: cover;*/
     
@@ -260,6 +267,23 @@ button:active {
 .img-sity{
     width: 55px;
     height: 55px;
-    margin-left: 5px;
-    margin-right: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+   
 }
+.img-sity_home_one{
+    width: 55px;
+    height: 55px;
+    
+}
+.img-sity_tl{
+    width: 55px;
+    height: 55px;
+
+}
+
+.img-sity_tl_br{
+    width: 55px;
+    height: auto;
+}
+
