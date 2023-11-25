@@ -54,6 +54,17 @@ h1{
    
    
 }
+.upgrade-marker{
+    float: right;
+    color: #4CAF50;
+    font-size: 30px;
+    margin-bottom: -7px;
+    margin-right: -9px;
+    margin-top: -13px;
+    margin-left: -40px;
+    display: none;
+   
+}
 
 .img-sizeBG{
     width: 240px;
@@ -179,6 +190,7 @@ button {
     border-radius: 10px;
     color: #000000;
     border: none;
+    cursor: pointer;
 }
 
 button:hover {
@@ -190,8 +202,9 @@ button:active {
 }
 
 .clickButton{
-    display: flex;
-    justify-content: center;
+    position: fixed;
+    bottom: 17px;
+    right: 30px;
 }
 
 
@@ -245,7 +258,7 @@ button:active {
 }
 .sity{
     padding-bottom: 200px;
-    padding-top: 50px;
+   
     position: relative;
     background-color: rgba(76, 175, 79, 0.807);
 
@@ -258,11 +271,12 @@ button:active {
 }
 
 .caption {
-    position: absolute;
-    top: 0;
-    left: 0;
+    
     background-color: rgba(255, 255, 255, 0.7); /* Прозрачный белый фон для текста */
-    padding: 5px; /* Добавьте отступы по вашему усмотрению */
+    
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
 }
 .img-sity{
     width: 55px;
@@ -287,3 +301,71 @@ button:active {
     height: auto;
 }
 
+
+
+/* слайд бар*/
+#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+#sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover {
+    color: #f1f1f1;
+}
+
+#sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    padding: 16px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    
+}
+
+.openbtn:hover {
+    background-color: #444;
+    transform: rotate(90dgr);
+}
+
+@media screen and (max-width: 700px) {
+    #sidebar {
+        padding-top: 15px;
+    }
+    #sidebar a {
+        font-size: 16px;
+    }
+    #sidebar .closebtn {
+        font-size: 30px;
+    }
+}
