@@ -334,9 +334,9 @@ function checkUpgradeAvailability() {
         upgradeButton.disabled = notEnoughResources || notEnoughWheatForSawmill || notEnoughWheatForCamen;
         if (upgradeMarker) {
             if (upgradeMarkers[upgradeIndex - 1]) {
-                upgradeMarker.style.display = 'none';
-            } else {
                 upgradeMarker.style.display = 'block';
+            } else {
+                upgradeMarker.style.display = 'none';
                 
             }
        
