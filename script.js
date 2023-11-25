@@ -220,10 +220,10 @@ function updateUpgradeMarker(index) {
     // Условие для показа/скрытия маркера
     if (clickCount >= upgrade.cost) {
         upgradeMarkers[index - 1] = true;
-        upgradeMarker.style.display = 'block';
+        upgradeMarker.style.display = 'none';
     } else {
         upgradeMarkers[index - 1] = false;
-        upgradeMarker.style.display = 'none';
+        upgradeMarker.style.display = 'block';
     }
 }
 
