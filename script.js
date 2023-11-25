@@ -1,9 +1,9 @@
 // script.js
 
 let clickCount = 0;
-let clickValue = 1;
+let clickValue = 300;
 const UPGRADE_COUNT = 12;
-let catCount = 20;
+let catCount = 10;
 
 let wheatCount = 0;  
 let wheatTotalCount = 0; //количества пшена
@@ -20,6 +20,7 @@ let hoseTotalCount=0; //домики
 let isAnimating = false;
 
 let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
+let upgradeMarkers = Array(UPGRADE_COUNT).fill(false);
 
 //1{ cost: 20, level: 0, clickIncrease: 1, multiplier: 2, opened: false },
 //2{ cost: 200, level: 0, clickIncrease: 2, multiplier: 3, opened: false },
@@ -54,7 +55,7 @@ const upgrades = [
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.3, opened: false, resourceIncrease: 1, image: "Pole.png"},
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.4, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"},
     
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.jpg" },
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, home: 1, image: " dom1.png"}
 
     
@@ -69,6 +70,7 @@ function formatNumber(number, notation) {
 
 function buyUpgrade(index) {
     const upgrade = upgrades[index - 1];
+   
 
     if (clickCount >= upgrade.cost) {
         clickCount -= upgrade.cost;
@@ -82,16 +84,39 @@ function buyUpgrade(index) {
         catCount += upgrade.catCountIncrease;
         }
         // Check if the upgrade affects wheatCount
+        
         if (upgrade.resourceIncrease) {
-        wheatTotalCount += upgrade.resourceIncrease;
-
-        // Обновление значения на странице
-        document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            if (upgrade.level > 10) {
+                wheatTotalCount = upgrade.level;
+            } else {
+                
+                wheatTotalCount += upgrade.resourceIncrease;
+                updateWheatText();
+            } 
+            // Обновление значения на странице
+            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+              
+        }
+       // Call a function to update the wheat text
+            function updateWheatText() {
+                const wheatTextElement = document.getElementById('wheatText');
+            
+                if (wheatTextElement) {
+                    // Update the text content based on the condition
+                    wheatTextElement.textContent = wheatTotalCount >= 10 ? 'Собрать урожай! Пшено:' : 'Пшено';
+                }
+        
+        
         }
 
         // Check if the upgrade affects woodCount
         if (upgrade.resourceIncrease_wood) {
         woodTotalCount += upgrade.resourceIncrease_wood;
+        if (upgrade.level > 2) {
+            woodTotalCount += upgrade.level;
+        } else {
+            woodTotalCount += upgrade.resourceIncrease_wood;
+        }
 
         // Обновление значения на странице
         document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
@@ -182,11 +207,24 @@ function buyUpgrade(index) {
             return;
             }
             
-
+            updateUpgradeMarker(1);
     checkUpgradeAvailability();
     saveGame();
     showNotification('info', `Upgrade opened!`);
     
+}
+function updateUpgradeMarker(index) {
+    const upgrade = upgrades[index - 1];
+    const upgradeMarker = document.getElementById(`upgradeMarker${index}`);
+
+    // Условие для показа/скрытия маркера
+    if (clickCount >= upgrade.cost) {
+        upgradeMarkers[index - 1] = true;
+        upgradeMarker.style.display = 'block';
+    } else {
+        upgradeMarkers[index - 1] = false;
+        upgradeMarker.style.display = 'none';
+    }
 }
 
 function saveGame() {
@@ -198,7 +236,7 @@ function saveGame() {
     localStorage.setItem("stoneTotalCount", stoneTotalCount);
     localStorage.setItem("hoseTotalCount", hoseTotalCount);
     localStorage.setItem("numberFormat", numberFormat);
-
+    localStorage.setItem("roundCost", roundCost);
     localStorage.setItem("upgrades", JSON.stringify(upgrades));
 
     // Сохранение информации о формате чисел
@@ -260,11 +298,13 @@ function incrementClick() {
 
             // Show notification when the upgrade is opened
             showNotification('success', `Upgrade ${i} is now available!`);
+            
         }
     }
-
+    updateUpgradeMarker(1);
     saveGame();
     checkUpgradeAvailability();
+    
 }
 
 
@@ -276,7 +316,10 @@ function incrementClick() {
 function checkUpgradeAvailability() {
     for (let upgradeIndex = 1; upgradeIndex <= UPGRADE_COUNT; upgradeIndex++) {
         const upgradeButton = document.getElementById(`upgrade${upgradeIndex}`);
+        const upgradeMarker = document.getElementById(`upgradeMarker${upgradeIndex}`);
         const upgrade = upgrades[upgradeIndex - 1];
+
+        
 
         // Проверка, достаточно ли ресурсов для покупки
         const notEnoughResources = upgrade.cost > clickCount || !upgrade.opened;
@@ -289,9 +332,18 @@ function checkUpgradeAvailability() {
 
         // Если недостаточно ресурсов, дерева или пшена, то кнопка становится неактивной
         upgradeButton.disabled = notEnoughResources || notEnoughWheatForSawmill || notEnoughWheatForCamen;
+        if (upgradeMarker) {
+            if (upgradeMarkers[upgradeIndex - 1]) {
+                upgradeMarker.style.display = 'none';
+            } else {
+                upgradeMarker.style.display = 'block';
+                
+            }
+       
+        }
     }
-    
     saveGame();
+   
 }
     
 //Анимация +1 клик с анимацией
@@ -436,4 +488,33 @@ function closeNotification(notification) {
             activeNotification.style.bottom = index * notificationHeight + 'px';
         });
     }, 350); // Adjust the time to match the fadeOut animation duration
+}
+
+function toggleNav() {
+    var sidebar = document.getElementById("sidebar");
+    var main = document.getElementById("main");
+    var screenWidth = window.innerWidth;
+
+    if (screenWidth <= 700) { // Для мобильных устройств
+        if (sidebar.style.width === "100%") {
+            sidebar.style.width = "0";
+            main.style.marginLeft = "0";
+        } else {
+            sidebar.style.width = "100%";
+            main.style.marginLeft = "0%";
+        }
+    } else { // Для более широких экранов
+        if (sidebar.style.width === "30%") {
+            sidebar.style.width = "0";
+            main.style.marginLeft = "0";
+        } else {
+            sidebar.style.width = "30%";
+            main.style.marginLeft = "0%";
+        }
+    }
+}
+
+function closeNav() {
+    document.getElementById("sidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
 }
