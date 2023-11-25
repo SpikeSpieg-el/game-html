@@ -9,6 +9,17 @@
   
 </head>
 <body>
+    <div id="sidebar">
+        <a href="Index1.html">✪ Об игре</a>
+        <a href="https://forms.gle/v2K1fvzz7wLr7SYdA" target="_blank">✪ Пройди небольшой опрос чтобы оставить отзыв</a>
+        <a href="https://github.com/SpikeSpieg-el/game-html" target="_blank">✪ GitHub</a>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="toggleNav()">☰</button>
+    </div>
+
     <div class="clicker-container">
     <div class="name">
         <!--<div class="image-container">
@@ -41,7 +52,7 @@
             
             <h2>
                 <div>Посеселение Cat: <img src="333.png" alt="cat" class="img-sizeCAT_top">
-                     <span id="catCount"> 20 </span>
+                     <span id="catCount"> 10 </span>
                 </div>
                 <span class="first-part">For click: <span id="clickValue">0</span></span>
                 <span class="second-part">Clicks count: <span id="clickCount">0</span></span>
@@ -53,10 +64,10 @@
         </div>
         
         <div class="pages">
-            <span><button onclick="showColumn(1)">Upgrade</button></span>
-            <span><button onclick="showColumn(2)">More</button></span>
+            <span><button onclick="showColumn(1)">Upgrade<a id="upgradeMarker1" class="upgrade-marker">^</a></button></span>
+            <span><button onclick="showColumn(2)">Buildings</button></span>
             <!-- Column3<span><button onclick="showColumn(3)">3</button></span>-->
-            <span><button onclick="showColumn(3)">Sity</button></span>
+            <span><button onclick="showColumn(3)">Village</button></span>
             <!--<span><button onclick="showNextColumn()">next</button></span>-->
         </div>
         
@@ -64,6 +75,7 @@
         <div id="upgradeContainer">
             <!-- Column 1: Апгрейды -->
             <div class="upgradeColumn" id="column1">
+                
             <div> 
                 <div class="hidden1">
                 <div class="catIMG">
@@ -124,7 +136,10 @@
                     <button id="upgrade9" onclick="buyUpgrade9()">
                          Построить поле <span class="upgradeCost9" id="upgradeCost9">15</span>
                          <img src="Pole.png" alt="acat" class="img-sizeCAT">
-                         <br>Пшено <a id="wheatTotalCount">0</a></br>
+                        <br> 
+                        <a id="wheatText">Пшено</a>
+                        <a id="wheatTotalCount">0</a>
+                        </br>
                     </button>
                 </div>
                 
@@ -144,7 +159,7 @@
                          <br>Нужно 10 пшена </rb>
                          <br>Нужно 5 дерева </br>
 
-                         <img src="OIG.zBJ2V.jpg"alt="acat" class="img-sizeCAT">
+                         <img src="OIG.zBJ2V.png"alt="acat" class="img-sizeCAT">
                          <br>Камень <a id="stoneTotalCount">0</a></br>
                     </button>
                 </div>
@@ -182,7 +197,12 @@
             <!-- Column 3: Empty -->
             <div class="upgradeColumn" id="column3">
                 <div class="sity" >
-                    <div class="caption">10 Котов на один дом</div>
+                    <div class="caption">Ресурсов на складе
+                       <br> Пшено: <a id="wheatTotalCount">0</a>
+                        Дерево: <a id="woodTotalCount">0</a>
+                        Камень: <a id="stoneTotalCount">0</a></br>
+                        
+                        </div>
                     
                         <img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
                         <img  src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
