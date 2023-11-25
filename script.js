@@ -1,7 +1,7 @@
 // script.js
 
 let clickCount = 0;
-let clickValue = 300;
+let clickValue = 1;
 const UPGRADE_COUNT = 12;
 let catCount = 10;
 
