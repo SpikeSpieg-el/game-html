@@ -359,11 +359,11 @@ function checkUpgradeAvailability() {
         // Проверка для 11 уровня (Camencita), учитывая количество дерева и пшена
         const notEnoughWheatForCamen = upgradeIndex === 11 && (woodTotalCount < 5 || wheatTotalCount < 10);
 
-        const notEnoughWheatForCamen = upgradeIndex === 13 && (woodTotalCount < 1 || wheatTotalCount < 1 || stoneTotalCount);
+        const notEnoughWheatForMetall = upgradeIndex === 13 && (woodTotalCount < 1 || wheatTotalCount < 1 || stoneTotalCount);
 
 
         // Если недостаточно ресурсов, дерева или пшена, то кнопка становится неактивной
-        upgradeButton.disabled = notEnoughResources || notEnoughWheatForSawmill || notEnoughWheatForCamen;
+        upgradeButton.disabled = notEnoughResources || notEnoughWheatForSawmill || notEnoughWheatForCamen || notEnoughWheatForMetall;
         if (upgradeMarker) {
             if (upgradeMarkers[upgradeIndex - 1]) {
                 upgradeMarker.style.display = 'block';
