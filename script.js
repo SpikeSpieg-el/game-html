@@ -41,7 +41,7 @@ const upgrades = [
     
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, home: 1, image: " dom1.png"}, 
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_metall: 1, image: "" }
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_metall: 1, image: "OIG.bFY9BU.jpeg" }
 
     
 ];
