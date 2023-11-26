@@ -118,6 +118,12 @@ function buyUpgrade(index) {
         // Обновление значения на странице
         document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
         }
+        if (upgrade.resourceIncrease_metall) {
+        metallTotalCount += upgrade.resourceIncrease_metall;
+
+        // Обновление значения на странице
+        document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
+        }
         if (upgrade.home) {
         hoseTotalCount += upgrade.home;
 
@@ -359,7 +365,7 @@ function checkUpgradeAvailability() {
         // Проверка для 11 уровня (Camencita), учитывая количество дерева и пшена
         const notEnoughWheatForCamen = upgradeIndex === 11 && (woodTotalCount < 5 || wheatTotalCount < 10);
 
-        const notEnoughWheatForMetall = upgradeIndex === 13 && (woodTotalCount < 1 || wheatTotalCount < 1 || stoneTotalCount);
+        const notEnoughWheatForMetall = upgradeIndex === 13 && (woodTotalCount < 1 || wheatTotalCount < 1 || stoneTotalCount < 1);
 
 
         // Если недостаточно ресурсов, дерева или пшена, то кнопка становится неактивной
