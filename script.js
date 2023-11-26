@@ -26,7 +26,7 @@ let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 let upgradeMarkers = Array(UPGRADE_COUNT).fill(false);
 
 
-//{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
+//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 const upgrades = [
     { cost: 20, level: 0, clickIncrease: 1, multiplier: 1.5, opened: false },
     { cost: 200, level: 0, clickIncrease: 2, multiplier: 2.4, opened: false },
@@ -53,7 +53,7 @@ function formatNumber(number, notation) {
     return number.toLocaleString('en-US', { notation: notation });
 }
 
-//if (index === 11) {
+//2if (index === 11) {
         //wheatTotalCount -= 10;
         //woodTotalCount -=5;
         //document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
@@ -182,7 +182,7 @@ function buyUpgrade(index) {
         }
     }
 
-    //  if (index === 11) {
+    //3  if (index === 11) {
             // Проверяем, достаточно ли у нас пшена
                 //if (wheatTotalCount < 10 & woodTotalCount < 5) {
                 //console.log("Not enough wheat to build");
@@ -266,7 +266,7 @@ function saveGame() {
 }
 
 
-//добавляем if (upgrades[UPGRADE_COUNT + 1]) {
+//4добавляем if (upgrades[UPGRADE_COUNT + 1]) {
         //__TotalCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
         //__TotalCount += upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
         // Обновление значения на странице
@@ -346,7 +346,7 @@ function incrementClick() {
 
 
 
-// добавляем const notEnoughWheatForCamen = upgradeIndex === цифра индекса && (woodTotalCount < 1 || и так далее
+//5 добавляем const notEnoughWheatForCamen = upgradeIndex === цифра индекса && (woodTotalCount < 1 || и так далее
 
 function checkUpgradeAvailability() {
     for (let upgradeIndex = 1; upgradeIndex <= UPGRADE_COUNT; upgradeIndex++) {
