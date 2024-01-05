@@ -1,68 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>Clicker Game</title>
- <style>
-  .container {
-   text-align: center;
-   margin-top: 200px;
-  }
+    <title>Clicker Game</title>
+    <style>
+        body {
+            background-color: white;
+        }
 
-  .button {
-   padding: 10px 20px;
-   background-color: #3498db;
-   color: #fff;
-   border: none;
-   font-size: 20px;
-   cursor: pointer;
-  }
+        .container {
+            text-align: center;
+            margin-top: 200px;
+        }
 
-  .upgrade-button {
-   margin-top: 20px;
-   padding: 5px 10px;
-   background-color: #2ecc71;
-   color: #fff;
-   border: none;
-   font-size: 14px;
-   cursor: pointer;
-  }
+        .button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
-  .score {
-   margin-top: 20px;
-   font-size: 24px;
-  }
- </style>
+        .upgrade-button {
+            margin-top: 20px;
+            padding: 5px 10px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .score {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
- <div class="container">
-  <h1>Clicker Game</h1>
-  <p>Кликай на кнопку как можно быстрее!</p>
-  <button class="button" onclick="incrementScore()">Кликни меня!</button>
-  <p class="score">Счет: 0</p>
-  <button class="upgrade-button" onclick="upgradeClick()">Улучшить клик - стоимость: <span id="upgradeCost">10</span></button>
- </div>
- <script>
-  let score = 0;
-  let upgradeCost = 10;
+    <div class="container">
+        <h1>Clicker Game</h1>
+        <p>Кликай на кнопку как можно быстрее!</p>
+        <button class="button" onclick="incrementScore()">Кликни меня!</button>
+        <p class="score">Счет: 0</p>
+        <button class="upgrade-button" onclick="upgradeClick()">Улучшить клик - стоимость: <span id="upgradeCost">10</span></button>
+    </div>
+    <script>
+        let score = 0;
+        let clickUpgrade = 1;
+        let upgradeCost = 10;
 
-  function incrementScore() {
-   score++;
-   updateScore();
-  }
+        function incrementScore() {
+            score += clickUpgrade;
+            updateScore();
+        }
 
-  function updateScore() {
-   document.querySelector('.score').textContent = 'Счет: ' + score;
-  }
+        function updateScore() {
+            document.querySelector('.score').textContent = 'Счет: ' + score;
+        }
 
-  function upgradeClick() {
-   if (score >= upgradeCost) {
-    score -= upgradeCost;
-    upgradeCost *= 2;
-    updateScore();
+        function upgradeClick() {
+            if (score >= upgradeCost) {
+                score -= upgradeCost;
+                clickUpgrade++;
+                upgradeCost *= 2;
+                updateScore();
 
-    document.querySelector('#upgradeCost').textContent = upgradeCost;
-   }
-  }
- </script>
+                document.querySelector('#upgradeCost').textContent = upgradeCost;
+            }
+        }
+    </script>
 </body>
 </html>
