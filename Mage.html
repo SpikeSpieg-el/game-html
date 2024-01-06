@@ -67,7 +67,8 @@
                 log += `Ты блокировал, противник атаковал, ты успешно защитился, ничего не произошло.<br>`;
             } else if (enemyAction === 'prepare') {
                 // Player defends, but enemy prepares (no damage dealt)
-                log += `Ты блокировал, противник готовился, ничего не произошло.<br>`;
+                playerHealth -= 2;
+                log += `Ты блокировал, противник готовился, ты получил -2.<br>`;
             }
         } else if (action === 'prepare') {
             if (enemyAction === 'attack') {
@@ -76,7 +77,9 @@
                 log += `Ты готовился, противник атаковал, ты получил урон -2.<br>`;
             } else if (enemyAction === 'defend') {
                 // Player prepares, and enemy defends (no damage dealt)
+                enemyHealth -= 2;
                 log += `Ты готовился, противник блокировал, но ты все равно нанес урон -2.<br>`;
+                
             }
             // Both prepare, no damage taken
         }
