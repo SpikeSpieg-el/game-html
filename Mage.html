@@ -62,7 +62,6 @@ text-align: left;
 let playerHealth = 10;
 let enemyHealth = 10;
 let currentPlayer;
-let playerMoveType;
 let isPlayerTurn = true;
 let moveCounter = 0;
 let isReady = false;
@@ -75,13 +74,15 @@ displayMoveCounter();
 }
 
 function playerMove(type) {
-playerMoveType = type;
+if (isReady) return;
 document.getElementById("battle").style.pointerEvents = "none";
+playerMoveType = type;
 document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: ${currentPlayer} выбрал ${getMoveName(type)}</p>`;
 }
 
 function ready() {
 if (isReady) return;
+if (!playerMoveType) return;
 isReady = true;
 document.getElementById("battle").style.pointerEvents = "auto";
 document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: Противник выбирает действие...</p>`;
@@ -132,6 +133,7 @@ window.location.reload();
 alert("Вы победили!");
 window.location.reload();
 } else {
+playerMoveType = "";
 displayMoveCounter();
 isReady = false;
 }
