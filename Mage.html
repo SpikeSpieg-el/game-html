@@ -91,7 +91,9 @@ document.getElementById("player-health").innerHTML = `Здоровье мага:
 break;
 
 case "defend":
-if (!isPlayerTurn) {
+if (isPlayerTurn) {
+document.getElementById("log").innerHTML += `<p>Ход ${moveCounter}: Ничего не произошло. ${currentPlayer} защитился.</p>`;
+} else {
 playerHealth = 10;
 document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
 }
@@ -99,7 +101,7 @@ break;
 
 case "prepare":
 if (isPlayerTurn) {
-playerAttack = 2;
+document.getElementById("log").innerHTML += `<p>Ход ${moveCounter}: Ничего не произошло. ${currentPlayer} подготавливает следующую атаку.</p>`;
 }
 break;
 }
