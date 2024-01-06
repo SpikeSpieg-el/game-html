@@ -83,7 +83,7 @@ function performAction(action) {
 
 function getRandomAction() {
   const actions = ['Атака', 'Защита'];
-  if (opponentAction === 'Подготовка') {
+  if (playerAction === 'Подготовка') { // заменить opponentAction на playerAction
     actions.splice(actions.indexOf('Подготовка'), 1);
   }
   return actions[Math.floor(Math.random() * actions.length)];
