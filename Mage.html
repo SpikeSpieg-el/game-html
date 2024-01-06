@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Уличная жизнь магов</title>
+  <link rel="stylesheet" type="text/css" href="styles_mage.css">
+</head>
+<body>
+  <div id="game">
+    <h1>Уличная жизнь магов</h1>
+    <div id="character-selection">
+      <h2>Выберите мага</h2>
+      <button onclick="selectMage('Маг 1')">Маг 1</button>
+      <button onclick="selectMage('Маг 2')">Маг 2</button>
+    </div>
+    <div id="battle" style="display: none;">
+      <h2>Сражение</h2>
+      <div id="actions">
+        <button onclick="performAction('Атака')">Атака</button>
+        <button onclick="performAction('Защита')">Защита</button>
+        <button onclick="performAction('Подготовка')">Подготовка</button>
+      </div>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script src="script_mage.js"></script>
+</body>
+</html>
