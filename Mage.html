@@ -21,6 +21,10 @@
             display: flex;
             justify-content: space-around;
         }
+        #log {
+            margin-top: 20px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -31,51 +35,78 @@
         <button onclick="performAction('defend')">Блок</button>
         <button onclick="performAction('prepare')">Подготовка</button>
     </div>
+    <div id="log"></div>
+    <button onclick="resetGame()" style="display:none;">Начать заново</button>
     <script>
         let playerHealth = 10;
         let enemyHealth = 10;
+        let round = 1;
+        let log = "";
 
         function performAction(action) {
             let enemyAction = Math.random() < 0.33 ? 'attack' : Math.random() < 0.67 ? 'defend' : 'prepare';
 
+            log += `Ход ${round}: Ты выбрал ${action}, противник выбрал ${enemyAction}.<br>`;
+
             if (action === 'attack') {
                 if (enemyAction === 'defend') {
                     // Player attacks, but enemy blocks
+                    log += `Ничего не произошло.<br>`;
                 } else if (enemyAction === 'prepare') {
                     enemyHealth -= 2;
+                    log += `Ты атаковал, противник готовился и получил урон -2.<br>`;
                 } else {
                     enemyHealth -= 2;
+                    log += `Ты атаковал, противник атаковал, оба получили урон -2.<br>`;
                 }
             } else if (action === 'defend') {
                 if (enemyAction === 'attack') {
                     // Player blocks, but enemy attacks
                     playerHealth -= 2;
+                    log += `Ты блокировал, противник атаковал, ты получил урон -2.<br>`;
                 } else if (enemyAction === 'prepare') {
                     // Both defend, no damage taken
+                    log += `Оба блокировали, никто не получил урона.<br>`;
                 }
             } else if (action === 'prepare') {
                 if (enemyAction === 'attack') {
                     playerHealth -= 2;
+                    log += `Ты готовился, противник атаковал, ты получил урон -2.<br>`;
                 } else if (enemyAction === 'defend') {
                     // Player prepares, but enemy blocks
+                    log += `Ты готовился, противник блокировал, никто не получил урона.<br>`;
                 }
                 // Both prepare, no damage taken
             }
 
+            round++;
             updateStatus();
-        }
-
-        function updateStatus() {
-            document.getElementById('output').innerHTML = `Твоё здоровье: ${playerHealth} | Здоровье противника: ${enemyHealth}`;
 
             if (playerHealth <= 0 || enemyHealth <= 0) {
                 endGame();
             }
         }
 
+        function updateStatus() {
+            document.getElementById('output').innerHTML = `Твоё здоровье: ${playerHealth} | Здоровье противника: ${enemyHealth}`;
+            document.getElementById('log').innerHTML = log;
+        }
+
         function endGame() {
             document.getElementById('output').innerHTML = playerHealth <= 0 ? 'Ты проиграл!' : 'Ты победил!';
             document.getElementById('actions').style.display = 'none';
+            document.querySelector('button').style.display = 'inline-block';
+        }
+
+        function resetGame() {
+            playerHealth = 10;
+            enemyHealth = 10;
+            round = 1;
+            log = "";
+            updateStatus();
+            document.getElementById('actions').style.display = 'flex';
+            document.querySelector('button').style.display = 'none';
+            document.getElementById('output').innerHTML = 'Битва началась!';
         }
 
         // Display actions after a short delay
