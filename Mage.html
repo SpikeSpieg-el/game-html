@@ -1,125 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Уличная жизнь магов</title>
-  <style>
-    body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #7fbf7f;
+<title>Уличная жизнь магов</title>
+<style>
+.container {
+text-align: center;
 }
 
-#game {
-  margin: 50px;
+.button {
+padding: 10px 20px;
+margin: 10px;
+border-radius: 5px;
+background-color: #4CAF50;
+color: white;
+text-decoration: none;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
+.battle-actions {
+display: flex;
+justify-content: center;
+margin-top: 20px;
 }
 
-#result {
-  margin-top: 20px;
+.battle-actions button {
+margin: 0 5px;
 }
-  </style>
+</style>
 </head>
 <body>
-  <div id="game">
-    <h1>Уличная жизнь магов</h1>
-    <div id="character-selection">
-      <h2>Выберите мага</h2>
-      <button onclick="selectMage('Маг 1')">Маг 1</button>
-      <button onclick="selectMage('Маг 2')">Маг 2</button>
-    </div>
-    <div id="battle" style="display: none;">
-      <h2>Сражение</h2>
-      <div id="actions">
-        <button onclick="performAction('Атака')">Атака</button>
-        <button onclick="performAction('Защита')">Защита</button>
-        <button onclick="performAction('Подготовка')">Подготовка</button>
-      </div>
-      <div id="result"></div>
-    </div>
-  </div>
+<div class="container">
+<h1>Уличная жизнь магов</h1>
 
-  <script>
-    let playerMage;
-let opponentMage;
+<div id="character-selection">
+<h2>Выберите мага:</h2>
+<button class="button" onclick="selectMage('Маг 1')">Маг 1</button>
+<button class="button" onclick="selectMage('Маг 2')">Маг 2</button>
+</div>
+
+<div id="battle" style="display: none;">
+<h2>Битва</h2>
+<p id="player-health">Здоровье мага: 10</p>
+<p id="enemy-health">Здоровье противника: 10</p>
+
+<div class="battle-actions">
+<button class="button" onclick="attack()">Атака</button>
+<button class="button" onclick="defend()">Защита</button>
+<button class="button" onclick="prepareAttack()">Подготовить атаку</button>
+</div>
+</div>
+
+<script>
 let playerHealth = 10;
-let opponentHealth = 10;
+let enemyHealth = 10;
+let currentPlayer;
+let isPlayerTurn = true;
 
 function selectMage(mage) {
-  playerMage = mage;
-  document.getElementById('character-selection').style.display = 'none';
-  document.getElementById('battle').style.display = 'block';
-  document.getElementById('result').innerHTML = '';
-  opponentMage = Math.random() < 0.5 ? 'Маг 1' : 'Маг 2'; // выбираем противника случайным образом
-  displayStatus();
+currentPlayer = mage;
+document.getElementById("character-selection").style.display = "none";
+document.getElementById("battle").style.display = "block";
 }
 
-function performAction(action) {
-  const opponentAction = getRandomAction();
-  let playerDamage = 0;
-  let opponentDamage = 0;
-
-  if (action === 'Атака') {
-    playerDamage = 2;
-    opponentDamage = opponentAction === 'Защита' ? 0 : 2;
-  } else if (action === 'Защита') {
-    opponentDamage = opponentAction === 'Атака' ? 0 : 2;
-  } else if (action === 'Подготовка') {
-    playerDamage = 2;
-  }
-
-  playerHealth -= opponentDamage;
-  opponentHealth -= playerDamage;
-  displayResult(action, opponentAction, playerDamage, opponentDamage);
-  displayStatus();
-  
-  if (playerHealth <= 0 || opponentHealth <= 0) {
-    endGame();
-  }
+function attack() {
+if (isPlayerTurn) {
+enemyHealth -= 2;
+document.getElementById("enemy-health").innerHTML = `Здоровье противника: ${enemyHealth}`;
+} else {
+playerHealth -= 2;
+document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
+}
+endTurn();
 }
 
-function getRandomAction() {
-  const actions = ['Атака', 'Защита'];
-  if (playerAction === 'Подготовка') { // заменить opponentAction на playerAction
-    actions.splice(actions.indexOf('Подготовка'), 1);
-  }
-  return actions[Math.floor(Math.random() * actions.length)];
+function defend() {
+if (!isPlayerTurn) {
+playerHealth = 10;
+document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
+}
+endTurn();
 }
 
-function displayResult(playerAction, opponentAction, playerDamage, opponentDamage) {
-  const result = document.getElementById('result');
-  result.innerHTML = 'Вы ' + playerAction.toLowerCase() + ', противник ' + opponentAction.toLowerCase() + '.<br>';
-  if (playerDamage > 0) {
-    result.innerHTML += 'Вы нанесли ' + playerDamage + ' урона.';
-  }
-  if (opponentDamage > 0) {
-    result.innerHTML += ' Противник нанес ' + opponentDamage + ' урона.';
-  }
+function prepareAttack() {
+if (isPlayerTurn) {
+playerAttack = 2;
+document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
+}
+endTurn();
 }
 
-function displayStatus() {
-  document.getElementById('result').innerHTML += '<br><br>';
-  document.getElementById('result').innerHTML += 'Ваше здоровье: ' + playerHealth + '<br>';
-  document.getElementById('result').innerHTML += 'Здоровье противника: ' + opponentHealth;
+function enemyTurn() {
+const randomAction = Math.floor(Math.random() * 3);
+switch (randomAction) {
+case 0:
+playerHealth -= 2;
+document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
+break;
+case 1:
+playerHealth = 10;
+document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
+break;
+case 2:
+enemyAttack = 2;
+document.getElementById("enemy-health").innerHTML = `Здоровье противника: ${enemyHealth}`;
+break;
+}
+endTurn();
 }
 
-function endGame() {
-  let message = '';
-  if (playerHealth <= 0 && opponentHealth <= 0) {
-    message = 'Ничья!';
-  } else if (playerHealth <= 0) {
-    message = 'Вы проиграли!';
-  } else {
-    message = 'Вы победили!';
-  }
-  
-  document.getElementById('result').innerHTML += '<br><br>';
-  document.getElementById('result').innerHTML += message;
-  document.getElementById('actions').style.display = 'none';
+function endTurn() {
+if (playerHealth <= 0) {
+alert("Вы проиграли!");
+window.location.reload();
+} else if (enemyHealth <= 0) {
+alert("Вы победили!");
+window.location.reload();
+} else {
+isPlayerTurn = !isPlayerTurn;
+if (isPlayerTurn) {
+setTimeout(() => {
+enemyTurn();
+}, 1000);
 }
-  </script>
+}
+}
+</script>
+</div>
 </body>
 </html>
