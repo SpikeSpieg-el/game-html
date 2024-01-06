@@ -43,51 +43,52 @@
         let round = 1;
         let log = "";
 
-        function performAction(action) {
-            let enemyAction = Math.random() < 0.33 ? 'attack' : Math.random() < 0.67 ? 'defend' : 'prepare';
 
-            log += `Ход ${round}: Ты выбрал ${action}, противник выбрал ${enemyAction}.<br>`;
+    function performAction(action) {
+        let enemyAction = Math.random() < 0.33 ? 'attack' : Math.random() < 0.67 ? 'defend' : 'prepare';
 
-            if (action === 'attack') {
-                if (enemyAction === 'defend') {
-                    // Player attacks, but enemy blocks
-                    enemyHealth -= 2;
-                    log += `Ты атаковал, противник блокировал, но ты все равно нанес урон -2.<br>`;
-                } else if (enemyAction === 'prepare') {
-                    enemyHealth -= 2;
-                    log += `Ты атаковал, противник готовился и получил урон -2.<br>`;
-                } else {
-                    enemyHealth -= 2;
-                    log += `Ты атаковал, противник атаковал, оба получили урон -2.<br>`;
-                }
-            } else if (action === 'defend') {
-                if (enemyAction === 'attack') {
-                    // Player blocks, but enemy attacks
-                    playerHealth -= 2;
-                    log += `Ты блокировал, противник атаковал, ты получил урон -2.<br>`;
-                } else if (enemyAction === 'prepare') {
-                    // Player blocks, but enemy prepares
-                    log += `Ты блокировал, противник готовился, ничего не произошло.<br>`;
-                }
-            } else if (action === 'prepare') {
-                if (enemyAction === 'attack') {
-                    // Player prepares, but enemy attacks
-                    playerHealth -= 2;
-                    log += `Ты готовился, противник атаковал, ты получил урон -2.<br>`;
-                } else if (enemyAction === 'defend') {
-                    // Player prepares, but enemy blocks
-                    log += `Ты готовился, противник блокировал, ничего не произошло.<br>`;
-                }
-                // Both prepare, no damage taken
+        log += `Ход ${round}: Ты выбрал ${action}, противник выбрал ${enemyAction}.<br>`;
+
+        if (action === 'attack') {
+            if (enemyAction === 'defend') {
+                // Player attacks, but enemy successfully defends
+                log += `Ты атаковал, противник успешно защитился, ничего не произошло.<br>`;
+            } else if (enemyAction === 'prepare') {
+                // Player attacks, and enemy prepares
+                enemyHealth -= 2;
+                log += `Ты атаковал, противник готовился и получил урон -2.<br>`;
+            } else {
+                // Both attack, no damage taken
+                log += `Ты атаковал, противник атаковал, но оба избежали урона.<br>`;
             }
-
-            round++;
-            updateStatus();
-
-            if (playerHealth <= 0 || enemyHealth <= 0) {
-                endGame();
+        } else if (action === 'defend') {
+            if (enemyAction === 'attack') {
+                // Player successfully defends against enemy attack
+                log += `Ты блокировал, противник атаковал, ты успешно защитился, ничего не произошло.<br>`;
+            } else if (enemyAction === 'prepare') {
+                // Player blocks, but enemy prepares
+                log += `Ты блокировал, противник готовился, ничего не произошло.<br>`;
             }
+        } else if (action === 'prepare') {
+            if (enemyAction === 'attack') {
+                // Player prepares, but enemy attacks
+                playerHealth -= 2;
+                log += `Ты готовился, противник атаковал, ты получил урон -2.<br>`;
+            } else if (enemyAction === 'defend') {
+                // Player prepares, but enemy successfully defends
+                log += `Ты готовился, противник успешно защитился, ничего не произошло.<br>`;
+            }
+            // Both prepare, no damage taken
         }
+
+        round++;
+        updateStatus();
+
+        if (playerHealth <= 0 || enemyHealth <= 0) {
+            endGame();
+        }
+    }
+
 
         function updateStatus() {
             document.getElementById('output').innerHTML = `Твоё здоровье: ${playerHealth} | Здоровье противника: ${enemyHealth}`;
