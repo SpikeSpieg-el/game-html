@@ -53,7 +53,8 @@
         if (action === 'attack') {
             if (enemyAction === 'defend') {
                 // Player attacks, but enemy successfully defends
-                log += `Ты атаковал, противник успешно защитился, ничего не произошло.<br>`;
+                playerHealth -= 2;
+                log += `Ты атаковал, противник успешно защитился, он провёл контр атаку.<br>`;
             } else if (enemyAction === 'prepare') {
                 // Player attacks, and enemy prepares
                 enemyHealth -= 2;
@@ -65,7 +66,8 @@
         } else if (action === 'defend') {
             if (enemyAction === 'attack') {
                 // Player successfully defends against enemy attack
-                log += `Ты блокировал, противник атаковал, ты успешно защитился, ничего не произошло.<br>`;
+                enemyHealth -=2;
+                log += `Ты блокировал, противник атаковал, ты успешно защитился и контр атаковал.<br>`;
             } else if (enemyAction === 'prepare') {
                 // Player defends, but enemy prepares (no damage dealt)
                 playerHealth -= 2;
