@@ -25,38 +25,41 @@
 </head>
 <body>
     <h1>RPG: Уличная Жизнь Магов</h1>
-    <div id="output">Выбери своего мага:</div>
-    <button onclick="chooseMage(1)">Маг Атаки</button>
-    <button onclick="chooseMage(2)">Маг Защиты</button>
+    <div id="output">Битва началась!</div>
     <div id="actions" style="display:none;">
         <button onclick="performAction('attack')">Атака</button>
-        <button onclick="performAction('defend')">Защита</button>
+        <button onclick="performAction('defend')">Блок</button>
+        <button onclick="performAction('prepare')">Подготовка</button>
     </div>
     <script>
         let playerHealth = 10;
         let enemyHealth = 10;
-        let playerMageType;
-
-        function chooseMage(mageType) {
-            playerMageType = mageType;
-            document.getElementById('output').innerHTML = 'Битва началась!';
-            document.getElementById('actions').style.display = 'flex';
-        }
 
         function performAction(action) {
-            let enemyAction = Math.random() < 0.5 ? 'attack' : 'defend';
+            let enemyAction = Math.random() < 0.33 ? 'attack' : Math.random() < 0.67 ? 'defend' : 'prepare';
 
             if (action === 'attack') {
-                if (enemyAction === 'attack') {
+                if (enemyAction === 'defend') {
+                    // Player attacks, but enemy blocks
+                } else if (enemyAction === 'prepare') {
                     enemyHealth -= 2;
-                    playerHealth -= 2;
                 } else {
-                    playerHealth -= 2;
+                    enemyHealth -= 2;
                 }
             } else if (action === 'defend') {
                 if (enemyAction === 'attack') {
-                    // Player defends, no damage taken
+                    // Player blocks, but enemy attacks
+                    playerHealth -= 2;
+                } else if (enemyAction === 'prepare') {
+                    // Both defend, no damage taken
                 }
+            } else if (action === 'prepare') {
+                if (enemyAction === 'attack') {
+                    playerHealth -= 2;
+                } else if (enemyAction === 'defend') {
+                    // Player prepares, but enemy blocks
+                }
+                // Both prepare, no damage taken
             }
 
             updateStatus();
@@ -74,6 +77,11 @@
             document.getElementById('output').innerHTML = playerHealth <= 0 ? 'Ты проиграл!' : 'Ты победил!';
             document.getElementById('actions').style.display = 'none';
         }
+
+        // Display actions after a short delay
+        setTimeout(() => {
+            document.getElementById('actions').style.display = 'flex';
+        }, 1000);
     </script>
 </body>
 </html>
