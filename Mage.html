@@ -48,8 +48,8 @@
     <p id="enemy-health">Здоровье противника: 10</p>
     <p id="move-counter">Ход: 0</p>
     <div class="battle-actions">
-      <button class="button" onclick="playerMove('attack')">Атака</button>
-      <button class="button" onclick="playerMove('defend')">Защита</button>
+      <button id="attackBtn" class="button" onclick="playerMove('attack')">Атака</button>
+      <button id="defendBtn" class="button" onclick="playerMove('defend')">Защита</button>
       <button class="button" onclick="ready()">Готов</button>
     </div>
     <div class="move-log">
@@ -66,7 +66,6 @@
     let isPlayerTurn = true;
     let moveCounter = 0;
     let isReady = false;
-    let isActionSelected = false;
 
     function selectMage(mage) {
       currentPlayer = mage;
@@ -76,16 +75,18 @@
     }
 
     function playerMove(type) {
-      if (isReady || !isPlayerTurn || isActionSelected) return;
+      if (isReady || !isPlayerTurn) return;
       playerMoveType = type;
       document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: ${currentPlayer} выбрал ${getMoveName(type)}</p>`;
-      isActionSelected = true;
+      document.getElementById("attackBtn").disabled = true;
+      document.getElementById("defendBtn").disabled = true;
     }
 
     function ready() {
-      if (isReady || !isPlayerTurn || !isActionSelected) return;
+      if (isReady) return;
+      if (!playerMoveType) return;
       isReady = true;
-      document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: Противник выбирает действие...</p>`;
+      document.getElementById("log").innerHTML += `<p>Противник выбирает действие...</p>`;
       setTimeout(() => {
         enemyTurn();
       }, 1500);
@@ -126,16 +127,17 @@
     function endTurn() {
       moveCounter++;
       isPlayerTurn = !isPlayerTurn;
+      document.getElementById("attackBtn").disabled = false;
+      document.getElementById("defendBtn").disabled = false;
+      
       if (playerHealth <= 0) {
         alert("Вы проиграли!");
         window.location.reload();
       } else if (enemyHealth <= 0) {
-        
         alert("Вы победили!");
         window.location.reload();
       } else {
         playerMoveType = "";
-        isActionSelected = false;
         displayMoveCounter();
         isReady = false;
       }
