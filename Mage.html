@@ -30,6 +30,7 @@
 <body>
     <h1>RPG: Уличная Жизнь Магов</h1>
     <div id="output">Битва началась!</div>
+    <button onclick="resetGame()" style="display:none;">Играть снова</button>
     <div id="actions" style="display:none;">
         <button onclick="performAction('attack')">Атака</button>
         <button onclick="performAction('defend')">Блок</button>
@@ -102,10 +103,12 @@
         }
 
         function endGame() {
-            document.getElementById('output').innerHTML = playerHealth <= 0 ? 'Ты проиграл!' : 'Ты победил!';
-            document.getElementById('actions').style.display = 'none';
-            document.querySelector('button').style.display = 'inline-block';
-        }
+    document.getElementById('output').innerHTML = playerHealth <= 0 ? 'Ты проиграл!' : 'Ты победил!';
+    document.getElementById('actions').style.display = 'none';
+    document.querySelector('button').style.display = 'none';
+    document.querySelector('button[onclick="resetGame()"]').style.display = 'inline-block';
+}
+
 
         function resetGame() {
             playerHealth = 10;
