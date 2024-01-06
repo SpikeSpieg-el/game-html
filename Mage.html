@@ -50,7 +50,7 @@ text-align: left;
 <div class="battle-actions">
 <button class="button" onclick="playerMove('attack')">Атака</button>
 <button class="button" onclick="playerMove('defend')">Защита</button>
-<button class="button" onclick="playerMove('prepare')">Подготовка</button>
+<button class="button" onclick="ready()">Готов</button>
 </div>
 <div class="move-log">
 <h3>Лог ходов:</h3>
@@ -62,8 +62,10 @@ text-align: left;
 let playerHealth = 10;
 let enemyHealth = 10;
 let currentPlayer;
+let playerMoveType;
 let isPlayerTurn = true;
 let moveCounter = 0;
+let isReady = false;
 
 function selectMage(mage) {
 currentPlayer = mage;
@@ -72,61 +74,57 @@ document.getElementById("battle").style.display = "block";
 displayMoveCounter();
 }
 
-function playerMove(action) {
-document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: ${currentPlayer} выбрал ${getMoveName(action)}</p>`;
-moveCounter++;
-performMove(action);
+function playerMove(type) {
+playerMoveType = type;
+document.getElementById("battle").style.pointerEvents = "none";
+document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: ${currentPlayer} выбрал ${getMoveName(type)}</p>`;
 }
 
-function performMove(action) {
-switch (action) {
-case "attack":
-if (isPlayerTurn) {
-enemyHealth -= 2;
-document.getElementById("enemy-health").innerHTML = `Здоровье противника: ${enemyHealth}`;
-} else {
-playerHealth -= 2;
-document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
-}
-break;
-
-case "defend":
-if (isPlayerTurn) {
-document.getElementById("log").innerHTML += `<p>Ход ${moveCounter}: Ничего не произошло. ${currentPlayer} защитился.</p>`;
-} else {
-playerHealth = 10;
-document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
-}
-break;
-
-case "prepare":
-if (isPlayerTurn) {
-document.getElementById("log").innerHTML += `<p>Ход ${moveCounter}: Ничего не произошло. ${currentPlayer} подготавливает следующую атаку.</p>`;
-}
-break;
-}
-
-if (action !== "prepare") {
-endTurn();
-} else {
-displayMoveCounter();
-isPlayerTurn = false;
+function ready() {
+if (isReady) return;
+isReady = true;
+document.getElementById("battle").style.pointerEvents = "auto";
+document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: Противник выбирает действие...</p>`;
 setTimeout(() => {
 enemyTurn();
-}, 1000);
-}
+}, 1500);
 }
 
 function enemyTurn() {
-const randomAction = Math.floor(Math.random() * 3);
-const actions = ["attack", "defend", "prepare"];
+const randomAction = Math.floor(Math.random() * 2);
+const actions = ["attack", "defend"];
 const selectedAction = actions[randomAction];
-document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: Противник выбрал ${getMoveName(selectedAction)}</p>`;
-moveCounter++;
 performMove(selectedAction);
 }
 
+function performMove(action) {
+if (isPlayerTurn) {
+switch (playerMoveType) {
+case "attack":
+enemyHealth -= 2;
+document.getElementById("enemy-health").innerHTML = `Здоровье противника: ${enemyHealth}`;
+break;
+case "defend":
+document.getElementById("log").innerHTML += `<p>Ход ${moveCounter + 1}: Ничего не произошло. ${currentPlayer} защитился.</p>`;
+break;
+}
+} else {
+switch (action) {
+case "attack":
+playerHealth -= 2;
+document.getElementById("player-health").innerHTML = `Здоровье мага: ${playerHealth}`;
+break;
+case "defend":
+break;
+}
+}
+
+endTurn();
+}
+
 function endTurn() {
+moveCounter++;
+isPlayerTurn = !isPlayerTurn;
 if (playerHealth <= 0) {
 alert("Вы проиграли!");
 window.location.reload();
@@ -134,8 +132,8 @@ window.location.reload();
 alert("Вы победили!");
 window.location.reload();
 } else {
-isPlayerTurn = true;
 displayMoveCounter();
+isReady = false;
 }
 }
 
@@ -149,8 +147,6 @@ case "attack":
 return "Атака";
 case "defend":
 return "Защита";
-case "prepare":
-return "Подготовка";
 default:
 return "";
 }
