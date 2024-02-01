@@ -86,6 +86,7 @@ function loadGame() {
     
         upgradeCostSpan.innerText = upgrades[index].cost;
     }
+    
 
     document.getElementById("woodTotalCount").innerText = woodTotalCount;
     document.getElementById("stoneTotalCount").innerText = stoneTotalCount;

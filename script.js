@@ -195,6 +195,7 @@ function buyUpgrade(index) {
                 //return;
                 //}
             //}
+            
     checkUpgradeAvailability();
     
         // Добавьте условие, что если индекс равен 10 (лесопилка), то уменьшите количество пшена
@@ -344,6 +345,7 @@ function incrementClick() {
     updateUpgradeMarker(1);
     saveGame();
     checkUpgradeAvailability();
+    
     
 }
 
@@ -557,6 +559,38 @@ function toggleNav() {
         }
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    // Check if there are saved local data
+    const savedGameExists = localStorage.getItem("clickCount") !== null;
+
+    if (savedGameExists) {
+        // If saved data exists, show a warning window
+        const confirmation = window.confirm("У вас есть сохранённые данные, загрузить прошлый сеанс игры?");
+        
+        if (confirmation) {
+            // If the player chooses to load saved data, call the loadGame function
+            loadGame();
+            showLoadNotification();
+        } else {
+            // If the player chooses not to load saved data, continue with the new game
+            showNotification('info', 'New game started!');
+        }
+    }
+
+    // Add your existing event listeners and other initialization code here
+    const saveButton = document.querySelector('.top button:nth-child(1)');
+    const loadButton = document.querySelector('.top button:nth-child(2)');
+
+    saveButton.addEventListener('click', function () {
+        showSaveNotification();
+        saveGame();
+    });
+
+    loadButton.addEventListener('click', function () {
+        showLoadNotification();
+        loadGame();
+    });
+});
 
 function closeNav() {
     document.getElementById("sidebar").style.width = "0";
