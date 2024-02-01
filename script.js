@@ -559,6 +559,10 @@ function toggleNav() {
         }
     }
 }
+
+
+// предупреждение о найденной игры в прошлом при попадании на стр
+
 document.addEventListener('DOMContentLoaded', function () {
     // Check if there are saved local data
     const savedGameExists = localStorage.getItem("clickCount") !== null;

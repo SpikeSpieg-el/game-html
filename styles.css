@@ -203,7 +203,7 @@ button:active {
 }
 
 .clickButton{
-    position: fixed;
+    /*position: fixed;*/
     bottom: 17px;
     right: 30px;
 }
