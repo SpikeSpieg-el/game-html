@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG: Уличная Жизнь Магов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #output {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #actions {
+            display: flex;
+            justify-content: space-around;
+        }
+        #log {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>RPG: Уличная Жизнь Магов</h1>
+    <div id="output">Битва началась!</div>
+    <button onclick="resetGame()" style="display:none;">Играть снова</button>
+    <div id="actions" style="display:none;">
+        <button onclick="performAction('attack')">Атака</button>
+        <button onclick="performAction('defend')">Блок</button>
+        <button onclick="performAction('prepare')">Подготовка</button>
+    </div>
+    <div id="log"></div>
+    <button onclick="resetGame()" style="display:none;">Начать заново</button>
+    <script>
+        let playerHealth = 10;
+        let enemyHealth = 10;
+        let round = 1;
+        let log = "";
+
+
+    function performAction(action) {
+        let enemyAction = Math.random() < 0.33 ? 'attack' : Math.random() < 0.67 ? 'defend' : 'prepare';
+
+        log += `Ход ${round}: Ты выбрал ${action}, противник выбрал ${enemyAction}.<br>`;
+
+        if (action === 'attack') {
+            if (enemyAction === 'defend') {
+                // Player attacks, but enemy successfully defends
+                playerHealth -= 2;
+                log += `Ты атаковал, противник успешно защитился, он провёл контр атаку.<br>`;
+            } else if (enemyAction === 'prepare') {
+                // Player attacks, and enemy prepares
+                enemyHealth -= 2;
+                log += `Ты атаковал, противник готовился и получил урон -2.<br>`;
+            } else {
+                // Both attack, no damage taken
+                log += `Ты атаковал, противник атаковал, но оба избежали урона.<br>`;
+            }
+        } else if (action === 'defend') {
+            if (enemyAction === 'attack') {
+                // Player successfully defends against enemy attack
+                enemyHealth -=2;
+                log += `Ты блокировал, противник атаковал, ты успешно защитился и контр атаковал.<br>`;
+            } else if (enemyAction === 'prepare') {
+                // Player defends, but enemy prepares (no damage dealt)
+                playerHealth -= 2;
+                log += `Ты блокировал, противник готовился, ты получил -2.<br>`;
+            }
+        } else if (action === 'prepare') {
+            if (enemyAction === 'attack') {
+                // Player prepares, but enemy attacks
+                playerHealth -= 2;
+                log += `Ты готовился, противник атаковал, ты получил урон -2.<br>`;
+            } else if (enemyAction === 'defend') {
+                // Player prepares, and enemy defends (no damage dealt)
+                enemyHealth -= 2;
+                log += `Ты готовился, противник блокировал, но ты все равно нанес урон -2.<br>`;
+                
+            }
+            // Both prepare, no damage taken
+        }
+
+        round++;
+        updateStatus();
+
+        if (playerHealth <= 0 || enemyHealth <= 0) {
+            endGame();
+        }
+    }
+
+
+
+
+
+        function updateStatus() {
+            document.getElementById('output').innerHTML = `Твоё здоровье: ${playerHealth} | Здоровье противника: ${enemyHealth}`;
+            document.getElementById('log').innerHTML = log;
+        }
+
+        function endGame() {
+    document.getElementById('output').innerHTML = playerHealth <= 0 ? 'Ты проиграл!' : 'Ты победил!';
+    document.getElementById('actions').style.display = 'none';
+    document.querySelector('button').style.display = 'none';
+    document.querySelector('button[onclick="resetGame()"]').style.display = 'inline-block';
+}
+
+
+        function resetGame() {
+            playerHealth = 10;
+            enemyHealth = 10;
+            round = 1;
+            log = "";
+            updateStatus();
+            document.getElementById('actions').style.display = 'flex';
+            document.querySelector('button').style.display = 'none';
+            document.getElementById('output').innerHTML = 'Битва началась!';
+        }
+
+        // Display actions after a short delay
+        setTimeout(() => {
+            document.getElementById('actions').style.display = 'flex';
+        }, 1000);
+    </script>
+</body>
+</html>
