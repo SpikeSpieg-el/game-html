@@ -12,7 +12,7 @@ let savedUpgrades = [
     { cost: 5000, level: 0, clickIncrease: 50, multiplier: 7, opened: false },
 { cost: 100, level: 0, clickIncrease: 0, multiplier: 1.1, opened: false, catCountIncrease: 1 },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, image: "OIG.3NJJoFBIJGj4Z.png"},
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.3, opened: false, resourceIncrease: 1, image: "Pole.png"},
+    { cost: 300, level: 0, clickIncrease: 1.5, multiplier: 1.3, opened: false, resourceIncrease: 1, image: "Pole.png"},
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.4, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"},
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, home: 1, image: " dom1.png"}, 
@@ -22,7 +22,8 @@ let savedUpgrades = [
     { cost: 50000, level: 0, clickIncrease: 500, multiplier: 12, opened: false },
     { cost: 100000, level: 0, clickIncrease: 1000, multiplier: 15, opened: false },
     { cost: 200000, level: 0, clickIncrease: 2000, multiplier: 18, opened: false },
-    { cost: 500000, level: 0, clickIncrease: 5000, multiplier: 22, opened: false }
+    { cost: 500000, level: 0, clickIncrease: 5000, multiplier: 22, opened: false },
+    { cost: 1000000, level: 0, clickIncrease: 10000, multiplier: 23, opened: false }
 ];
 
 
@@ -45,6 +46,10 @@ function loadGame() {
 
     hoseTotalCount = parseInt(localStorage.getItem("hoseTotalCount")) || 0; 
     document.getElementById("hoseTotalCount").innerText = hoseTotalCount;
+
+    metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
+    document.getElementById("metallTotalCount").innerText = metallTotalCount;
+
 
 
     const savedUpgradesJSON = localStorage.getItem("upgrades");
@@ -94,6 +99,9 @@ function loadGame() {
     document.getElementById("clickCount").innerText = clickCount;
     document.getElementById("clickValue").innerText = clickValue;
     document.getElementById("catCount").innerText = catCount;
+    document.getElementById("wheatTotalCount").innerText = wheatTotalCount;
+    document.getElementById("metallTotalCount").innerText = metallTotalCount;
+
 
     checkUpgradeAvailability();
     
