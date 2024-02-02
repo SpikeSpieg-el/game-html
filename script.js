@@ -551,6 +551,7 @@ function closeNotification(notification) {
     }, 350); // Adjust the time to match the fadeOut animation duration
 }
 
+//слайдер слева
 function toggleNav() {
     var sidebar = document.getElementById("sidebar");
     var main = document.getElementById("main");

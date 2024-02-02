@@ -24,7 +24,7 @@
     </div>
 
     <div class="clicker-container">
-    <div class="name">
+        <div class="name">
         <!--<div class="image-container">
         <img class="clipped-image" src="" alt="bd1"></div> -->
         <h1>Clicker Game
@@ -36,17 +36,17 @@
                 
             </a>
             
-    </div>
-    <div id="notifications-container">
+        </div>
+        <div id="notifications-container">
         <!-- Уведомления будут добавляться сюда -->
-    </div>
-    <div class="top">
+        </div>
+        <div class="top">
 
             <!-- Добавляем кнопку сохранения -->
             <button onclick="saveGame()">Save Game</button>
             <!-- Добавляем кнопку загрузки -->
             <button onclick="loadGame()">Load Game</button>
-     </div>
+        </div>
         
         
         
@@ -67,18 +67,18 @@
         </div>
         
         <div class="pages">
-            <span><button onclick="showColumn(1)">Upgrade<a id="upgradeMarker1" class="upgrade-marker">^</a></button></span>
-            <span><button onclick="showColumn(2)">Buildings</button></span>
+            <span><button id="column1Btn" onclick="showColumn(1)">Upgrade<a id="upgradeMarker1" class="upgrade-marker">^</a></button></span>
+            <span><button id="column2Btn" onclick="showColumn(2)">Buildings</button></span>
             <!-- Column3<span><button onclick="showColumn(3)">3</button></span>-->
-            <span><button onclick="showColumn(3)">Village</button></span>
+            <span><button id="column3Btn" onclick="showColumn(3)">Village</button></span>
             <!--<span><button onclick="showNextColumn()">next</button></span>-->
         </div>
         
         
-        <div id="upgradeContainer">
+    <div id="upgradeContainer">
             <!-- Column 1: Апгрейды -->
-            <div class="upgradeColumn" id="column1">
-                
+        <div class="upgradeColumn" id="column1">
+
             <div> 
                 <div class="hidden1">
                 <div class="catIMG">
@@ -106,9 +106,9 @@
                         Upgrade <span>+5</span> Cost: <span class="upgradeCost" id="upgradeCost3">500</span>
                     </button>
                     
+                    </div>
                 </div>
-                </div>
-            </div>
+            
             <div>
                 <div class="hidden4">
                     <button id="upgrade4" onclick="buyUpgrade4()">
@@ -164,8 +164,9 @@
                 </div>
                 
             </div>
+            
             </div>
-        
+        </div>
             <!-- Column 2: Постройки -->
             <div class="upgradeColumn" id="column2">
                 <div class="hidden9">

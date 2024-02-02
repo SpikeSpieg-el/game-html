@@ -20,6 +20,10 @@ h1{
     font-size: 45px;
     color: rgb(255, 255, 255);
 }
+.highlight {
+    background-color: rgb(8, 57, 8);
+    color: white;
+}
 
 .name{
     display: flex;
