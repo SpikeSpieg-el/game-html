@@ -101,7 +101,7 @@ function getItemImage(rarity) {
             case "Ресурс 2":
                     return '<img src="Chainsaw-Man-Manga-Anime-makima-(chainsaw-man)-6697352.gif" alt="st2">';
         default:
-            return '<img src="_f1200d8f-3b98-4e93-8890-223ad0522821.jpg" alt="Common">';
+            return '<img src="223ad0522821.jpg" alt="Common">';
     
     }
 }
