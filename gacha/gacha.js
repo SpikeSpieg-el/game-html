@@ -1,19 +1,20 @@
 let containerCount = 0;
+let openedContainers = 0; // Define openedContainers variable
 let itemsPerContainer = 10;
 let baseEliteChance = 0.001;
 let eliteChanceIncrement = 0.001;
-let chanceDisplayElement = document.getElementById("currentChance");
-
-
-let eliteChance = baseEliteChance;
-let openedContainers = 0;
+let eliteChance = baseEliteChance; // Declare eliteChance globally
 
 function openContainer() {
     containerCount++;
     openedContainers++;
 
+    let containerInfoElement = document.getElementById("containerInfo");
     let resultElement = document.getElementById("result");
-    let result = "Открыт контейнер " + containerCount + ": ";
+
+    let containerInfo = "Открыт контейнер " + containerCount + ": ";
+    containerInfoElement.innerHTML = containerInfo;
+
     let containerContent = [];
     let itemsInColumn = itemsPerContainer / 2;
 
@@ -26,19 +27,25 @@ function openContainer() {
 
         // Добавление предмета в контейнер
         let itemClass = getItemClass(rarity, isElite);
+        
+
+        if (i >= itemsInColumn) {
+            itemClass += " right-column";
+        }
+        
         containerContent.push(`<div class="item ${itemClass}">${getItemImage(rarity)} ${rarity}</div> `);
 
         // Add a break after the first column
         if (i === itemsInColumn - 1) {
             containerContent.push('<br>');
-    
         // Сброс шанса при выпадении элитного предмета
         if (isElite) {
             eliteChance = baseEliteChance;
         }
     }
 
-    resultElement.innerHTML = result + containerContent.join('');
+    resultElement.innerHTML = containerContent.join('');
+    
      // Trigger the animation after a short delay for each item
      setTimeout(() => {
         document.querySelectorAll('.item').forEach((item, index) => {
