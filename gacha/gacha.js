@@ -86,22 +86,26 @@ function hideAllContainers() {
 
 function calculateRarity() {
     let rand = Math.random();
-    
+    let rarity;
+
     if (rand < baseEliteChance) {
-        return "Элитный";
-    } else if (rand <  0.005) {
-        return "Легендарный";
-    } else if (rand <  0.03) {
-        return "Эпический";
-    } else if (rand <  0.037) {
-        return "Золотой";
-    } else if (rand <  0.07) {
-        return "Серебрянный";
+        rarity = "Элитный";
+    } else if (rand < 0.005) {
+        rarity = "Легендарный";
+    } else if (rand < 0.03) {
+        rarity = "Эпический";
+    } else if (rand < 0.037) {
+        rarity = "Золотой";
+    } else if (rand < 0.07) {
+        rarity = "Серебрянный";
     } else if (rand < baseEliteChance + 0.47) {
-        return rand < baseEliteChance + 0.4 ? "Ресурс 1" : "Ресурс 2";
+        rarity = rand < baseEliteChance + 0.4 ? "Ресурс 1" : "Ресурс 2";
     } else {
-        return "Обычный";
+        rarity = "Обычный";
     }
+
+    console.log("Calculated Rarity: ", rarity);
+    return rarity;
 }
 
 
@@ -120,16 +124,14 @@ function getItemClass(rarity, isElite) {
                 return "silver";
             case "Элитный":
                 return "elite";
-
             case "Ресурс 1":
-                    return "st1";
+                return "st1";
             case "Ресурс 2":
-                    return "st2";
+                return "st2";
             default:
                 return "common";
         }
     }
-
 }
 
 function getItemImage(rarity) {
