@@ -1,10 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
     align-items: center;
-    height: 100vh;
-    margin: 0;
 }
 
 .container {
@@ -76,8 +75,24 @@ button {
     transition: transform 0.7s ease-in-out; /* Scale animation for golden items */
   }
 
-
-
+  .result-container {
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+  }
+  .result-container10 {
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
 .legendary { background-color: #ff5900; }
 .epic { background-color: #9400D3; }

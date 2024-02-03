@@ -1,60 +1,88 @@
 let containerCount = 0;
-let openedContainers = 0; // Define openedContainers variable
+let openedContainers = 0;
 let itemsPerContainer = 10;
 let baseEliteChance = 0.001;
 let eliteChanceIncrement = 0.001;
-let eliteChance = baseEliteChance; // Declare eliteChance globally
+let eliteChance = baseEliteChance;
 
-function openContainer() {
-    containerCount++;
-    openedContainers++;
+let containerCount1 = 0;
+let openedContainers1 = 0;
+let containerCount2 = 0;
+let openedContainers2 = 0;
+let containerCount3 = 0;
+let openedContainers3 = 0;
 
-    let containerInfoElement = document.getElementById("containerInfo");
-    let resultElement = document.getElementById("result");
+function openContainer(itemsPerContainer) {
+    // Hide all container and result elements initially
+    hideAllContainers();
 
-    let containerInfo = "Открыт контейнер " + containerCount + ": ";
+    let containerCount, openedContainers, containerInfoElement, resultElement;
+
+    if (itemsPerContainer === 3) {
+        containerCount = ++containerCount1;
+        openedContainers = ++openedContainers1;
+        containerInfoElement = document.getElementById("containerInfo");
+        resultElement = document.getElementById("result");
+    } else if (itemsPerContainer === 5) {
+        containerCount = ++containerCount2;
+        openedContainers = ++openedContainers2;
+        containerInfoElement = document.getElementById("containerInfo2");
+        resultElement = document.getElementById("result2");
+    } else if (itemsPerContainer === 10) {
+        containerCount = ++containerCount3;
+        openedContainers = ++openedContainers3;
+        containerInfoElement = document.getElementById("containerInfo3");
+        resultElement = document.getElementById("result3");
+    } else {
+        console.error("Invalid itemsPerContainer value");
+        return;
+    }
+
+    // Show the selected container and result elements
+    containerInfoElement.style.display = "block";
+    resultElement.style.display = "flex";
+
+    let containerInfo = "Открыт контейнер " + containerCount;
     containerInfoElement.innerHTML = containerInfo;
 
     let containerContent = [];
     let itemsInColumn = itemsPerContainer / 2;
 
     for (let i = 0; i < itemsPerContainer; i++) {
-        // Вычисление редкости предмета
         let rarity = calculateRarity();
-
-        // Определение, выпал ли элитный предмет
         let isElite = Math.random() < eliteChance;
-
-        // Добавление предмета в контейнер
         let itemClass = getItemClass(rarity, isElite);
-        
-
-        if (i >= itemsInColumn) {
+    if (i >= itemsInColumn) {
             itemClass += " right-column";
         }
-        
+
         containerContent.push(`<div class="item ${itemClass}">${getItemImage(rarity)} ${rarity}</div> `);
 
-        // Add a break after the first column
         if (i === itemsInColumn - 1) {
             containerContent.push('<br>');
-        // Сброс шанса при выпадении элитного предмета
+        }
+
         if (isElite) {
             eliteChance = baseEliteChance;
         }
     }
 
     resultElement.innerHTML = containerContent.join('');
-    
-     // Trigger the animation after a short delay for each item
-     setTimeout(() => {
+
+    setTimeout(() => {
         document.querySelectorAll('.item').forEach((item, index) => {
             setTimeout(() => {
                 item.classList.add('show');
             }, index * 100);
         });
     }, 500);
-    }
+}
+
+function hideAllContainers() {
+    document.querySelectorAll('.container-info, .result-container').forEach((element) => {
+        element.style.display = "none";
+    });
+}
 
 function calculateRarity() {
     let rand = Math.random();
@@ -126,4 +154,4 @@ function getItemImage(rarity) {
     
     }
 }
-}
+
