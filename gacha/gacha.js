@@ -86,15 +86,15 @@ function getItemClass(rarity, isElite) {
 function getItemImage(rarity) {
     switch (rarity) {
         case "Легендарный":
-            return '<img src="_2dc644b0-3e3c-4d06-827f-12802fb0a815.jpg" alt="Legendary">';
+            return '<img src="12802fb0a815.jpg" alt="Legendary">';
         case "Эпический":
-            return '<img src="_4ebc6f96-dfb3-4b66-8d96-574ee342e6b1.jpg" alt="Epic">';
+            return '<img src="574ee342e6b1.jpg" alt="Epic">';
         case "Золотой":
-            return '<img src="_efc0be59-33a4-4ee6-9bb0-9b8e093aa9bc.jpg" alt="Golden">';
+            return '<img src="9b8e093aa9bc.jpg" alt="Golden">';
         case "Серебрянный":
-            return '<img src="_da98b2d3-d85d-476d-b61e-f361537f27e1.jpg" alt="Silver">';
+            return '<img src="f361537f27e1.jpg" alt="Silver">';
         case "Элитный":
-            return '<img src="_d87442b6-a0cf-4182-867f-2964ff176157.jpg" alt="Elite">';
+            return '<img src="2964ff176157.jpg" alt="Elite">';
 
             case "Ресурс 1":
                     return '<img src="k-eke-artist-Chainsawman-Chainsaw-Man-6769864.gif" alt="st1">';
