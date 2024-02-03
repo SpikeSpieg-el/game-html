@@ -37,6 +37,10 @@ button {
     height: 50px;
     margin-bottom: 5px;
 }
+.chestIMG {
+    width: 70px;
+    height: 70px;
+}
 
 
 .legendary { background-color: #ff5900; }
