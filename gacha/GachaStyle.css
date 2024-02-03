@@ -84,6 +84,16 @@ button {
     justify-content: center;
     flex-direction: row;
   }
+  .result-container5{
+  margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
   .result-container10 {
     margin-top: 20px;
     margin-left: 25px;
