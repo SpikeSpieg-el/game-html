@@ -15,6 +15,7 @@ function openContainer() {
     let resultElement = document.getElementById("result");
     let result = "Открыт контейнер " + containerCount + ": ";
     let containerContent = [];
+    let itemsInColumn = itemsPerContainer / 2;
 
     for (let i = 0; i < itemsPerContainer; i++) {
         // Вычисление редкости предмета
@@ -24,8 +25,13 @@ function openContainer() {
         let isElite = Math.random() < eliteChance;
 
         // Добавление предмета в контейнер
-        containerContent.push(`<div class="item ${getItemClass(rarity, isElite)}">${getItemImage(rarity)} ${rarity}</div> `);
+        let itemClass = getItemClass(rarity, isElite);
+        containerContent.push(`<div class="item ${itemClass}">${getItemImage(rarity)} ${rarity}</div> `);
 
+        // Add a break after the first column
+        if (i === itemsInColumn - 1) {
+            containerContent.push('<br>');
+    
         // Сброс шанса при выпадении элитного предмета
         if (isElite) {
             eliteChance = baseEliteChance;
@@ -33,7 +39,15 @@ function openContainer() {
     }
 
     resultElement.innerHTML = result + containerContent.join('');
-}
+     // Trigger the animation after a short delay for each item
+     setTimeout(() => {
+        document.querySelectorAll('.item').forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('show');
+            }, index * 100);
+        });
+    }, 500);
+    }
 
 function calculateRarity() {
     let rand = Math.random();
@@ -104,4 +118,5 @@ function getItemImage(rarity) {
             return '<img src="223ad0522821.jpg" alt="Common">';
     
     }
+}
 }

@@ -30,17 +30,51 @@ button {
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
-}
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
 
 .item img {
     width: 50px;
     height: 50px;
     margin-bottom: 5px;
 }
-.chestIMG {
-    width: 70px;
-    height: 70px;
-}
+.item.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .item.elite {
+    background-color: #ffc107; /* Highlight color for elite items */
+    border: 2px solid #ffc107; /* Border color for elite items */
+    box-shadow: 0 0 10px #ffc107; /* Shadow for elite items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for elite items */
+  }
+
+  .item.legendary {
+    background-color: #ff5722; /* Highlight color for legendary items */
+    border: 2px solid #ff5722; /* Border color for legendary items */
+    box-shadow: 0 0 10px #ff5722; /* Shadow for legendary items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for legendary items */
+  }
+
+  .item.epic {
+    background-color: #9c27b0; /* Highlight color for epic items */
+    border: 2px solid #9c27b0; /* Border color for epic items */
+    box-shadow: 0 0 10px #9c27b0; /* Shadow for epic items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for epic items */
+  }
+
+  .item.golden {
+    background-color: #ffeb3b; /* Highlight color for golden items */
+    border: 2px solid #ffeb3b; /* Border color for golden items */
+    box-shadow: 0 0 10px #ffeb3b; /* Shadow for golden items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for golden items */
+  }
+
+
 
 
 .legendary { background-color: #ff5900; }
