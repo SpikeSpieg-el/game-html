@@ -97,9 +97,9 @@ function getItemImage(rarity) {
             return '<img src="2964ff176157.jpg" alt="Elite">';
 
             case "Ресурс 1":
-                    return '<img src="k-eke-artist-Chainsawman-Chainsaw-Man-6769864.gif" alt="st1">';
+                    return '<img src="Слой 3.png" alt="st1">';
             case "Ресурс 2":
-                    return '<img src="Chainsaw-Man-Manga-Anime-makima-(chainsaw-man)-6697352.gif" alt="st2">';
+                    return '<img src="Слой 2.png" alt="st2">';
         default:
             return '<img src="223ad0522821.jpg" alt="Common">';
     
