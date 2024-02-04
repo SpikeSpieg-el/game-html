@@ -72,6 +72,7 @@
             <span><button id="column2Btn" onclick="showColumn(2)">Buildings</button></span>
             <!-- Column3<span><button onclick="showColumn(3)">3</button></span>-->
             <span><button id="column3Btn" onclick="showColumn(3)">Village</button></span>
+            <span><button id="column4Btn" onclick="showColumn(4)">Shop</button></span>
             <!--<span><button onclick="showNextColumn()">next</button></span>-->
         </div>
         
@@ -79,7 +80,7 @@
     <div id="upgradeContainer">
             <!-- Column 1: Апгрейды -->
         <div class="upgradeColumn" id="column1">
-
+        <div class="pod1"> 
             <div> 
                 <div class="hidden1">
                 <div class="catIMG">
@@ -110,7 +111,7 @@
                     </div>
                 </div>
             
-            <div>
+            
                 <div class="hidden4">
                     <button id="upgrade4" onclick="buyUpgrade4()">
                         Upgrade <span>+10</span> Cost: <span class="upgradeCost" id="upgradeCost4">1,000</span>
@@ -122,7 +123,10 @@
                         Upgrade <span>+20</span>Cost: <span class="upgradeCost" id="upgradeCost5">3,000</span>
                     </button>
                 </div>
-        
+            </div> 
+         </div>
+    
+         <div class="pod1">
                 <div class="hidden6">
                     <button id="upgrade6" onclick="buyUpgrade6()">
                         Upgrade <span>+50</span>Cost: <span class="upgradeCost" id="upgradeCost6">5,000</span>
@@ -143,11 +147,13 @@
                         Upgrade <span>+500</span>Cost: <span class="upgradeCost" id="upgradeCost16">50,000</span>
                     </button>
                 </div>
+
                  <div class="hidden17">
                     <button id="upgrade17" onclick="buyUpgrade17()">
                         Upgrade <span>+1,000</span>Cost: <span class="upgradeCost" id="upgradeCost17">100,000</span>
                     </button>
                 </div>
+            
                 <div class="hidden18">
                     <button id="upgrade18" onclick="buyUpgrade18()">
                         Upgrade <span>+2,000</span>Cost: <span class="upgradeCost" id="upgradeCost18">200,000</span>
@@ -286,11 +292,35 @@
 
                 </div>
             </div>
+            <div class="upgradeColumn" id="column4">
+                <div class="container">
+                    <div class="chestIMG"> 
+                        <img src="chest.jpeg" alt="chest" style="width: 90px;">
+                    </div>
+                    <button onclick="openContainer(3)">Открыть контейнер (3 предмета)</button>
+                    <div id="containerInfo" class="container-info"></div>
+                    <div id="result" class="result-container"></div>
+                </div>
             
-        
-
-        
-        
+                <div class="container">
+                    <div class="chestIMG"> 
+                        <img src="chest.jpeg" alt="chest" style="width: 90px;">
+                    </div>
+                    <button onclick="openContainer(5)">Открыть контейнер (5 предметов)</button>
+                    <div id="containerInfo2" class="container-info"></div>
+                    <div id="result2" class="result-container result-container5"></div>
+                </div>
+            
+                <div class="container">
+                    <div class="chestIMG"> 
+                        <img src="chest.jpeg" alt="chest" style="width: 90px;">
+                    </div>
+                    <button onclick="openContainer(10)">Открыть контейнер (10 предметов)</button>
+                    <div id="containerInfo3" class="container-info"></div>
+                    <div id="result3" class="result-container result-container10"></div>
+                </div>
+            
+            </div>
        
          <div class="animated-number-container">
                 <span id="animatedNumber"></span>
@@ -310,6 +340,8 @@
 <script src="saveLoad.js"></script>      
         
 <script src="showColumn.js"></script>
+<script src="gacha/gacha.js"></script>
+
 
 
 

@@ -137,22 +137,22 @@ function getItemClass(rarity, isElite) {
 function getItemImage(rarity) {
     switch (rarity) {
         case "Легендарный":
-            return '<img src="12802fb0a815.jpg" alt="Legendary">';
+            return '<img src="gacha/12802fb0a815.jpg" alt="Legendary">';
         case "Эпический":
-            return '<img src="574ee342e6b1.jpg" alt="Epic">';
+            return '<img src="gacha/574ee342e6b1.jpg" alt="Epic">';
         case "Золотой":
-            return '<img src="9b8e093aa9bc.jpg" alt="Golden">';
+            return '<img src="gacha/9b8e093aa9bc.jpg" alt="Golden">';
         case "Серебрянный":
-            return '<img src="f361537f27e1.jpg" alt="Silver">';
+            return '<img src="gacha/f361537f27e1.jpg" alt="Silver">';
         case "Элитный":
-            return '<img src="2964ff176157.jpg" alt="Elite">';
+            return '<img src="gacha/2964ff176157.jpg" alt="Elite">';
 
             case "Ресурс 1":
-                    return '<img src="Tree.png" alt="st1">';
+                    return '<img src="gacha/Tree.png" alt="st1">';
             case "Ресурс 2":
-                    return '<img src="Wood.png" alt="st2">';
+                    return '<img src="gacha/Wood.png" alt="st2">';
         default:
-            return '<img src="223ad0522821.jpg" alt="Common">';
+            return '<img src="gacha/223ad0522821.jpg" alt="Common">';
     
     }
 }

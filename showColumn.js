@@ -2,7 +2,7 @@ var currentColumn = 1;
 
 function showColumn(columnNumber) {
     // Hide all columns
-    for (var i = 1; i <= 3; i++) {
+    for (var i = 1; i <= 4; i++) {
         document.getElementById('column' + i).style.display = 'none';
         document.getElementById('column' + i + 'Btn').classList.remove('highlight');
     }
@@ -18,18 +18,25 @@ function showColumn(columnNumber) {
         column.style.justifyContent = 'space-evenly';
     }
     if (columnNumber === 1) {
-        column.style.flexWrap = 'wrap';
-        column.style.justifyContent = 'space-between';
+        column.style.flexDirection = 'row';
+        column.style.justifyContent = 'center';
         column.style.alignItems = 'center';
     }
     if (columnNumber === 3) {
         column.style.justifyContent = 'center';
     }
+    if (columnNumber === 4) {
+        column.style.flexDirection = 'column';
+        column.style.flexflow = 'wrap';
+        column.style.justifyContent = 'center';
+        column.style.flexwrap ='nowrap'
+
 
     // Highlight the current button
     document.getElementById('column' + columnNumber + 'Btn').classList.add('highlight');
 
     currentColumn = columnNumber;
+}
 }
 
 function showNextColumn() {
@@ -37,7 +44,7 @@ function showNextColumn() {
     currentColumn++;
 
     // If the current column exceeds the total number of columns, reset to the first column
-    if (currentColumn > 3) {
+    if (currentColumn > 4) {
         currentColumn = 1;
     }
 
@@ -47,3 +54,4 @@ function showNextColumn() {
 
 // Initially, show the first column
 showColumn(1);
+
