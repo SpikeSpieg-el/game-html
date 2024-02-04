@@ -30,6 +30,7 @@ function showColumn(columnNumber) {
         column.style.flexflow = 'wrap';
         column.style.justifyContent = 'center';
         column.style.flexwrap ='nowrap'
+        column.style.textAlign = 'center';
 
 
     // Highlight the current button

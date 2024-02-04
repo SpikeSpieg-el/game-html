@@ -1,8 +1,4 @@
 // saveLoad.js
-
-
-
-
 let savedUpgrades = [
      { cost: 20, level: 0, clickIncrease: 1, multiplier: 1.5, opened: false },
     { cost: 200, level: 0, clickIncrease: 2, multiplier: 2.4, opened: false },
@@ -23,7 +19,10 @@ let savedUpgrades = [
     { cost: 100000, level: 0, clickIncrease: 1000, multiplier: 15, opened: false },
     { cost: 200000, level: 0, clickIncrease: 2000, multiplier: 18, opened: false },
     { cost: 500000, level: 0, clickIncrease: 5000, multiplier: 22, opened: false },
-    { cost: 1000000, level: 0, clickIncrease: 10000, multiplier: 23, opened: false }
+    { cost: 1000000, level: 0, clickIncrease: 10000, multiplier: 23, opened: false },
+{ cost: 1000, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
+    { cost: 1500, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
+    { cost: 2000, level: 0, clickIncrease: 0, multiplier: 1, opened: false}
 ];
 
 

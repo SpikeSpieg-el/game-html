@@ -5,8 +5,8 @@ body {
     color: rgb(255 255 255);
     background-color: black;
    
-    text-align: center;
     
+
     background-image: url('OIG.nEJp58LK_kMl.jpg');
     
     
@@ -129,9 +129,6 @@ h2 {
 }
 .pod1{
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
     align-items: center;
 }
 
@@ -143,7 +140,7 @@ h2 {
 
 .hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7, .hidden8,
  .hidden9, .hidden10, .hidden11, .hidden12, .hidden13, .hidden14, .hidden15,
- .hidden16,.hidden17,.hidden18, .hidden19,.hidden20,.hidden21,.hidden22 {
+ .hidden16,.hidden17,.hidden18, .hidden19,.hidden20,.hidden21,.hidden22,.hidden23 {
     display: none;
     
 }
@@ -218,6 +215,7 @@ button:active {
     /*position: fixed;*/
     bottom: 17px;
     right: 30px;
+    text-align: center;
 }
 
 

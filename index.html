@@ -70,7 +70,7 @@
         <div class="pages">
             <span><button id="column1Btn" onclick="showColumn(1)">Upgrade<a id="upgradeMarker1" class="upgrade-marker">^</a></button></span>
             <span><button id="column2Btn" onclick="showColumn(2)">Buildings</button></span>
-            <!-- Column3<span><button onclick="showColumn(3)">3</button></span>-->
+            
             <span><button id="column3Btn" onclick="showColumn(3)">Village</button></span>
             <span><button id="column4Btn" onclick="showColumn(4)">Shop</button></span>
             <!--<span><button onclick="showNextColumn()">next</button></span>-->
@@ -80,8 +80,9 @@
     <div id="upgradeContainer">
             <!-- Column 1: Апгрейды -->
         <div class="upgradeColumn" id="column1">
-        <div class="pod1"> 
-            <div> 
+         
+            <div>
+                <div class="pod1">  
                 <div class="hidden1">
                 <div class="catIMG">
                     <button id="upgrade1" onclick="buyUpgrade1()">
@@ -89,6 +90,7 @@
                         <span class="upgradeCost1" id="upgradeCost1">20</span>
                         
                     </button>
+                    
                     
                 </div>
                 </div>
@@ -124,9 +126,9 @@
                     </button>
                 </div>
             </div> 
-         </div>
+         
     
-         <div class="pod1">
+            <div class="pod1"> 
                 <div class="hidden6">
                     <button id="upgrade6" onclick="buyUpgrade6()">
                         Upgrade <span>+50</span>Cost: <span class="upgradeCost" id="upgradeCost6">5,000</span>
@@ -169,10 +171,10 @@
                         Upgrade <span>+10,000</span>Cost: <span class="upgradeCost" id="upgradeCost20">1,000,000</span>
                     </button>
                 </div>
-                
+            </div>
             </div>
             
-            </div>
+            
         </div>
             <!-- Column 2: Постройки -->
             <div class="upgradeColumn" id="column2">
@@ -252,7 +254,7 @@
                 
             </div>
         </div>
-            <!-- Column 3: Empty -->
+            <!-- Column 3: поселение -->
             <div class="upgradeColumn" id="column3">
                 <div class="sity" >
                     <div class="caption">
@@ -292,12 +294,21 @@
 
                 </div>
             </div>
+            <div id="upgradeContainer2">
             <div class="upgradeColumn" id="column4">
+                <div id="rewardInfo" class="reward-info"></div>
+                
                 <div class="container">
                     <div class="chestIMG"> 
                         <img src="chest.jpeg" alt="chest" style="width: 90px;">
                     </div>
-                    <button onclick="openContainer(3)">Открыть контейнер (3 предмета)</button>
+                    <div class="hidden21">
+                    <button id="upgrade21" onclick="buyUpgrade21(); openContainer(3)">
+                     Cost: <span class="upgradeCost" id="upgradeCost21">1000</span>
+                     Открыть контейнер (3 предмета)
+                    </button>
+                    </div>
+                    <!-- <button onclick="openContainer(3)">Открыть контейнер (3 предмета)</button> -->
                     <div id="containerInfo" class="container-info"></div>
                     <div id="result" class="result-container"></div>
                 </div>
@@ -306,41 +317,52 @@
                     <div class="chestIMG"> 
                         <img src="chest.jpeg" alt="chest" style="width: 90px;">
                     </div>
-                    <button onclick="openContainer(5)">Открыть контейнер (5 предметов)</button>
+                    <div class="hidden22">
+                        
+                    <button id="upgrade22" onclick="buyUpgrade22(); openContainer(5)">Открыть контейнер (5 предметов)
+                        Cost: <span class="upgradeCost" id="upgradeCost22">1500</span></button>
+                    </div>
+                    
                     <div id="containerInfo2" class="container-info"></div>
                     <div id="result2" class="result-container result-container5"></div>
+                    
+                    
                 </div>
             
                 <div class="container">
                     <div class="chestIMG"> 
                         <img src="chest.jpeg" alt="chest" style="width: 90px;">
                     </div>
-                    <button onclick="openContainer(10)">Открыть контейнер (10 предметов)</button>
+                    <div class="hidden23">
+                    <button id="upgrade23" onclick="buyUpgrade23(); openContainer(10)">Открыть контейнер (10 предметов)
+                        Cost: <span class="upgradeCost" id="upgradeCost23">2000</span></button>
+                    </div>
                     <div id="containerInfo3" class="container-info"></div>
                     <div id="result3" class="result-container result-container10"></div>
                 </div>
             
             </div>
+        </div>
+        
        
          <div class="animated-number-container">
                 <span id="animatedNumber"></span>
-            </div>
+        </div>
+        
         <div class="clickButton"> 
-            
             <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
             <div class="animatedNumber" id="animatedNumber"></div>
         </div> 
         
         
 
-       
-<script src="script.js"></script>
+<!-- Подключение скрипты  -->  
 
-<!-- Подключение saveLoad.js после script.js -->
-<script src="saveLoad.js"></script>      
-        
+<script src="script.js"></script>
+<script src="saveLoad.js"></script>            
 <script src="showColumn.js"></script>
-<script src="gacha/gacha.js"></script>
+
+<!--<script src="gacha/gacha.js"></script>--> 
 
 
 
