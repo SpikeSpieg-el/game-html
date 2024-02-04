@@ -21,7 +21,7 @@ let savedUpgrades = [
     { cost: 500000, level: 0, clickIncrease: 5000, multiplier: 22, opened: false },
     { cost: 1000000, level: 0, clickIncrease: 10000, multiplier: 23, opened: false },
 { cost: 1000, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
-    { cost: 1500, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
+    { cost: 1110, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
     { cost: 2000, level: 0, clickIncrease: 0, multiplier: 1, opened: false}
 ];
 
@@ -48,6 +48,10 @@ function loadGame() {
 
     metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
     document.getElementById("metallTotalCount").innerText = metallTotalCount;
+
+    goldCount = parseInt(localStorage.getItem("goldCount")) || 10;
+    document.getElementById("goldCount").innerText = goldCount;
+    
 
 
 
@@ -100,7 +104,7 @@ function loadGame() {
     document.getElementById("catCount").innerText = catCount;
     document.getElementById("wheatTotalCount").innerText = wheatTotalCount;
     document.getElementById("metallTotalCount").innerText = metallTotalCount;
-
+    document.getElementById("goldCount").innerText = goldCount;
 
     checkUpgradeAvailability();
     

@@ -55,9 +55,13 @@
         <div class="Count">
             
             <h2>
+                
                 <div>Посеселение Cat: <img src="333.png" alt="cat" class="img-sizeCAT_top">
-                     <span id="catCount"> 10 </span>
+                     <span id="catCount"> 5 </span>
+                     
                 </div>
+                
+                <span class="first-part">Gold: <span id="goldCount">10</span></span>
                 <span class="first-part">For click: <span id="clickValue">0</span></span>
                 <span class="second-part">Clicks count: <span id="clickCount">0</span></span>
                 
@@ -245,7 +249,7 @@
                 <div class="hidden12">
                     <button id="upgrade12" onclick="buyUpgrade12()">
                         Построить дом <span class="upgradeCost12" id="upgradeCost12">15</span>
-                        <br>Домов <a id="hoseTotalCount">2</a></br>
+                        <br>Домов <a id="hoseTotalCount">0</a></br>
                     
                         <img src="dom1.png"alt="acat" class="img-sizeCAT">
                    </button>
@@ -257,17 +261,17 @@
             <!-- Column 3: поселение -->
             <div class="upgradeColumn" id="column3">
                 <div class="sity" >
-                    <div class="caption">
+                    <!--<div class="caption">
                         Ресурсов на складе
                         Пшено: <a id="wheatTotalCount">0</a>
                         Дерево: <a id="woodTotalCount">0</a>
                         Камень: <a id="stoneTotalCount">0</a>
                         Металл: <a id="metallTotalCount">0</a>
                     </br>
-                    </div>
+                    </div>-->
                     
-                        <img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
-                        <img  src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
+                        <!--<img src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">
+                        <img  src="OIG.3NJJoFBIJGj41Z.png" alt="acat" class="img-sity_home_one">-->
                         <a  id= "hiddenimg12">
                     </a>
                     <a  id= "hiddenimg13">
@@ -304,7 +308,7 @@
                     </div>
                     <div class="hidden21">
                     <button id="upgrade21" onclick="buyUpgrade21(); openContainer(3)">
-                     Cost: <span class="upgradeCost" id="upgradeCost21">1000</span>
+                     Cost: 1 золота <span class="upgradeCost" id="upgradeCost21"></span>
                      Открыть контейнер (3 предмета)
                     </button>
                     </div>
@@ -320,7 +324,7 @@
                     <div class="hidden22">
                         
                     <button id="upgrade22" onclick="buyUpgrade22(); openContainer(5)">Открыть контейнер (5 предметов)
-                        Cost: <span class="upgradeCost" id="upgradeCost22">1500</span></button>
+                        Cost: 2 золота <span class="upgradeCost" id="upgradeCost22"></span></button>
                     </div>
                     
                     <div id="containerInfo2" class="container-info"></div>
@@ -335,7 +339,7 @@
                     </div>
                     <div class="hidden23">
                     <button id="upgrade23" onclick="buyUpgrade23(); openContainer(10)">Открыть контейнер (10 предметов)
-                        Cost: <span class="upgradeCost" id="upgradeCost23">2000</span></button>
+                        Cost: 3 золота <span class="upgradeCost" id="upgradeCost23"></span></button>
                     </div>
                     <div id="containerInfo3" class="container-info"></div>
                     <div id="result3" class="result-container result-container10"></div>
