@@ -754,26 +754,30 @@ function openContainer(itemsPerContainer) {
             containerContent.push('<br>');
         }
 
-        let rewardIncrement = 0;  // Initialize for each item
+        let rewardIncrement = 0;
+        let rewardIncrementgold = 0;  // Initialize for each item
         switch (rarity) {
             case "Легендарный":
-                rewardIncrement = getRandomReward(10300, 10000);
+                rewardIncrement = getRandomReward(15300, 15000);
+                rewardIncrementgold = getgoldCount(10,10);
                 break;
             case "Эпический":
-                rewardIncrement = getRandomReward(7000, 7070);
+                rewardIncrement = getRandomReward(2500, 2000);
                 break;
             case "Золотой":
-                rewardIncrement = getRandomReward(500, 500);
+                rewardIncrement = getRandomReward(7500, 8500);
+                rewardIncrementgold = getgoldCount(5,5);
                 break;
             case "Серебрянный":
                 rewardIncrement = getRandomReward(300, 300);
                 break;
             case "Элитный":
                 rewardIncrement = getRandomReward(101000, 100000);
+                rewardIncrementgold = getgoldCount(50,50);
                 break;
             case "Ресурс 1":
             case "Ресурс 2":
-                rewardIncrement = getRandomReward(5, 150);
+                rewardIncrement = getRandomReward(10, 150);
                 break;
             default:
                 rewardIncrement = getRandomReward(1, 100);
@@ -781,8 +785,11 @@ function openContainer(itemsPerContainer) {
 
         totalReward += rewardIncrement;
         clickCount += rewardIncrement;
+        goldCount += rewardIncrementgold;
 
-        itemRewardInfo = `${rarity} +${rewardIncrement}`;
+        document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
+        
+        itemRewardInfo = `${rarity} +${rewardIncrement} +${rewardIncrementgold}`;
         containerContent.push(`<div class="item ${itemClass}">${getItemImage(rarity)} ${itemRewardInfo}</div> `);
 
         if (isElite) {
@@ -807,6 +814,12 @@ function openContainer(itemsPerContainer) {
     function getRandomReward(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
+    function getgoldCount(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+   document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+
+ 
 
 function hideAllContainers() {
     document.querySelectorAll('.container-info, .result-container').forEach((element) => {
