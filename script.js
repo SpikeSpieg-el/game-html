@@ -25,7 +25,7 @@ const upgrades = [
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
 let clickCount = 0; // сколько сейчас
-let clickValue = 1000; //сколько за клик
+let clickValue = 1; //сколько за клик
 const UPGRADE_COUNT = 23; //сколько всего улутшений
 let catCount = 5; //сколько котов в поселении
 
