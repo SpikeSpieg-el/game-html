@@ -106,6 +106,7 @@ h2 {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+
 .img-size {
     width: 80px;
     height: 80px;
@@ -113,10 +114,13 @@ h2 {
 .img-sizeCAT {
     width: 55px;
     height: 55px;
+    float: right;
+    
 }
 .img-sizeCAT_top{
     width: 50px;
     height: 50px;
+    
 }
 
 

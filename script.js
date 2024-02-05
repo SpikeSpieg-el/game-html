@@ -25,7 +25,7 @@ const upgrades = [
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
 let clickCount = 0; // сколько сейчас
-let clickValue = 10; //сколько за клик
+let clickValue = 1000; //сколько за клик
 const UPGRADE_COUNT = 23; //сколько всего улутшений
 let catCount = 5; //сколько котов в поселении
 
@@ -182,12 +182,14 @@ function buyUpgrade(index) {
         }
 
         if (index === 13) {
-        wheatTotalCount -= 1;
-        woodTotalCount -=1;
-        stoneTotalCount -=1;
+        wheatTotalCount -= 20;
+        woodTotalCount -=15;
+        stoneTotalCount -=5;
+        clickValue = clickValue *1.2;
         document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
         document.getElementById("woodTotalCount").innerText = woodTotalCount; 
         document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
+        document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
         }
 
         if (clickCount < 0) {
@@ -262,7 +264,7 @@ function buyUpgrade(index) {
 
                if (index === 13) {
             // Проверяем, достаточно ли у нас пшена
-                if (wheatTotalCount < 1 & woodTotalCount < 1  & stoneTotalCount < 1) {
+                if (wheatTotalCount < 20 & woodTotalCount < 15  & stoneTotalCount < 5) {
                 console.log("Not enough wheat to build");
                 return;
                 }
@@ -441,7 +443,7 @@ function checkUpgradeAvailability() {
         // Проверка для 11 уровня (Camencita), учитывая количество дерева и пшена
         const notEnoughWheatForCamen = upgradeIndex === 11 && (woodTotalCount < 5 || wheatTotalCount < 10);
 
-        const notEnoughWheatForMetall = upgradeIndex === 13 && (woodTotalCount < 1 || wheatTotalCount < 1 || stoneTotalCount < 1);
+        const notEnoughWheatForMetall = upgradeIndex === 13 && (woodTotalCount < 20 || wheatTotalCount < 15 || stoneTotalCount < 5);
 
         const notEnoughGold1 = upgradeIndex === 21 && goldCount < 1;
         const notEnoughGold2 = upgradeIndex === 22 && goldCount < 2;
