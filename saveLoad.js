@@ -49,7 +49,7 @@ function loadGame() {
     metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
     document.getElementById("metallTotalCount").innerText = metallTotalCount;
 
-    goldCount = parseInt(localStorage.getItem("goldCount")) || 10;
+    goldCount = parseInt(localStorage.getItem("goldCount")) || 20;
     document.getElementById("goldCount").innerText = goldCount;
     
 

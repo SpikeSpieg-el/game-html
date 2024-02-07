@@ -699,11 +699,20 @@ let openedContainers2 = 0;
 let containerCount3 = 0;
 let openedContainers3 = 0;
 
+function closePopup() {
+    document.getElementById("containerPopup").style.display = "none";
+}
 
+// Добавляем обработчик события для кнопки закрытия
+document.getElementById("closePopupButton").addEventListener("click", closePopup);
 
 function openContainer(itemsPerContainer) {
     // Hide all container and result elements initially
     hideAllContainers();
+    
+    // Отображаем дополнительное окно
+    document.getElementById("containerPopup").style.display = "block";
+    
 
     let containerCount, openedContainers, containerInfoElement, resultElement;
     
