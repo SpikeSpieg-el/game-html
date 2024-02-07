@@ -48,16 +48,17 @@ let goldCount = 10; //золото
 
 
 let isAnimating = false;
-
-let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 let upgradeMarkers = Array(UPGRADE_COUNT).fill(false);
 
 
 
 
 
-    
 
+
+
+    
+let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 function roundCost(cost) {
     return Math.round(cost * 10) / 10;
 }
@@ -329,7 +330,7 @@ function saveGame() {
     localStorage.setItem("upgrades", JSON.stringify(upgrades));
 
     // Сохранение информации о формате чисел
-    
+        
 }
 
 
@@ -639,7 +640,10 @@ function toggleNav() {
         }
     }
 }
-
+function closeNav() {
+    document.getElementById("sidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
 
 // предупреждение о найденной игры в прошлом при попадании на стр
 
@@ -678,10 +682,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function closeNav() {
-    document.getElementById("sidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
+
 
 //gacha контейнер
 

@@ -28,59 +28,53 @@ let savedUpgrades = [
 
 
 function loadGame() {
+    // Загрузка всех значений из localStorage
+
+    numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 
     clickCount = parseInt(localStorage.getItem("clickCount")) || 0;
     clickValue = parseInt(localStorage.getItem("clickValue")) || 1;
     catCount = parseInt(localStorage.getItem("catCount")) || 0;
-
-    wheatTotalCount = parseInt(localStorage.getItem("wheatTotalCount")) || 0; // Загрузка общего количества пшена
-    document.getElementById("wheatTotalCount").innerText = wheatTotalCount;
-
-    // Загружаем количество дерева
-    woodTotalCount = parseInt(localStorage.getItem("woodTotalCount")) || 0; 
-    document.getElementById("woodTotalCount").innerText = woodTotalCount;   
-
-    stoneTotalCount = parseInt(localStorage.getItem("stoneTotalCount")) || 0; 
-    document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
-
-    hoseTotalCount = parseInt(localStorage.getItem("hoseTotalCount")) || 0; 
-    document.getElementById("hoseTotalCount").innerText = hoseTotalCount;
-
+    wheatTotalCount = parseInt(localStorage.getItem("wheatTotalCount")) || 0;
+    woodTotalCount = parseInt(localStorage.getItem("woodTotalCount")) || 0;
+    stoneTotalCount = parseInt(localStorage.getItem("stoneTotalCount")) || 0;
+    hoseTotalCount = parseInt(localStorage.getItem("hoseTotalCount")) || 0;
     metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
-    document.getElementById("metallTotalCount").innerText = metallTotalCount;
-
     goldCount = parseInt(localStorage.getItem("goldCount")) || 20;
-    document.getElementById("goldCount").innerText = goldCount;
-    
-
-
 
     const savedUpgradesJSON = localStorage.getItem("upgrades");
     savedUpgrades = savedUpgradesJSON ? JSON.parse(savedUpgradesJSON) : savedUpgrades;
 
+    // Обновление HTML элементов согласно загруженным значениям
+    document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
+    document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
+    document.getElementById("catCount").innerText = formatNumber(roundCost(catCount));
+    document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+    document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
+    document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
+    document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
+    document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
+    document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+
+    // Обновление доступности апгрейдов
     for (let index = 0; index < UPGRADE_COUNT; index++) {
         upgrades[index].level = savedUpgrades[index].level;
         upgrades[index].cost = savedUpgrades[index].cost;
         upgrades[index].opened = savedUpgrades[index].opened;
 
-    
         const upgradeContainer = document.querySelector(`.hidden${index + 1}`);
         const upgradeCostSpan = document.getElementById(`upgradeCost${index + 1}`);
-    
+
         if (upgrades[index].opened) {
             upgradeContainer.style.display = "block";
-    
-            // Добавляем изображение в контейнер, если оно было открыто
+
             const upgradeImageContainer = document.getElementById(`hiddenimg${index + 1}`);
-    
-            // Проверяем, что upgradeImageContainer существует
             if (upgradeImageContainer) {
-                // Очищаем контейнер перед добавлением новых изображений
                 upgradeImageContainer.innerHTML = "";
-    
+
                 for (let i = 0; i < upgrades[index].level; i++) {
                     const imgElement = document.createElement('img');
-                    imgElement.src = upgrades[index].image; // Исправлено: использовать свойство image из массива upgrades
+                    imgElement.src = upgrades[index].image;
                     imgElement.alt = 'acat';
                     imgElement.classList.add('img-sity');
                     upgradeImageContainer.appendChild(imgElement);
@@ -91,23 +85,10 @@ function loadGame() {
         } else {
             upgradeContainer.style.display = "none";
         }
-    
-        upgradeCostSpan.innerText = upgrades[index].cost;
+
+        upgradeCostSpan.innerText = formatNumber(roundCost(upgrades[index].cost));
     }
-    
 
-    document.getElementById("woodTotalCount").innerText = woodTotalCount;
-    document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
-    document.getElementById("hoseTotalCount").innerText = hoseTotalCount;
-    document.getElementById("clickCount").innerText = clickCount;
-    document.getElementById("clickValue").innerText = clickValue;
-    document.getElementById("catCount").innerText = catCount;
-    document.getElementById("wheatTotalCount").innerText = wheatTotalCount;
-    document.getElementById("metallTotalCount").innerText = metallTotalCount;
-    document.getElementById("goldCount").innerText = goldCount;
-
+    // Обновление доступности апгрейдов
     checkUpgradeAvailability();
-    
 }
-
-
