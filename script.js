@@ -330,7 +330,7 @@ function saveGame() {
     localStorage.setItem("upgrades", JSON.stringify(upgrades));
 
     // Сохранение информации о формате чисел
-        
+
 }
 
 
@@ -340,8 +340,36 @@ function saveGame() {
         // Обновление значения на странице
        
         document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
-function incrementClick() {
+
+
+// автоклик
+        var autoClickInterval; // Переменная для хранения интервала автоклика
+        var autoClickEnabled = false; // Флаг, указывающий, включен ли автоклик
+        
+        // Функция, которая будет выполнять клик
+        function autoClick() {
+            incrementClick();
+        }
+        
+        // Функция для включения/выключения автоклика
+        function toggleAutoClick() {
+            if (!autoClickEnabled) {
+                autoClickInterval = setInterval(autoClick, 1000); // Запускаем автоклик каждую секунду
+                document.getElementById('toggleAutoClickButton').innerText = 'Выключить автоклик';
+            } else {
+                clearInterval(autoClickInterval); // Останавливаем автоклик
+                document.getElementById('toggleAutoClickButton').innerText = 'Включить автоклик';
+            }
+            autoClickEnabled = !autoClickEnabled; // Инвертируем состояние флага
+        }
+        
+        // Добавляем обработчик события к кнопке
+        document.getElementById('toggleAutoClickButton').addEventListener('click', toggleAutoClick);
+
+//обработчик основной кноки клика     
+    function incrementClick() {
     clickCount += clickValue;
+
 
     // Убедитесь, что clickCount не станет отрицательным
     if (clickCount < 0) {

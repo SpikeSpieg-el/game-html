@@ -143,7 +143,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.775);
     z-index: 9999; /* Отображается поверх всех окон */
 }
 
@@ -152,7 +152,7 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.148);
+    background-color: rgba(31, 31, 31, 0.542);
     
     border-radius: 5px;
 }
@@ -247,16 +247,21 @@ button:active {
 }
 
 .clickButton{
+    display: flex;
     position: fixed;
-    bottom: 55px;
-    right: 100px;
+    bottom: 50px;
     text-align: center;
+    margin-bottom: -10px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
 
 
 .clickButton .clicker {
     padding: 20px 60px;
-    margin: 25px;
+    margin-left: 56px;
+    margin-bottom: 25px;
     background-color: #000000c7;
     color: #fff;
     border: 2px solid #2980b9;
@@ -273,9 +278,10 @@ button:active {
 
 /* Style the animated number */
 #animatedNumber {
-    font-size: 30px;
+    font-size: 24px;
     color: white;
     text-shadow: 1px 2px 0px black;
+    margin-left: 20px;
     
     
     display: block;
