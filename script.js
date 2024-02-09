@@ -22,7 +22,7 @@ const upgrades = [
 { cost: 1000, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
     { cost: 1110, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
     { cost: 2000, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
-    { cost: 5000000, level: 0, clickIncrease: 0, multiplier: 26, opened: false }
+    { cost: 5000000, level: 0, clickIncrease: 100000, multiplier: 26, opened: false }
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
 let clickCount = 0; // сколько сейчас
