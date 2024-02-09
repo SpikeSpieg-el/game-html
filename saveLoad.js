@@ -22,7 +22,8 @@ let savedUpgrades = [
     { cost: 1000000, level: 0, clickIncrease: 10000, multiplier: 23, opened: false },
 { cost: 1000, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
     { cost: 1110, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
-    { cost: 2000, level: 0, clickIncrease: 0, multiplier: 1, opened: false}
+    { cost: 2000, level: 0, clickIncrease: 0, multiplier: 1, opened: false},
+     { cost: 5000000, level: 0, clickIncrease: 0, multiplier: 26, opened: false }
 ];
 
 
