@@ -355,7 +355,7 @@ function saveGame() {
         // Функция для включения/выключения автоклика
         function toggleAutoClick() {
             if (!autoClickEnabled) {
-                autoClickInterval = setInterval(autoClick, 1000); // Запускаем автоклик каждую секунду
+                autoClickInterval = setInterval(autoClick, 500); // Запускаем автоклик каждую секунду
                 document.getElementById('toggleAutoClickButton').innerText = 'Выключить автоклик';
             } else {
                 clearInterval(autoClickInterval); // Останавливаем автоклик
