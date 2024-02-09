@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="sidebar">
-        <a href="Index1.html">✪ Об игре</a>
+        <a href="My Site.html">✪ Об игре</a>
         <a href="https://forms.gle/v2K1fvzz7wLr7SYdA" target="_blank">✪ Пройди небольшой опрос чтобы оставить отзыв</a>
         <a href="https://github.com/SpikeSpieg-el/game-html" target="_blank">✪ GitHub</a>
         <a href ="Index_time_kill.html">Тайм киллер</a>
@@ -20,26 +20,21 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     </div>
 
-    <div id="main">
-        <button class="openbtn" onclick="toggleNav()">☰</button>
-    </div>
+    
 
     <div class="clicker-container">
+        <div class="TopAppBar">
         <div class="name">
+            
         <!--<div class="image-container">
         <img class="clipped-image" src="" alt="bd1"></div> -->
-        <h1>Clicker Game
-           
-        </h1>
-     <a class="imageMIDLE" >
-           
-                <img src="cating.png" alt="img" class="img-size">
-                
-            </a>
-            
-        </div>
-        <div id="notifications-container">
-        <!-- Уведомления будут добавляться сюда -->
+
+            <div class="title">
+                <div id="main">
+                    <button class="openbtn" onclick="toggleNav()">☰</button>
+                    </div>
+               <h1>Clicker Game </h1>
+            </div> 
         </div>
         <div class="top">
 
@@ -48,6 +43,11 @@
             <!-- Добавляем кнопку загрузки -->
             <button onclick="loadGame()">Load Game</button>
         </div>
+    </div>
+        <div id="notifications-container">
+        <!-- Уведомления будут добавляться сюда -->
+        </div>
+       
         
         
         
@@ -187,26 +187,31 @@
             <div class="upgradeColumn" id="column2">
                 <div class="hidden9">
                     
-                    <button id="upgrade9" onclick="buyUpgrade9()">
-                        <img src="Pole.png" alt="acat" class="img-sizeCAT">
-                        <div> Построить поле  <span class="upgradeCost9" id="upgradeCost9">15</span></div>
-                         <a>Бонус +1.5</a>
-                         
-                        <a id="wheatText">Пшено</a>
-                        <a id="wheatTotalCount">0</a>
-                        
+                    <button id="upgrade9" onclick="buyUpgrade9()" >
+                        <div class="up9">
+                        <div class="TextComplex">
+                        <div class="TextHad">Поле</div>
+                            <div сlass="TextMid">Стоимость:<span class="upgradeCost9" id="upgradeCost9">15</span></div>
+                            <div сlass="TextMid"><a>Бонус +1.5</a></div>
+                            <div сlass="TextMid"><span id="wheatText">Пшено:</span>
+                            <a id="wheatTotalCount">0</a></div>
+                        </div>
+                        <div class="imgInBild"> <img src="Pole.png" alt="acat" class="img-sizeCAT"> </div>
+                        </div>
                     </button>
                 </div>
                 
                 <div class="hidden10">
                     <button id="upgrade10" onclick="buyUpgrade10()">
-                        <img src="forest_pilka.png" alt="acat" class="img-sizeCAT">
-                         <div>
-                        <div> Построить лесопилку <span class="upgradeCost10" id="upgradeCost10">15</span>
-                         </div>
-                         <a>Нужно 10 пшена</a>
-                        </div>
-                           Дерево <a id="woodTotalCount">0</a>
+                        <div class="up10">
+                            <div class="TextComplex">
+                                <div class="TextHad">Лесопилка</div>
+                                <div сlass="TextMid">Стоимость<span class="upgradeCost10" id="upgradeCost10">15</span></div>
+                                <div сlass="TextMid"><a>Нужно 10 пшена</a></div>
+                                <div сlass="TextMid"> Дерево <a id="woodTotalCount">0</a></div>
+                            </div>
+                            <div class="imgInBild"> <img src="forest_pilka.png" alt="acat" class="img-sizeCAT"> </div>
+                           </div>                       
                     </button>
                 </div>
 
@@ -371,9 +376,9 @@
         
        
          
-        
+        <span class="animated-number-container"><span id="animatedNumber"></span></span> 
         <div class="clickButton">
-            <span class="animated-number-container"><span id="animatedNumber"></span></span> 
+            
             <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
             <div class="animatedNumber" id="animatedNumber"></div>
             <button id="toggleAutoClickButton">Включить автоклик</button>

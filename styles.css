@@ -16,10 +16,35 @@ body {
  
     
 }
+.title{
+
+/* Автолейаут */
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+padding: 12px;
+
+
+}
+.TopAppBar{
+    display: flex;
+    justify-content: space-around;
+    
+    padding: 48px 0px 0px 0px;
+    flex-direction: column;
+ 
+}
 h1{
-    text-shadow: 1px 1px 2px rgb(0 0 0);
-    font-size: 45px;
+    
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: left;
+    margin: 0px 16px;
     color: rgb(255, 255, 255);
+
+   
 }
 .highlight {
     background-color: rgb(8, 57, 8);
@@ -27,12 +52,8 @@ h1{
 }
 
 .name{
-    display: flex;
-    
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-     background: linear-gradient(to top, #a3a3a34f, #ffffff00);
+
+    background: linear-gradient(to top, #a3a3a34f, #ffffff00);
 
     
     
@@ -81,10 +102,11 @@ h1{
     padding-top: 10px;
 }
 .top{
-    display: block;
-    
-    /*padding-right: 20px;*/
+    display: flex;
     background: #a3a3a34f;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 
@@ -127,6 +149,11 @@ h2 {
 .clicker-container {
     text-align: center;
     margin-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
 }
 
 #upgradeContainer {
@@ -171,6 +198,54 @@ h2 {
 
 .ContOne_three{
     display: block;
+}
+.TextComplex{
+    align-items: flex-start;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 4px;
+    height: min-content;
+    justify-content: center;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    width: min-content;
+}
+.TextHad{
+    font-family: "Roboto";
+    font-size: 24px;
+    letter-spacing: 0px;
+    color: rgba(27, 28, 23, 1);
+}
+.TextMid{
+    font-family: "Roboto";
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    color:  rgb(110, 114, 95);
+}
+.imgInBild{
+    flex: none;
+    height: 60px;
+    position: relative;
+    width: 60px;
+}
+.up9, .up10, .up11, .up12, .up13 {
+    align-items: center;
+    
+    border-radius: 20px;
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    height: min-content;
+    justify-content: center;
+    overflow: visible;
+    padding: 16px 20px 16px 24px;
+    position: relative;
+    width: min-content;
 }
 
 .hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7, .hidden8,
@@ -232,11 +307,15 @@ button {
     padding: 11px 11px;
     margin: 2px;
     transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
-    border-radius: 10px;
+    border-radius: 40px;
     color: #000000;
+    
     border: none;
     cursor: pointer;
 }
+
+
+
 
 button:hover {
     transform: translate(-5px, -5px); /* Смещаем кнопку на 5 пикселей влево и вверх при наведении */
@@ -390,9 +469,7 @@ button:active {
     margin-left: 50px;
 }
 
-#main {
-    padding: 16px;
-}
+
 
 .openbtn {
     font-size: 20px;
@@ -401,7 +478,6 @@ button:active {
     color: white;
     padding: 10px 15px;
     border: none;
-    position: fixed;
     
 }
 
