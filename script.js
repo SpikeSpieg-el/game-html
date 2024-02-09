@@ -27,7 +27,7 @@ const upgrades = [
 
 let clickCount = 0; // сколько сейчас
 let clickValue = 1; //сколько за клик
-const UPGRADE_COUNT = 23; //сколько всего улутшений
+const UPGRADE_COUNT = 24; //сколько всего улутшений
 let catCount = 5; //сколько котов в поселении
 
 let wheatCount = 0;  
