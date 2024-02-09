@@ -193,10 +193,6 @@ function buyUpgrade(index) {
         document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
         document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
         }
-        if (index ===24) {
-            clickValue = clickValue *2;
-            document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
-        }
 
         if (clickCount < 0) {
         clickCount = 0;
