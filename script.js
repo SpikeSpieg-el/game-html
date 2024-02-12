@@ -65,7 +65,27 @@ function roundCost(cost) {
 }
 
 function formatNumber(number, notation) {
-    return number.toLocaleString('en-US', { notation: notation });
+    if (notation === 'scientific') {
+        return number.toExponential(2);
+    } else if (notation === 'engineering') {
+        const exp = Math.floor(Math.log10(Math.abs(number)));
+        const base = Math.pow(10, exp - (exp % 3));
+        const adjusted = number / base;
+        return adjusted.toFixed(2) + 'e' + exp;
+    } else {
+        if (number >= 1000000000000) {
+            return (number / 1000000000000).toFixed(1) + 'T';
+        }
+        if (number >= 1000000000) {
+            const billions = Math.floor(number / 1000000000);
+            const remainder = number % 1000000000;
+            return billions.toLocaleString() + ',' + (remainder / 1000000).toFixed(1) + 'B';
+        }
+        if (number >= 1000000) {
+            return (number / 1000000).toFixed(1) + 'M';
+        }
+        return number.toLocaleString(); // fallback to default formatting if number is smaller than 1000
+    }
 }
 
 //2if (index === 11) {
@@ -714,7 +734,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 //gacha контейнер
-
 let containerCount = 0;
 let openedContainers = 0;
 let itemsPerContainer = 10;
@@ -728,6 +747,45 @@ let containerCount2 = 0;
 let openedContainers2 = 0;
 let containerCount3 = 0;
 let openedContainers3 = 0;
+
+// вариации для каждого предмета(готово только серебро)
+let variations = {
+    // legendary: [
+       // { image: "gacha/legendary1.jpg", reward: { clicks: 15300, gold: 10 } },
+       // { image: "gacha/legendary2.jpg", reward: { clicks: 15250, gold: 11 } },
+       // { image: "gacha/legendary3.jpg", reward: { clicks: 15400, gold: 9 } },
+       // { image: "gacha/legendary4.jpg", reward: { clicks: 15200, gold: 12 } },
+       // { image: "gacha/legendary5.jpg", reward: { clicks: 15100, gold: 11 } }
+    //],
+    //epic: [
+        //{ image: "gacha/epic1.jpg", reward: { clicks: 2500, gold: 0 } },
+       // { image: "gacha/epic2.jpg", reward: { clicks: 2600, gold: 0 } },
+       // { image: "gacha/epic3.jpg", reward: { clicks: 2400, gold: 0 } },
+       // { image: "gacha/epic4.jpg", reward: { clicks: 2550, gold: 0 } },
+        //{ image: "gacha/epic5.jpg", reward: { clicks: 2450, gold: 0 } }
+    //],
+    //golden: [
+        //{ image: "gacha/golden1.jpg", reward: { clicks: 7500, gold: 5 } },
+        //{ image: "gacha/golden2.jpg", reward: { clicks: 7600, gold: 6 } },
+        //{ image: "gacha/golden3.jpg", reward: { clicks: 7400, gold: 4 } },
+        //{ image: "gacha/golden4.jpg", reward: { clicks: 7700, gold: 7 } },
+       // { image: "gacha/golden5.jpg", reward: { clicks: 7300, gold: 6 } }
+    //],
+    silver: [
+        { image: "gacha/silver1.jpg", reward: { clicks: 300 } },
+        { image: "gacha/silver2.jpg", reward: { clicks: 310 } },
+        { image: "gacha/silver3.jpg", reward: { clicks: 290 } },
+        { image: "gacha/silver4.jpg", reward: { clicks: 320 } },
+        { image: "gacha/silver5.jpg", reward: { clicks: 280 } }
+    ],
+    //elite: [
+        //{ image: "gacha/elite1.jpg", reward: { clicks: 101000, gold: 50 } },
+        //{ image: "gacha/elite2.jpg", reward: { clicks: 100500, gold: 49 } },
+        //{ image: "gacha/elite3.jpg", reward: { clicks: 101500, gold: 51 } },
+       // { image: "gacha/elite4.jpg", reward: { clicks: 100000, gold: 52 } },
+        //{ image: "gacha/elite5.jpg", reward: { clicks: 102000, gold: 48 } }
+    //]
+};
 
 function closePopup() {
     document.getElementById("containerPopup").style.display = "none";
@@ -777,35 +835,42 @@ function openContainer(itemsPerContainer) {
     containerInfoElement.innerHTML = containerInfo;
 
     let containerContent = [];
-    let itemsInColumn = itemsPerContainer / 2;
     let totalReward = 0;
+
+
 
     for (let i = 0; i < itemsPerContainer; i++) {
         let rarity = calculateRarity();
         let isElite = Math.random() < eliteChance;
         let itemClass = getItemClass(rarity, isElite);
 
-
         let rewardIncrement = 0;
         let rewardIncrementgold = 0;  // Initialize for each item
+        let rewardVariant = 1; // Default reward variant
         switch (rarity) {
             case "Легенда":
                 rewardIncrement = getRandomReward(15300, 15000);
                 rewardIncrementgold = getgoldCount(10,10);
+                rewardVariant = getRandomVariant(1, 5);
                 break;
             case "Эпический":
                 rewardIncrement = getRandomReward(2500, 2000);
+                rewardVariant = getRandomVariant(1, 5);
                 break;
             case "Золотой":
                 rewardIncrement = getRandomReward(7500, 8500);
                 rewardIncrementgold = getgoldCount(5,5);
+                rewardVariant = getRandomVariant(1, 5);
                 break;
             case "Серебро":
-                rewardIncrement = getRandomReward(300, 300);
+                // Get a random reward for silver items from the silver array
+                rewardIncrement = getRandomSilverReward();
+                rewardVariant = getRandomVariant(1, 5);
                 break;
             case "Элитный":
                 rewardIncrement = getRandomReward(101000, 100000);
                 rewardIncrementgold = getgoldCount(50,50);
+                rewardVariant = getRandomVariant(1, 5);
                 break;
             case "Ресурс1":
             case "Ресурс2":
@@ -821,14 +886,25 @@ function openContainer(itemsPerContainer) {
 
         document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
         
-        itemRewardInfo = `${rarity} +${rewardIncrement} +${rewardIncrementgold}`;
-        containerContent.push(`<div class="item ${itemClass}">${getItemImage(rarity)} ${itemRewardInfo}</div> `);
+        // Check if the reward has gold and add it to the itemRewardInfo
+        let itemRewardInfo = `${rarity} +${rewardIncrement}`;
+        if (rewardIncrementgold > 0) {
+            itemRewardInfo += ` +${rewardIncrementgold} золото`;
+        }
+        
+        // Push the item with its rarity, reward, and reward variant
+        containerContent.push(`<div class="item ${itemClass}">${getItemImage(rarity, rewardVariant)} ${itemRewardInfo}</div> `);
 
         if (isElite) {
             eliteChance = baseEliteChance;
         }
     }
-
+    function getRandomSilverReward() {
+    // Get a random index from 0 to the length of the silver array
+    let randomIndex = Math.floor(Math.random() * variations.silver.length);
+    // Return the reward value (clicks) for the selected silver item
+    return variations.silver[randomIndex].reward.clicks;
+}
     // Display total reward information in the rewardInfo div
     document.getElementById("rewardInfo").innerHTML = `Total Reward: +${totalReward} Clicks`;
 
@@ -844,9 +920,12 @@ function openContainer(itemsPerContainer) {
 
    
     function getRandomReward(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+        return Math.floor(Math.random() * (max - min + 1) + min)* clickValue;
     }
     function getgoldCount(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    function getRandomVariant(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
    document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
@@ -909,8 +988,7 @@ function getItemClass(rarity, isElite) {
     }
 }
 
-
-function getItemImage(rarity) {
+function getItemImage(rarity, rewardVariant) {
     switch (rarity) {
         case "Легенда":
             return '<img src="gacha/12802fb0a815.jpg" alt="Legendary">';
@@ -919,18 +997,29 @@ function getItemImage(rarity) {
         case "Золотой":
             return '<img src="gacha/9b8e093aa9bc.jpg" alt="Golden">';
         case "Серебро":
-            return '<img src="gacha/f361537f27e1.jpg" alt="Silver">';
+            switch (rewardVariant) {
+                case 1:
+                    return '<img src="gacha/silver1.jpg" alt="Silver">';
+                case 2:
+                    return '<img src="gacha/silver2.jpg" alt="Silver">';
+                case 3:
+                    return '<img src="gacha/silver3.jpg" alt="Silver">';
+                case 4:
+                    return '<img src="gacha/silver4.jpg" alt="Silver">';
+                case 5:
+                    return '<img src="gacha/silver5.jpg" alt="Silver">';
+                default:
+                    return '<img src="gacha/f361537f27e1.jpg" alt="Silver">';
+            }
         case "Элитный":
             return '<img src="gacha/2964ff176157.jpg" alt="Elite">';
-
-            case "Ресурс1":
-                    return '<img src="gacha/Tree.png" alt="st1">';
-            case "Ресурс2":
-                    return '<img src="gacha/Wood.png" alt="st2">';
+        case "Ресурс1":
+            return '<img src="gacha/Tree.png" alt="st1">';
+        case "Ресурс2":
+            return '<img src="gacha/Wood.png" alt="st2">';
         default:
             return '<img src="gacha/223ad0522821.jpg" alt="Common">';
     
     }
 }
 }
-
