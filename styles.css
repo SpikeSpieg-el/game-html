@@ -175,13 +175,12 @@ h2 {
 }
 
 .container-popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: rgba(31, 31, 31, 0.542);
-    
-    border-radius: 5px;
+    border-radius: 43px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40%;
 }
 
 
@@ -580,13 +579,13 @@ button:active {
     flex-wrap: wrap;
 }
   .result-container10 {
-    margin-top: 0px;
     margin-left: 5px;
     margin-right: 5px;
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-content: center;
+    align-items: stretch;
   }
 
 .legendary { background-color: #ff5900; }
