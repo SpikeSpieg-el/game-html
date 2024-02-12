@@ -580,9 +580,9 @@ button:active {
     flex-wrap: wrap;
 }
   .result-container10 {
-    margin-top: 20px;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
     display: flex;
     justify-content: center;
     flex-direction: row;

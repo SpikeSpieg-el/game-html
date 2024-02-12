@@ -785,13 +785,6 @@ function openContainer(itemsPerContainer) {
         let isElite = Math.random() < eliteChance;
         let itemClass = getItemClass(rarity, isElite);
 
-        if (i >= itemsInColumn) {
-            itemClass += " right-column";
-        }
-
-        if (i === itemsInColumn - 1) {
-            containerContent.push('<br>');
-        }
 
         let rewardIncrement = 0;
         let rewardIncrementgold = 0;  // Initialize for each item
