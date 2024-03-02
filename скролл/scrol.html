@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Простая игра</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    grid-gap: 2px;
+  }
+  .grid-item {
+    width: 50px;
+    height: 50px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #player {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .enemy {
+    background-color: #ff0000;
+    color: #fff;
+  }
+  #modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  #modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="grid-container" id="grid-container">
+  <!-- Create grid items -->
+</div>
+<button id="moveButton">Идти</button>
+
+<div id="modal">
+  <div id="modal-content">
+    <p>Вы столкнулись с врагом! Время для боя.</p>
+    <button id="continueButton">Продолжить</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const gridContainer = document.getElementById('grid-container');
+  let playerPosition = { row: 0, column: 0 }; // Starting position
+
+  // Function to create grid items
+  function createGridItems() {
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 10; j++) {
+        const gridItem = document.createElement('div');
+        gridItem.classList.add('grid-item');
+        gridItem.setAttribute('data-row', i);
+        gridItem.setAttribute('data-column', j);
+        if (i === playerPosition.row && j === playerPosition.column) {
+          gridItem.setAttribute('id', 'player');
+          gridItem.textContent = 'Игрок';
+        } else {
+          // Add enemies randomly
+          if (Math.random() < 0.1) { // Adjust the probability of enemies appearance
+            gridItem.classList.add('enemy');
+            gridItem.textContent = 'Враг';
+          }
+        }
+        gridContainer.appendChild(gridItem);
+      }
+    }
+  }
+
+  // Initial creation of grid items
+  createGridItems();
+
+  document.getElementById('moveButton').addEventListener('click', movePlayer);
+
+  function movePlayer() {
+    const playerCell = document.getElementById('player');
+    let nextCell = gridContainer.querySelector(`[data-row="${playerPosition.row}"][data-column="${playerPosition.column + 1}"]`);
+    if (nextCell) {
+      if (nextCell.classList.contains('enemy')) {
+        document.getElementById('modal').style.display = 'block';
+      } else {
+        playerCell.removeAttribute('id');
+        playerCell.textContent = '';
+        nextCell.setAttribute('id', 'player');
+        nextCell.textContent = 'Игрок';
+        playerPosition.column++;
+      }
+    } else {
+      if (playerPosition.row < 4) {
+        playerPosition.row++;
+        playerPosition.column = 0;
+        nextCell = gridContainer.querySelector(`[data-row="${playerPosition.row}"][data-column="${playerPosition.column}"]`);
+        playerCell.removeAttribute('id');
+        playerCell.textContent = '';
+        nextCell.setAttribute('id', 'player');
+        nextCell.textContent = 'Игрок';
+      } else {
+        const continueButton = document.createElement('button');
+        continueButton.textContent = 'Продолжить';
+        continueButton.addEventListener('click', function() {
+          document.getElementById('modal').style.display = 'none';
+          playerPosition = { row: 0, column: 0 }; // Reset player position
+          gridContainer.innerHTML = ''; // Clear grid
+          createGridItems(); // Recreate grid items
+        });
+        const modalContent = document.getElementById('modal-content');
+        modalContent.innerHTML = '';
+        modalContent.appendChild(document.createTextNode('Вы достигли конца поля!'));
+        modalContent.appendChild(document.createElement('br'));
+        modalContent.appendChild(continueButton);
+        document.getElementById('modal').style.display = 'block';
+      }
+    }
+  }
+
+  document.getElementById('continueButton').addEventListener('click', function() {
+    document.getElementById('modal').style.display = 'none';
+    const enemyCell = gridContainer.querySelector('.enemy');
+    if (enemyCell) {
+      enemyCell.classList.remove('enemy');
+      enemyCell.textContent = '';
+    }
+  });
+});
+</script>
+</body>
+</html>
