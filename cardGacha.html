@@ -196,9 +196,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function updateCollectionCounter() {
+    const uniqueCardsCount = collection.length;
+    const totalCardsCount = rewards.filter(reward => reward.type === "Карта").length;
     const counterElement = document.getElementById("collectionCounter");
-    counterElement.textContent = `(${totalCardsCount} / ${rewards.filter(reward => reward.type === "Карта").length})`;
+    counterElement.textContent = `(${uniqueCardsCount} / ${totalCardsCount})`;
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     loadCollectionData(); // Загружаем данные о коллекции
 });
@@ -236,18 +239,22 @@ function loadCollectionData() {
     { type: "Карта", rarity: "common", name: "Карта 13", image: "testCard/00038-1734537472.png" },
     { type: "Карта", rarity: "common", name: "Карта 14", image: "testCard/00039-1085920090.png" },
     { type: "Карта", rarity: "legendary", name: "The Devil", image: "testCard/The Devil.png" },
+    { type: "Карта", rarity: "legendary", name: "The Hanged Man", image: "testCard/The Hanged Man.png" },
     { type: "Карта", rarity: "legendary", name: "The Emperor", image: "testCard/The Emperor.png" },
     { type: "Карта", rarity: "legendary", name: "the empress", image: "testCard/the empress.png" },
     { type: "Карта", rarity: "epic", name: "the fool", image: "testCard/the fool.png" },
+    { type: "Карта", rarity: "epic", name: "Death", image: "testCard/Death.png" },
     { type: "Карта", rarity: "epic", name: "The Hermit", image: "testCard/The Hermit.png" },
     { type: "Карта", rarity: "epic", name: "the hight priestess", image: "testCard/the hight priestess.png" },
     { type: "Карта", rarity: "rare", name: "The Lovers", image: "testCard/The Lovers.png" },
     { type: "Карта", rarity: "rare", name: "the magician", image: "testCard/the magician.png" },
     { type: "Карта", rarity: "rare", name: "The Wheel of Fortune", image: "testCard/The Wheel of Fortune.png" },
+    { type: "Карта", rarity: "rare", name: "Temperance", image: "testCard/Temperance.png" },
     { type: "Карта", rarity: "legendary", name: "The Moon", image: "testCard/The Moon.png" },
     { type: "Карта", rarity: "legendary", name: "The Star", image: "testCard/The Star.png" },
     { type: "Карта", rarity: "legendary", name: "The Sun", image: "testCard/The Sun.png" },
     { type: "Карта", rarity: "legendary", name: "The World", image: "testCard/The World.png" },
+
     // Add other cards here with their respective rarities and images
 ];
 
