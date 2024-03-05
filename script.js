@@ -208,6 +208,7 @@ function buyUpgrade(index) {
         woodTotalCount -=15;
         stoneTotalCount -=5;
         clickValue = clickValue *1.2;
+        document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
         document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
         document.getElementById("woodTotalCount").innerText = woodTotalCount; 
         document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
@@ -220,7 +221,7 @@ function buyUpgrade(index) {
 
         document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
         document.getElementById("catCount").innerText = catCount; // Update catCount
-
+        document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
         document.getElementById(`upgradeCost${index}`).innerText = formatNumber(roundCost(upgrade.cost));
 
         
