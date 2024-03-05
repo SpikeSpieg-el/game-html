@@ -597,3 +597,109 @@ button:active {
 
 .st1 { background-color: #666666; }
 .st2 { background-color: #9c9c9c; }
+
+
+.bodyStyleMap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+
+
+   /* background-image: url('OIG1.pHl.png');
+   
+     background-position: center; Позиционирование изображения по центру */
+  /*  background-repeat: no-repeat;  Запрет повторения изображения */
+    /* height: 100vh; Занимаем всю высоту видимой области экрана */
+   /* display: flex;  Используем flexbox для центрирования содержимого */
+   /* justify-content: center;  Центрируем содержимое по горизонтали */
+   /* align-items: center;  Центрируем содержимое по вертикали*/
+} 
+
+     .map {
+        display: grid;
+        grid-template-columns: repeat(10, 60px);
+        grid-template-rows: repeat(10, 60px);
+        justify-content: center;
+        justify-items: center;
+        background-size: contain;
+        align-items: center;
+       /* transform: rotateX(45deg) rotateZ(45deg) scale(1); */
+        
+    
+    background-size: cover; /* Растягивает изображение на всю область элемента */
+    background-position: center; /* Выравнивает изображение по центру */
+    position: relative;
+    }
+    .tile {
+        width: 15px; /* Уменьшаем размер точки */
+        height: 15px; /* Уменьшаем размер точки */
+        background-color: #444444; /* Цвет точки */
+        border-radius: 25%; /* Делаем точку круглой */
+        position: relative;
+    }
+    .player {
+        background-color: #007bff;
+        width: 30px; /* Размер игрока */
+        height: 30px; /* Размер игрока */
+        border-radius: 90%; /* Делаем игрока круглым */
+        z-index: 1; /* Поднимаем игрока над точками */
+    }
+    .enemy {
+        background-color: red; /* Цвет врага */
+        width: 30px; /* Размер врага */
+        height: 30px; /* Размер врага */
+        border-radius: 0%; /* Делаем врага круглым */
+        z-index: 1; /* Поднимаем врага над точками */
+    }
+    
+    .inactive {
+        opacity: 0.5; /* делаем неактивные ячейки менее видимыми */
+        pointer-events: none; /* отключаем возможность клика по неактивным ячейкам */
+    }
+    #output {
+            background-color: #343434;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #actions {
+            display: flex;
+            justify-content: space-around;
+        }
+        #log {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+    @keyframes movePlayerAnimation {
+    0% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.battle-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.battle-modal-content {
+    background-color: rgb(21, 21, 21);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
