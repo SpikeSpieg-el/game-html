@@ -15,7 +15,9 @@ var currentColumn = 1;
             if (columnNumber === 2) {
                 column.style.flexDirection = 'row';
                 column.style.flexWrap = 'wrap';
-                column.style.justifyContent = 'space-evenly';
+                column.style.justifyContent = 'space-around';
+                column.style.alignItems = 'center';
+
             }
             else if (columnNumber === 1) {
                 column.style.justifyContent = 'center';

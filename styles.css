@@ -199,30 +199,32 @@ h2 {
     display: block;
 }
 .TextComplex{
-    align-items: flex-start;
     display: flex;
     flex: none;
     flex-direction: column;
-    flex-wrap: nowrap;
     gap: 4px;
     height: min-content;
-    justify-content: center;
     overflow: visible;
     padding: 0;
     position: relative;
     width: min-content;
+    align-items: flex-start;
 }
 .TextHad{
     font-family: "Roboto";
     font-size: 24px;
     letter-spacing: 0px;
     color: rgba(27, 28, 23, 1);
+    width: 115px;
+    text-align: start;
 }
-.TextMid{
+.TextComplex .MidText {
     font-family: "Roboto";
     font-size: 12px;
     letter-spacing: 0.4px;
-    color:  rgb(110, 114, 95);
+    color: rgb(110, 114, 95);
+    align-items: flex-start;
+
 }
 .imgInBild{
     flex: none;
@@ -230,21 +232,17 @@ h2 {
     position: relative;
     width: 60px;
 }
-.up9, .up10, .up11, .up12, .up13 {
-    align-items: center;
-    
+.up8,.up7, .up9, .up10, .up11, .up12, .up13 {
     border-radius: 20px;
     display: flex;
     flex: none;
-    flex-direction: row;
-    flex-wrap: nowrap;
     gap: 20px;
     height: min-content;
-    justify-content: center;
     overflow: visible;
     padding: 16px 20px 16px 24px;
     position: relative;
     width: min-content;
+    align-items: center;
 }
 
 .hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7, .hidden8,
@@ -329,16 +327,16 @@ button:active {
     position: fixed;
     bottom: 50px;
     text-align: center;
-    margin-bottom: -10px;
-    justify-content: center;
+    margin-bottom: -15px;
     flex-wrap: nowrap;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
 .clickButton .clicker {
     padding: 20px 60px;
-    margin-left: 56px;
+    
     margin-bottom: 25px;
     background-color: #000000c7;
     color: #fff;

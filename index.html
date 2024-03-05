@@ -197,10 +197,9 @@
                         <div class="up9">
                         <div class="TextComplex">
                         <div class="TextHad">Поле</div>
-                            <div сlass="TextMid">Стоимость: <span class="upgradeCost9" id="upgradeCost9">15</span></div>
-                            <div сlass="TextMid"><a>Бонус +1.5</a></div>
-                            <div сlass="TextMid"><span id="wheatText">Пшено:</span>
-                            <a id="wheatTotalCount">0</a></div>
+                        <div сlass="TextMid">Стоимость: <span class="upgradeCost9" id="upgradeCost9">15</span></div>
+                        <div сlass="TextMid"><a>Бонус +1.5</a></div>
+                        <div сlass="TextMid"><span id="wheatText">Пшено:</span><a id="wheatTotalCount">0</a></div>
                         </div>
                         <div class="imgInBild"> <img src="Pole.png" alt="acat" class="img-sizeCAT"> </div>
                         </div>
@@ -227,7 +226,8 @@
                         <div class="TextComplex">
                             <div class="TextHad">Каменоломня</div>
                             <div сlass="TextMid">Стоимость: <span class="upgradeCost11" id="upgradeCost11">15</span></div>
-                            <div сlass="TextMid">Нужно 10 пшена и 5 дерева</div>
+                            <div сlass="TextMid">Нужно 10 пшена </div>
+                            <div сlass="TextMid">и 5 дерева</div>
                             <div сlass="TextMid">Камень <a id="stoneTotalCount">0</a></div>
                          </div>
                          
@@ -239,32 +239,45 @@
                     <button id="upgrade13" onclick="buyUpgrade13()">
                         <div class="up13">
                         <div class="TextComplex">
-                        
-                         <div> Построить маталлодобытчик <span class="upgradeCost13" id="upgradeCost13">15</span>
+                            <div class="TextHad">Металлодобытчик</div>
+                            <div сlass="TextMid">Стоимость: <span class="upgradeCost13" id="upgradeCost13">15</span></div>
+                            <div сlass="TextMid">Нужно 20 пшено, </div>
+                            <div сlass="TextMid">15 дерево </div>
+                            <div сlass="TextMid">и 5 камень</div>
+                            <div сlass="TextMid"><a>бонус x1.2 за клик</a></div>
+                            <div сlass="TextMid">Металл <a id="metallTotalCount">0</a></div>
                         </div>
-                         <div> Нужно 20 пшено, 15 дерево 
-                         и 5 камень <a>бонус x1.2 за клик</a> 
-                        металл <a id="metallTotalCount">0</a>
-                    </div>
+                    
                     <div class="imgInBild"><img src="OIG.bFY9BU.jpeg"alt="acat" class="img-sizeCAT"></div>
-                    </div>
+                    
                       </div>   
                     </button>
                 </div>
 
                     <div class="hidden7">
                     <button id="upgrade7" onclick="buyUpgrade7()">
-                         Cat <span class="upgradeCost7" id="upgradeCost7">100</span>
-                         <br>Нужно 5 пшена </rb>
+                        <div class="up7">
+                            <div class="TextComplex">
+                                <div class="TextHad">Котики</div>
+                                <div сlass="TextMid">Стоимость: <span class="upgradeCost7" id="upgradeCost7">100</span></div>
+                                <div сlass="TextMid"> Нужно 5 пшена </div>
+                            </div>
                          <img src="333.png" alt="acat" class="img-sizeCAT">
+                        </div>
                     </button>
                     </div>
               
                 
                 <div class="hidden8">
                     <button id="upgrade8" onclick="buyUpgrade8()">
-                         Построить амбар <span class="upgradeCost8" id="upgradeCost8">15</span>
+                        <div class="up8">
+                            <div class="TextComplex">
+                            <div class="TextHad">Амбар</div>
+                            <div сlass="TextMid">Стоимость: <span class="upgradeCost8" id="upgradeCost8">15</span></div>
+                            </div>
                          <img src="OIG.3NJJoFBIJGj4Z.png" alt="acat" class="img-sizeCAT">
+
+                        </div>
                     </button>
                 </div>
 
@@ -274,10 +287,15 @@
                 
                 <div class="hidden12">
                     <button id="upgrade12" onclick="buyUpgrade12()">
-                        Построить дом <span class="upgradeCost12" id="upgradeCost12">15</span>
-                        <br>Домов <a id="hoseTotalCount">0</a></br>
-                    
+                        <div class="up8">
+                            <div class="TextComplex">
+                            <div class="TextHad">Дом</div>
+                            <div сlass="TextMid">Стоимость: <span class="upgradeCost12" id="upgradeCost12">15</span></div>
+                            <div сlass="TextMid">+ 1 золото</div>
+                            <div сlass="TextMid">Домов <a id="hoseTotalCount">0</a></div>
+                            </div>
                         <img src="dom1.png"alt="acat" class="img-sizeCAT">
+                        </div>
                    </button>
                 </div>
               
@@ -409,13 +427,13 @@
         
        
          
-        <span class="animated-number-container"><span id="animatedNumber"></span></span> 
+         
         <div class="clickButton">
-            
-            <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
             <div class="animatedNumber" id="animatedNumber"></div>
+            <div><span class="animated-number-container"><span id="animatedNumber"></span></span></div>
             <button id="toggleAutoClickButton">Включить автоклик</button>
             
+            <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
         </div> 
         
         
