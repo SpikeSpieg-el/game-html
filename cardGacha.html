@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Симулятор выбивания наград из сундука ^-^</title>
+<style>
+    body {
+        background-color: black;
+        color: aquamarine;
+    }
+    .card {
+        width: 103px;
+        height: 164px;
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        display: inline-block;
+        transition: transform 0.3s ease; /* Добавляем анимацию */
+    }
+
+    .card:hover {
+        transform: scale(1.1) rotate(5deg); /* При наведении увеличиваем и наклоняем карту */
+    }
+
+    .card img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #rewardItems {
+        display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    width: 301px;
+    justify-content: center;
+    }
+
+    /* Стили для popup */
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #290303;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: none;
+    }
+
+    .popup img {
+        max-width: 100px;
+        max-height: 150px;
+        margin: 5px;
+    }
+
+    .popup button {
+        margin-top: 10px;
+    }
+      /* Стили для карты во втором popup */
+      #cardDetailsPopup .card {
+        width: 150px;
+        height: 240px;
+        background-color: #333;
+        color: white;
+        border: 2px solid aquamarine;
+    }
+
+    #cardDetailsPopup img {
+        max-width: 403px;
+    max-height: 706px;
+    margin: 5px;
+    }
+/* Common Rarity */
+.card.common {
+    border: 1px solid #ccc;
+}
+
+/* Rare Rarity */
+.card.rare {
+    border: 1px solid #FFD700; /* Gold border */
+}
+
+/* Epic Rarity */
+.card.epic {
+    border: 1px solid #9932CC; /* Purple border */
+}
+
+/* Legendary Rarity */
+.card.legendary {
+    border: 1px solid #FF4500; /* Orange border */
+}
+/* Стили для кнопок */
+button {
+    background-color: aquamarine;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: lightcyan;
+}
+
+/* Стили для выпадающего меню */
+#filterDropdown {
+    background-color: aquamarine;
+    color: black;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#filterDropdown:hover {
+    background-color: lightcyan;
+}
+
+#filterDropdown option {
+    background-color: white;
+    color: black;
+}
+.rrr{
+    padding: 20px;
+}
+
+
+
+</style>
+</head>
+<body>
+    <h1>Симулятор выбивания наград из сундука</h1>
+    <button onclick="openChest()">Открыть сундук</button>
+    
+    <h2>Фильтр коллекции</h2>
+    <select id="filterDropdown" onchange="applyFilter()">
+        <option value="all">Все карты</option>
+        <option value="ascending">По возрастанию количества</option>
+        <option value="descending">По убыванию количества</option>
+        <option value="new">Новые карты</option>
+        <option value="old">Старые карты</option>
+        <option value="common">Common</option>
+        <option value="rare">Rare</option>
+        <option value="epic">Epic</option>
+        <option value="legendary">Legendary</option>
+        <option value="legendary-epic-rare-common">Самый редкий</option>
+        <option value="epic-rare-common">Редкий</option>
+        <option value="rare-common">Обычный</option>
+    </select>
+    <h2>Ваша коллекция <span id="collectionCounter">(0 / ${rewards.filter(reward => reward.type === "Карта").length})</span></h2>
+    <div id="collection">
+        
+    </div>
+    <div class="rrr">
+    <button onclick="clearCollection()">Очистить коллекцию</button>
+    <button onclick="clearSavedData()">Сбросить сохранения</button>
+    </div>
+
+
+    <!-- Popup для отображения наград -->
+    <div id="rewardPopup" class="popup">
+        <h2>Награды из сундука</h2>
+        <div id="rewardItems"></div>
+        <button onclick="claimRewards()">Забрать награду</button>
+    </div>
+
+    <!-- Второй Popup для отображения карты поближе -->
+    <div id="cardDetailsPopup" class="popup">
+        <h2>Подробная информация о карте</h2>
+        <div id="cardDetails"></div>
+        <button onclick="closeCardDetails()">Закрыть</button>
+    </div>
+    
+
+    <script>
+        // Коллекция карт
+        let collection = []; // измените const на let
+        let totalCardsCount = 0;
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateCollectionCounter();
+});
+
+function updateCollectionCounter() {
+    const counterElement = document.getElementById("collectionCounter");
+    counterElement.textContent = `(${totalCardsCount} / ${rewards.filter(reward => reward.type === "Карта").length})`;
+}
+document.addEventListener("DOMContentLoaded", function() {
+    loadCollectionData(); // Загружаем данные о коллекции
+});
+
+function loadCollectionData() {
+    const savedCollection = localStorage.getItem("collection");
+    if (savedCollection) {
+        collection = JSON.parse(savedCollection); // уберите объявление const перед collection
+        totalCardsCount = collection.reduce((total, card) => total + card.count, 0);
+        updateCollectionDisplay();
+        updateCollectionCounter();
+    }
+}
+
+
+        // Список возможных наград из сундука (карты и пустые награды)
+        const rewards = [
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "Карта", rarity: "common", name: "Карта 1", image: "testCard/00023-3026824156.png" },
+    { type: "Карта", rarity: "common", name: "Карта 2", image: "testCard/00025-4229486176.png" },
+    { type: "Карта", rarity: "common", name: "Карта 3", image: "testCard/00026-1337542961.png" },
+    { type: "Карта", rarity: "common", name: "Карта 4", image: "testCard/00027-3625868725.png" },
+    { type: "Карта", rarity: "common", name: "Карта 5", image: "testCard/00028-2279620003.png" },
+    { type: "Карта", rarity: "common", name: "Карта 6", image: "testCard/00029-3056698738.png" },
+    { type: "Карта", rarity: "common", name: "Карта 7", image: "testCard/00031-44396804.png" },
+    { type: "Карта", rarity: "common", name: "Карта 8", image: "testCard/00033-1623883453.png" },
+    { type: "Карта", rarity: "common", name: "Карта 9", image: "testCard/00034-1896478820.png" },
+    { type: "Карта", rarity: "common", name: "Карта 10", image: "testCard/00035-1474796013.png" },
+    { type: "Карта", rarity: "common", name: "Карта 11", image: "testCard/00036-257346408.png" },
+    { type: "Карта", rarity: "common", name: "Карта 12", image: "testCard/00037-989509602.png" },
+    { type: "Карта", rarity: "common", name: "Карта 13", image: "testCard/00038-1734537472.png" },
+    { type: "Карта", rarity: "common", name: "Карта 14", image: "testCard/00039-1085920090.png" },
+    { type: "Карта", rarity: "legendary", name: "The Devil", image: "testCard/The Devil.png" },
+    { type: "Карта", rarity: "legendary", name: "The Emperor", image: "testCard/The Emperor.png" },
+    { type: "Карта", rarity: "legendary", name: "the empress", image: "testCard/the empress.png" },
+    { type: "Карта", rarity: "epic", name: "the fool", image: "testCard/the fool.png" },
+    { type: "Карта", rarity: "epic", name: "The Hermit", image: "testCard/The Hermit.png" },
+    { type: "Карта", rarity: "epic", name: "the hight priestess", image: "testCard/the hight priestess.png" },
+    { type: "Карта", rarity: "rare", name: "The Lovers", image: "testCard/The Lovers.png" },
+    { type: "Карта", rarity: "rare", name: "the magician", image: "testCard/the magician.png" },
+    { type: "Карта", rarity: "rare", name: "The Wheel of Fortune", image: "testCard/The Wheel of Fortune.png" },
+    { type: "Карта", rarity: "legendary", name: "The Moon", image: "testCard/The Moon.png" },
+    { type: "Карта", rarity: "legendary", name: "The Star", image: "testCard/The Star.png" },
+    { type: "Карта", rarity: "legendary", name: "The Sun", image: "testCard/The Sun.png" },
+    { type: "Карта", rarity: "legendary", name: "The World", image: "testCard/The World.png" },
+    // Add other cards here with their respective rarities and images
+];
+
+        let currentFilter = "all";
+
+        function applyFilter() {
+    const filter = document.getElementById("filterDropdown").value;
+    let filteredCollection = [];
+
+    switch (filter) {
+        case "ascending":
+            filteredCollection = collection.slice().sort((a, b) => a.count - b.count);
+            break;
+        case "descending":
+            filteredCollection = collection.slice().sort((a, b) => b.count - a.count);
+            break;
+        case "new":
+            filteredCollection = collection.slice().sort((a, b) => b.dateAdded - a.dateAdded);
+            break;
+        case "old":
+            filteredCollection = collection.slice().sort((a, b) => a.dateAdded - b.dateAdded);
+            break;
+        case "common":
+        case "rare":
+        case "epic":
+        case "legendary":
+            filteredCollection = collection.filter(card => card.rarity === filter);
+            break;
+        case "legendary-epic-rare-common":
+            filteredCollection = collection.slice().sort((a, b) => {
+                const rarityOrder = { "common": 0, "rare": 1, "epic": 2, "legendary": 3 };
+                return rarityOrder[b.rarity] - rarityOrder[a.rarity];
+            });
+            break;
+        case "epic-rare-common":
+            filteredCollection = collection.slice().sort((a, b) => {
+                const rarityOrder = { "common": 0, "rare": 1, "epic": 2 };
+                return rarityOrder[b.rarity] - rarityOrder[a.rarity];
+            });
+            break;
+        case "rare-common":
+            filteredCollection = collection.slice().sort((a, b) => {
+                const rarityOrder = { "common": 0, "rare": 1 };
+                return rarityOrder[b.rarity] - rarityOrder[a.rarity];
+            });
+            break;
+        default:
+            filteredCollection = collection;
+    }
+
+    updateCollectionDisplay(filteredCollection);
+}
+
+
+
+
+        // Функция для выбивания случайных наград
+        function openChest() {
+    currentFilter = document.getElementById("filterDropdown").value;
+    const selectedRewards = [];
+    for (let i = 0; i < 5; i++) {
+        let randomIndex = Math.floor(Math.random() * 100); // Generate a random number between 0 and 99
+        let selectedReward;
+        if (randomIndex < 3) { // 3% chance for legendary
+            selectedReward = getRandomRewardByRarity("legendary");
+        } else if (randomIndex < 8) { // 5% chance for epic
+            selectedReward = getRandomRewardByRarity("epic");
+        } else if (randomIndex < 18) { // 10% chance for rare
+            selectedReward = getRandomRewardByRarity("rare");
+        } else { // 82% chance for common
+            selectedReward = getRandomRewardByRarity("common");
+        }
+        selectedRewards.push(selectedReward);
+    }
+    showPopup(selectedRewards);
+}
+
+// Function to get a random reward by rarity
+function getRandomRewardByRarity(rarity) {
+    const filteredRewards = rewards.filter(reward => reward.type === "Карта" && reward.rarity === rarity);
+    const randomIndex = Math.floor(Math.random() * filteredRewards.length);
+    return filteredRewards[randomIndex];
+}
+
+
+
+        // Функция для показа popup с наградами
+        function showPopup(rewards) {
+    const popup = document.getElementById("rewardPopup");
+    const rewardItemsContainer = document.getElementById("rewardItems");
+    rewardItemsContainer.innerHTML = ""; // Очищаем контейнер
+
+    rewards.forEach(reward => {
+        const rewardItem = document.createElement("div");
+        rewardItem.classList.add("card");
+        if (reward.type === "Карта") {
+            const cardImage = document.createElement("img");
+            cardImage.src = reward.image;
+            cardImage.alt = reward.name;
+            rewardItem.appendChild(cardImage);
+            // Добавляем класс редкости карты
+            rewardItem.classList.add(reward.rarity);
+        } else {
+            rewardItem.textContent = "Пустая награда";
+        }
+        rewardItemsContainer.appendChild(rewardItem);
+    });
+
+    popup.style.display = "block"; // Отображаем popup
+}
+
+        // Функция для забирания награды и закрытия popup
+        function claimRewards() {
+    const popup = document.getElementById("rewardPopup");
+    const rewardItems = document.querySelectorAll("#rewardItems .card");
+
+    rewardItems.forEach(rewardItem => {
+        if (rewardItem.textContent !== "Пустая награда") {
+            const cardImage = rewardItem.querySelector("img");
+            const cardName = cardImage.alt;
+            const cardImageSrc = cardImage.src;
+            const cardRarity = rewardItem.classList[1]; // Получаем класс редкости карты
+            const card = { type: "Карта", name: cardName, image: cardImageSrc, rarity: cardRarity }; // Передаем редкость карты
+            addToCollection(card);
+        }
+    });
+
+    applyFilter(); // Применяем текущий фильтр после добавления новых карт
+    popup.style.display = "none"; // Закрываем popup
+}
+
+
+
+       // Функция для добавления карты в коллекцию и отслеживания ее количества
+       function addToCollection(card) {
+    const collectionElement = document.getElementById("collection");
+    const existingCard = collection.find(c => c.name === card.name); 
+    if (existingCard) {
+        existingCard.count++;
+    } else {
+        card.count = 1;
+        totalCardsCount++;
+        collection.push(card);
+        const cardElement = createCardElement(card);
+        collectionElement.appendChild(cardElement);
+    }
+    updateCollectionCounter();
+    saveCollectionData(); // Сохраняем данные о коллекции
+}
+
+function saveCollectionData() {
+    localStorage.setItem("collection", JSON.stringify(collection));
+}
+document.addEventListener("DOMContentLoaded", function() {
+    loadCollectionData(); // Загружаем данные о коллекции
+});
+
+function loadCollectionData() {
+    const savedCollection = localStorage.getItem("collection");
+    if (savedCollection) {
+        collection = JSON.parse(savedCollection);
+        totalCardsCount = collection.reduce((total, card) => total + card.count, 0);
+        updateCollectionDisplay();
+        updateCollectionCounter();
+    }
+}
+function clearCollection() {
+    localStorage.removeItem("collection");
+    collection = [];
+    totalCardsCount = 0;
+    updateCollectionDisplay();
+    updateCollectionCounter();
+}
+
+function clearSavedData() {
+    localStorage.clear();
+    collection = [];
+    totalCardsCount = 0;
+    updateCollectionDisplay();
+    updateCollectionCounter();
+}
+
+// Функция для обновления отображения коллекции
+function updateCollectionDisplay(cards) {
+    const collectionElement = document.getElementById("collection");
+    collectionElement.innerHTML = ""; // Очищаем контейнер
+
+    if (cards) {
+        cards.forEach(card => {
+            const cardElement = createCardElement(card);
+            // Добавляем класс редкости к карте
+            cardElement.classList.add(card.rarity);
+            collectionElement.appendChild(cardElement);
+        });
+    } else {
+        // Если аргумент не передан, отображаем все карты из коллекции
+        collection.forEach(card => {
+            const cardElement = createCardElement(card);
+            // Добавляем класс редкости к карте
+            cardElement.classList.add(card.rarity);
+            collectionElement.appendChild(cardElement);
+        });
+    }
+}
+
+
+
+// Функция для создания HTML-элемента для карты в коллекции
+function createCardElement(card) {
+    const cardElement = document.createElement("div");
+    cardElement.classList.add("card");
+
+    // Добавляем класс редкости к элементу в соответствии с редкостью карты
+    if (card.rarity) {
+        cardElement.classList.add(card.rarity);
+    }
+
+    const imageElement = document.createElement("img");
+    imageElement.src = card.image;
+    imageElement.alt = card.name;
+    cardElement.appendChild(imageElement);
+
+    const countElement = document.createElement("span");
+    countElement.classList.add("count");
+    countElement.textContent = `x${card.count}`;
+    cardElement.appendChild(countElement);
+
+    cardElement.addEventListener("click", () => showCardDetails(card));
+
+    return cardElement;
+}
+
+
+
+
+
+        // Функция для показа детальной информации о карте
+        function showCardDetails(card) {
+            const cardDetailsPopup = document.getElementById("cardDetailsPopup");
+            const cardDetailsContainer = document.getElementById("cardDetails");
+            cardDetailsContainer.innerHTML = ""; // Очищаем контейнер
+
+            const cardImage = document.createElement("img");
+            cardImage.src = card.image;
+            cardImage.alt = card.name;
+            cardDetailsContainer.appendChild(cardImage);
+
+            const cardName = document.createElement("p");
+            cardName.textContent = `Название карты: ${card.name}`;
+            cardDetailsContainer.appendChild(cardName);
+
+            cardDetailsPopup.style.display = "block"; // Отображаем popup
+        }
+
+        // Функция для закрытия pop-up с детальной информацией о карте
+        function closeCardDetails() {
+            const cardDetailsPopup = document.getElementById("cardDetailsPopup");
+            cardDetailsPopup.style.display = "none"; // Закрываем pop-up
+        }
+    </script>
+</body>
+</html>
