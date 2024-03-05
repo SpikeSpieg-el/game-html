@@ -376,8 +376,9 @@ function saveGame() {
         // Функция для включения/выключения автоклика
         function toggleAutoClick() {
             if (!autoClickEnabled) {
-                autoClickInterval = setInterval(autoClick, 500); // Запускаем автоклик каждую секунду
+                autoClickInterval = setInterval(autoClick, 1000); // Запускаем автоклик каждую секунду
                 document.getElementById('toggleAutoClickButton').innerText = 'Выключить автоклик';
+                showClikNotification();
             } else {
                 clearInterval(autoClickInterval); // Останавливаем автоклик
                 document.getElementById('toggleAutoClickButton').innerText = 'Включить автоклик';
@@ -615,11 +616,9 @@ let notificationHeight = 70; // Adjust this value based on your notification hei
 function showNotification(type, text) {
     const notification = createNotification(type, text);
 
-    // Set the position to stack notifications vertically
+    // Set the position to stack notifications vertically from the top
     const offset = activeNotifications.length * notificationHeight;
-    notification.style.bottom = offset + 'px' ;
-    
-
+    notification.style.top = offset + 'px';
 
     // Display the notification initially with slideDown animation
     notification.classList.add('slideDown');
@@ -634,6 +633,20 @@ function showNotification(type, text) {
     }, 3000);
 }
 
+function closeNotification(notification) {
+    notification.classList.add('fadeOut');
+    setTimeout(() => {
+        notification.parentNode.removeChild(notification); // Remove the notification from the DOM
+        activeNotifications = activeNotifications.filter(item => item !== notification);
+
+        // Adjust positions of remaining notifications
+        activeNotifications.forEach((activeNotification, index) => {
+            activeNotification.style.top = index * notificationHeight + 'px';
+        });
+    }, 350); // Adjust the time to match the fadeOut animation duration
+}
+
+
 function showSaveNotification() {
     showNotification('success', 'Game saved successfully!');
     saveGame();
@@ -642,8 +655,9 @@ function showSaveNotification() {
 function showLoadNotification() {
     showNotification('info', 'Game loaded successfully!');
 }
-
-
+function showClikNotification(){
+    showNotification('custom', 'auto Click on!')
+}
 
 function createNotification(type, text) {
     const notification = document.createElement('div');
@@ -653,18 +667,8 @@ function createNotification(type, text) {
     return notification;
 }
 
-function closeNotification(notification) {
-    notification.classList.add('fadeOut');
-    setTimeout(() => {
-        notification.style.display = 'none';
-        activeNotifications = activeNotifications.filter(item => item !== notification);
 
-        // Adjust positions of remaining notifications
-        activeNotifications.forEach((activeNotification, index) => {
-            activeNotification.style.bottom = index * notificationHeight + 'px';
-        });
-    }, 350); // Adjust the time to match the fadeOut animation duration
-}
+
 
 //слайдер слева
 function toggleNav() {

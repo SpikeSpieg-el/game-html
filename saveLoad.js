@@ -80,8 +80,6 @@ function loadGame() {
                     imgElement.classList.add('img-sity');
                     upgradeImageContainer.appendChild(imgElement);
                 }
-            } else {
-                console.error(`Container with id 'hiddenimg${index + 1}' not found.`);
             }
         } else {
             upgradeContainer.style.display = "none";
