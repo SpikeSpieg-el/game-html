@@ -219,11 +219,11 @@ function loadCollectionData() {
 
         // Список возможных наград из сундука (карты и пустые награды)
         const rewards = [
-    { type: "empty" }, // Пустая награда
-    { type: "empty" }, // Пустая награда
-    { type: "empty" }, // Пустая награда
-    { type: "empty" }, // Пустая награда
-    { type: "empty" }, // Пустая награда
+    { type: "empty", image: "testCard/blank1.png" }, // Пустая награда
+    { type: "empty", image: "testCard/blank2.png" }, // Пустая награда
+    { type: "empty", image: "testCard/blank3.png" }, // Пустая награда
+    { type: "empty", image: "testCard/blank4.png" }, // Пустая награда
+    { type: "empty", image: "testCard/blank5.png" }, // Пустая награда
     { type: "Карта", rarity: "common", name: "Карта 1", image: "testCard/00023-3026824156.png" },
     { type: "Карта", rarity: "common", name: "Карта 2", image: "testCard/00025-4229486176.png" },
     { type: "Карта", rarity: "common", name: "Карта 3", image: "testCard/00026-1337542961.png" },
@@ -315,22 +315,44 @@ function loadCollectionData() {
         function openChest() {
     currentFilter = document.getElementById("filterDropdown").value;
     const selectedRewards = [];
+    let emptyRewardAdded = false; // Переменная для отслеживания добавления пустой награды
+
     for (let i = 0; i < 5; i++) {
-        let randomIndex = Math.floor(Math.random() * 100); // Generate a random number between 0 and 99
+        let randomIndex;
+
+        // Гарантируем, что пустая награда будет добавлена минимум один раз
+        if (!emptyRewardAdded && i === 4) { // Добавляем пустую награду в последней итерации цикла
+            selectedRewards.push({ type: "empty" });
+            emptyRewardAdded = true;
+            continue;
+        }
+
+        randomIndex = Math.floor(Math.random() * 100); // Генерируем случайное число от 0 до 99
+
+        // Если случайное число меньше или равно 4, добавляем пустую награду
+        if (randomIndex <= 4 && !emptyRewardAdded) {
+            selectedRewards.push({ type: "empty" });
+            emptyRewardAdded = true;
+            continue;
+        }
+
+        // Остальная часть кода остается без изменений
         let selectedReward;
-        if (randomIndex < 3) { // 3% chance for legendary
+        if (randomIndex < 3) { // 3% шанс на легендарную награду
             selectedReward = getRandomRewardByRarity("legendary");
-        } else if (randomIndex < 8) { // 5% chance for epic
+        } else if (randomIndex < 8) { // 5% шанс на эпическую награду
             selectedReward = getRandomRewardByRarity("epic");
-        } else if (randomIndex < 18) { // 10% chance for rare
+        } else if (randomIndex < 18) { // 10% шанс на редкую награду
             selectedReward = getRandomRewardByRarity("rare");
-        } else { // 82% chance for common
+        } else { // 82% шанс на обычную награду
             selectedReward = getRandomRewardByRarity("common");
         }
         selectedRewards.push(selectedReward);
     }
+
     showPopup(selectedRewards);
 }
+
 
 // Function to get a random reward by rarity
 function getRandomRewardByRarity(rarity) {
