@@ -219,11 +219,11 @@ function loadCollectionData() {
 
         // Список возможных наград из сундука (карты и пустые награды)
         const rewards = [
-    { type: "empty", image: "testCard/blank1.png" }, // Пустая награда
-    { type: "empty", image: "testCard/blank2.png" }, // Пустая награда
-    { type: "empty", image: "testCard/blank3.png" }, // Пустая награда
-    { type: "empty", image: "testCard/blank4.png" }, // Пустая награда
-    { type: "empty", image: "testCard/blank5.png" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
+    { type: "empty" }, // Пустая награда
     { type: "Карта", rarity: "common", name: "Карта 1", image: "testCard/00023-3026824156.png" },
     { type: "Карта", rarity: "common", name: "Карта 2", image: "testCard/00025-4229486176.png" },
     { type: "Карта", rarity: "common", name: "Карта 3", image: "testCard/00026-1337542961.png" },
@@ -312,7 +312,7 @@ function loadCollectionData() {
 
 
         // Функция для выбивания случайных наград
-        function openChest() {
+       function openChest() {
     currentFilter = document.getElementById("filterDropdown").value;
     const selectedRewards = [];
     let emptyRewardAdded = false; // Переменная для отслеживания добавления пустой награды
@@ -369,7 +369,7 @@ function getRandomRewardByRarity(rarity) {
     const rewardItemsContainer = document.getElementById("rewardItems");
     rewardItemsContainer.innerHTML = ""; // Очищаем контейнер
 
-    rewards.forEach(reward => {
+    rewards.forEach((reward, index) => {
         const rewardItem = document.createElement("div");
         rewardItem.classList.add("card");
         if (reward.type === "Карта") {
@@ -379,14 +379,20 @@ function getRandomRewardByRarity(rarity) {
             rewardItem.appendChild(cardImage);
             // Добавляем класс редкости карты
             rewardItem.classList.add(reward.rarity);
+        } else if (reward.type === "empty") {
+            const emptyImage = document.createElement("img");
+            emptyImage.src = `testCard/empty${index}.png`; // Замените "path/to/empty" на путь к папке с изображениями для пустых наград
+            emptyImage.alt = "Empty Reward";
+            rewardItem.appendChild(emptyImage);
         } else {
-            rewardItem.textContent = "Пустая награда";
+            rewardItem.textContent = "Unknown Reward";
         }
         rewardItemsContainer.appendChild(rewardItem);
     });
 
     popup.style.display = "block"; // Отображаем popup
 }
+
 
         // Функция для забирания награды и закрытия popup
         function claimRewards() {
