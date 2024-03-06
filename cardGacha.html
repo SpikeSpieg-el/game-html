@@ -51,6 +51,7 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         z-index: 9999;
         display: none;
+        color: black;
     }
 
     .popup img {
@@ -75,6 +76,8 @@
         max-width: 403px;
     max-height: 493px;
     margin: 5px;
+    border-radius: 45px;
+    border: 4px solid #000000bf;
     }
 /* Common Rarity */
 .card.common {
@@ -535,13 +538,28 @@ function createCardElement(card) {
             cardDetailsContainer.appendChild(cardName);
 
             cardDetailsPopup.style.display = "block"; // Отображаем popup
-        }
+            cardDetailsPopup.style.background = getBackgroundColorByRarity(card.rarity); // Устанавливаем фон в зависимости от редкости карты
 
+        }
         // Функция для закрытия pop-up с детальной информацией о карте
         function closeCardDetails() {
             const cardDetailsPopup = document.getElementById("cardDetailsPopup");
             cardDetailsPopup.style.display = "none"; // Закрываем pop-up
         }
+        function getBackgroundColorByRarity(rarity) {
+    switch (rarity) {
+        case "common":
+            return "#626262"; // Цвет фона для обычных карт
+        case "rare":
+            return "#9C8922"; // Цвет фона для редких карт
+        case "epic":
+            return "#723093"; // Цвет фона для эпических карт
+        case "legendary":
+            return "#B94E27"; // Цвет фона для легендарных карт
+        default:
+            return "#290303"; // Цвет фона по умолчанию
+    }
+}
     </script>
 </body>
 </html>
