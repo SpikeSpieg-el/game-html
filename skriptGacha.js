@@ -169,7 +169,6 @@ function getRandomRewardByRarity() {
     }
 }
 
-// Функция для показа popup с наградами
 function showPopup(rewards) {
     const popup = document.getElementById("rewardPopup");
     const rewardItemsContainer = document.getElementById("rewardItems");
@@ -193,18 +192,32 @@ function showPopup(rewards) {
         } else {
             rewardItem.textContent = "Unknown Reward";
         }
-        rewardItemsContainer.appendChild(rewardItem);
-    });
 
-    // Добавляем кнопку "Открыть ещё"
-    //const openMoreButton = document.createElement("button");
-    //openMoreButton.textContent = "Открыть ещё";
-    //openMoreButton.addEventListener("click", openChest);
-    //rewardItemsContainer.appendChild(openMoreButton);
+        // Установка начальной прозрачности
+        rewardItem.style.opacity = "0";
+
+        rewardItemsContainer.appendChild(rewardItem);
+
+        // Добавляем анимацию для каждой награды
+        rewardItem.style.animation = `slideIn 0.5s ease ${index * 0.1}s forwards`;
+        
+        // Постепенное изменение прозрачности до 1
+        setTimeout(() => {
+            rewardItem.style.opacity = "1";
+        }, index * 100);
+    });
 
     popup.style.display = "block"; // Отображаем popup
 }
 
+
+
+
+// Добавляем кнопку "Открыть ещё"
+    //const openMoreButton = document.createElement("button");
+    //openMoreButton.textContent = "Открыть ещё";
+    //openMoreButton.addEventListener("click", openChest);
+    //rewardItemsContainer.appendChild(openMoreButton);
 
 // Функция для забирания награды и закрытия popup
         function claimRewards() {
