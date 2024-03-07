@@ -87,37 +87,44 @@ const rewards = [
         let currentFilter = "all";
 
         function applyFilter() {
-    const filter = document.getElementById("filterDropdown").value;
-    let filteredCollection = [];
-
-    switch (filter) {
-        case "ascending":
-            filteredCollection = collection.slice().sort((a, b) => a.count - b.count);
-            break;
-        case "descending":
-            filteredCollection = collection.slice().sort((a, b) => b.count - a.count);
-            break;
-            case "descendingPower":
-            filteredCollection = collection.slice().sort((a, b) => b.strength - a.strength);
-            break;
-        case "common":
-        case "rare":
-        case "epic":
-        case "legendary":
-            filteredCollection = collection.filter(card => card.rarity === filter);
-            break;
-        case "legendary-epic-rare-common":
-            filteredCollection = collection.slice().sort((a, b) => {
-                const rarityOrder = { "common": 0, "rare": 1, "epic": 2, "legendary": 3 };
-                return rarityOrder[b.rarity] - rarityOrder[a.rarity];
-            });
-            break;
-        default:
-            filteredCollection = collection;
-    }
-
-    updateCollectionDisplay(filteredCollection);
-}
+            const filter = document.getElementById("filterDropdown").value;
+            let filteredCollection = [];
+        
+            switch (filter) {
+                case "ascending":
+                    filteredCollection = collection.slice().sort((a, b) => a.count - b.count);
+                    break;
+                case "descending":
+                    filteredCollection = collection.slice().sort((a, b) => b.count - a.count);
+                    break;
+                case "descendingPower":
+                    filteredCollection = collection.slice().sort((a, b) => b.strength - a.strength);
+                    break;
+                case "common":
+                case "rare":
+                case "epic":
+                case "legendary":
+                    filteredCollection = collection.filter(card => card.rarity === filter);
+                    break;
+                case "legendary-epic-rare-common":
+                    filteredCollection = collection.slice().sort((a, b) => {
+                        const rarityOrder = { "common": 0, "rare": 1, "epic": 2, "legendary": 3 };
+                        return rarityOrder[b.rarity] - rarityOrder[a.rarity];
+                    });
+                    break;
+                default:
+                    filteredCollection = collection;
+            }
+        
+            if (filteredCollection.length === 0) {
+                // Если отфильтрованная коллекция пуста, добавляем текст "пусто" вместо коллекции
+                const collectionElement = document.getElementById("collection");
+                collectionElement.innerHTML = "<p>Пусто</p>";
+            } else {
+                updateCollectionDisplay(filteredCollection);
+            }
+        }
+        
        
 
 // Функция для открытия сундука
@@ -311,6 +318,7 @@ function updateCollectionDisplay(cards) {
         });
     }
 }
+
 // Функция для создания HTML-элемента для карты в коллекции
 function createCardElement(card) {
     const cardElement = document.createElement("div");
@@ -462,3 +470,20 @@ function upgradeCard(card) {
             return "#290303"; // Цвет фона по умолчанию
     }
 }
+
+const toggleCollectionBtn = document.getElementById("toggleCollectionBtn");
+let isCollectionExpanded = true;
+
+toggleCollectionBtn.addEventListener("click", function() {
+    const collectionElement = document.getElementById("collection");
+    isCollectionExpanded = !isCollectionExpanded; // Инвертируем значение переменной
+
+    if (isCollectionExpanded) {
+        collectionElement.style.display = "block";
+        toggleCollectionBtn.textContent = "Свернуть коллекцию";
+    } else {
+        collectionElement.style.display = "none";
+        toggleCollectionBtn.textContent = "Развернуть коллекцию";
+    }
+});
+

@@ -79,8 +79,8 @@
             <span><button id="column2Btn" onclick="showColumn(2)">Buildings</button></span>
             <span><button id="column3Btn" onclick="showColumn(3)">Village</button></span>
             <span><button id="column4Btn" onclick="showColumn(4)">Shop</button></span>
-            <button id="column5Btn" onclick="showColumn(5)">!</button>
-            <button id="column6Btn" onclick="showColumn(6)">Cards</button>
+            <button id="column6Btn" onclick="showColumn(6)">Cards Shop</button>
+            <button id="column5Btn" onclick="showColumn(5)">нет</button>
             <!--<span><button onclick="showNextColumn()">next</button></span>-->
         </div>
         
@@ -455,7 +455,8 @@
         </select>
     
         </h2>Ваша коллекция <span id="collectionCounter">(0 / ${rewards.filter(reward => reward.type === "Карта").length})</span>
-    
+        <button id="toggleCollectionBtn">Свернуть/Развернуть коллекцию</button>
+
         <div id="collection">
             
         </div>
