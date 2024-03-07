@@ -1,4 +1,3 @@
-
 // Коллекция карт
 let collection = []; // измените const на let
 let totalCardsCount = 0;
@@ -27,10 +26,8 @@ function loadCollectionData() {
         updateCollectionCounter();
     }
 }
-
-
-        // Список возможных наград из сундука (карты и пустые награды)
-        const rewards = [
+// Список возможных наград из сундука (карты и пустые награды)
+const rewards = [
     { type: "empty" }, // Пустая награда
     { type: "empty" }, // Пустая награда
     { type: "empty" }, // Пустая награда
@@ -119,12 +116,8 @@ function loadCollectionData() {
 
     updateCollectionDisplay(filteredCollection);
 }
-
-
-
-
         // Функция для выбивания случайных наград
-       function openChest() {
+function openChest() {
     currentFilter = document.getElementById("filterDropdown").value;
     const selectedRewards = [];
     let emptyRewardAdded = false; // Переменная для отслеживания добавления пустой награды
@@ -148,7 +141,7 @@ function loadCollectionData() {
             continue;
         }
 
-        // Остальная часть кода остается без изменений
+     
         let selectedReward;
         if (randomIndex < 3) { // 3% шанс на легендарную награду
             selectedReward = getRandomRewardByRarity("legendary");
@@ -160,10 +153,16 @@ function loadCollectionData() {
             selectedReward = getRandomRewardByRarity("common");
         }
         selectedRewards.push(selectedReward);
+
+        // Добавляем новые карты в коллекцию после каждой новой открытой
+        if (selectedReward.type === "Карта") {
+            addToCollection(selectedReward);
+        }
     }
 
     showPopup(selectedRewards);
 }
+
 
 
 // Function to get a random reward by rarity
@@ -172,11 +171,8 @@ function getRandomRewardByRarity(rarity) {
     const randomIndex = Math.floor(Math.random() * filteredRewards.length);
     return filteredRewards[randomIndex];
 }
-
-
-
-        // Функция для показа popup с наградами
-        function showPopup(rewards) {
+// Функция для показа popup с наградами
+function showPopup(rewards) {
     const popup = document.getElementById("rewardPopup");
     const rewardItemsContainer = document.getElementById("rewardItems");
     rewardItemsContainer.innerHTML = ""; // Очищаем контейнер
@@ -202,11 +198,17 @@ function getRandomRewardByRarity(rarity) {
         rewardItemsContainer.appendChild(rewardItem);
     });
 
+    // Добавляем кнопку "Открыть ещё"
+    const openMoreButton = document.createElement("button");
+    openMoreButton.textContent = "Открыть ещё";
+    openMoreButton.addEventListener("click", openChest);
+    rewardItemsContainer.appendChild(openMoreButton);
+
     popup.style.display = "block"; // Отображаем popup
 }
 
 
-        // Функция для забирания награды и закрытия popup
+// Функция для забирания награды и закрытия popup
         function claimRewards() {
     const popup = document.getElementById("rewardPopup");
     const rewardItems = document.querySelectorAll("#rewardItems .card");
@@ -218,31 +220,48 @@ function getRandomRewardByRarity(rarity) {
             const cardImageSrc = cardImage.src;
             const cardRarity = rewardItem.classList[1]; // Получаем класс редкости карты
             const card = { type: "Карта", name: cardName, image: cardImageSrc, rarity: cardRarity }; // Передаем редкость карты
-            addToCollection(card);
+            
         }
     });
 
     applyFilter(); // Применяем текущий фильтр после добавления новых карт
     popup.style.display = "none"; // Закрываем popup
 }
-
-
-
-       // Функция для добавления карты в коллекцию и отслеживания ее количества
-       function addToCollection(card) {
+// Функция для добавления карты в коллекцию и отслеживания ее количества
+function addToCollection(card) {
     const collectionElement = document.getElementById("collection");
-    const existingCard = collection.find(c => c.name === card.name); 
+    const existingCard = collection.find(c => c.name === card.name);
+
     if (existingCard) {
         existingCard.count++;
+       
     } else {
         card.count = 1;
+        card.strength = getStrengthByRarity(card.rarity); // Устанавливаем силу карты в зависимости от редкости
         totalCardsCount++;
         collection.push(card);
         const cardElement = createCardElement(card);
         collectionElement.appendChild(cardElement);
     }
+
     updateCollectionCounter();
     saveCollectionData(); // Сохраняем данные о коллекции
+}
+
+// Функция для получения силы карты в зависимости от ее редкости
+function getStrengthByRarity(rarity) {
+    switch (rarity) {
+        case "common":
+            return 1;
+        case "rare":
+            return 2;
+        case "epic":
+            return 3;
+        case "legendary":
+            return 4;
+        default:
+            return 1; // По умолчанию устанавливаем силу 1
+    }
 }
 
 function saveCollectionData() {
@@ -299,9 +318,6 @@ function updateCollectionDisplay(cards) {
         });
     }
 }
-
-
-
 // Функция для создания HTML-элемента для карты в коллекции
 function createCardElement(card) {
     const cardElement = document.createElement("div");
@@ -322,10 +338,17 @@ function createCardElement(card) {
     countElement.textContent = `x${card.count}`;
     cardElement.appendChild(countElement);
 
+    // Добавляем отображение силы карты
+    const strengthElement = document.createElement("span");
+    strengthElement.classList.add("strength");
+    strengthElement.textContent = `Сила: ${card.strength}`;
+    cardElement.appendChild(strengthElement);
+
     cardElement.addEventListener("click", () => showCardDetails(card));
 
     return cardElement;
 }
+
 
 // Функция для показа детальной информации о карте
 function showCardDetails(card) {
@@ -333,19 +356,56 @@ function showCardDetails(card) {
     const cardDetailsContainer = document.getElementById("cardDetails");
     cardDetailsContainer.innerHTML = ""; // Очищаем контейнер
 
-        const cardImage = document.createElement("img");
-        cardImage.src = card.image;
-        cardImage.alt = card.name;
-        cardDetailsContainer.appendChild(cardImage);
+    const cardImage = document.createElement("img");
+    cardImage.src = card.image;
+    cardImage.alt = card.name;
+    cardDetailsContainer.appendChild(cardImage);
 
-        const cardName = document.createElement("p");
-        cardName.textContent = `Название карты: ${card.name}`;
-        cardDetailsContainer.appendChild(cardName);
+    const cardName = document.createElement("p");
+    cardName.textContent = `Название карты: ${card.name}`;
+    cardDetailsContainer.appendChild(cardName);
 
-        cardDetailsPopup.style.display = "block"; // Отображаем popup
-        cardDetailsPopup.style.background = getBackgroundColorByRarity(card.rarity); // Устанавливаем фон в зависимости от редкости карты
+    // Добавляем отображение силы карты
+    const strengthElement = document.createElement("p");
+    strengthElement.textContent = `Сила: ${card.strength}`;
+    cardDetailsContainer.appendChild(strengthElement);
 
-        }
+    // Добавляем кнопку прокачки карты с обработчиком события
+    const upgradeButton = document.createElement("button");
+    upgradeButton.textContent = "Прокачать карту";
+    upgradeButton.onclick = function() {
+        upgradeCard(card); // Вызываем функцию прокачки карты только при нажатии на кнопку
+    };
+    cardDetailsContainer.appendChild(upgradeButton);
+
+    cardDetailsPopup.style.display = "block"; // Отображаем popup
+    cardDetailsPopup.style.background = getBackgroundColorByRarity(card.rarity); // Устанавливаем фон в зависимости от редкости карты
+}
+
+
+// Функция для прокачки карты
+function upgradeCard(card) {
+    const upgradeCost = 10; // Количество копий карты для прокачки
+    if (card.count >= upgradeCost) {
+        // Уменьшаем количество копий карты
+        card.count -= upgradeCost;
+        // Увеличиваем силу карты
+        card.strength++;
+        // Обновляем счетчик коллекции
+        updateCollectionCounter();
+        // Обновляем отображение коллекции
+        updateCollectionDisplay();
+        // Сохраняем данные о коллекции
+        saveCollectionData();
+        // Закрываем pop-up с детальной информацией о карте
+        closeCardDetails();
+    } else {
+        alert("Недостаточно копий карты для прокачки.");
+    }
+}
+
+
+
         // Функция для закрытия pop-up с детальной информацией о карте
         function closeCardDetails() {
             const cardDetailsPopup = document.getElementById("cardDetailsPopup");
