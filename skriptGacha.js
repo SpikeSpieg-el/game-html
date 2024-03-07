@@ -33,32 +33,49 @@ const rewards = [
     { type: "empty" }, // Пустая награда
     { type: "empty" }, // Пустая награда
     { type: "empty" }, // Пустая награда
-    { type: "Карта", rarity: "common", name: "Карта 1", image: "testCard/00023-3026824156.png" },
-    { type: "Карта", rarity: "common", name: "Карта 2", image: "testCard/00025-4229486176.png" },
-    { type: "Карта", rarity: "common", name: "Карта 3", image: "testCard/00026-1337542961.png" },
-    { type: "Карта", rarity: "common", name: "Карта 4", image: "testCard/00027-3625868725.png" },
-    { type: "Карта", rarity: "common", name: "Карта 5", image: "testCard/00028-2279620003.png" },
-    { type: "Карта", rarity: "common", name: "Карта 6", image: "testCard/00029-3056698738.png" },
-    { type: "Карта", rarity: "common", name: "Карта 7", image: "testCard/00031-44396804.png" },
-    { type: "Карта", rarity: "common", name: "Карта 8", image: "testCard/00033-1623883453.png" },
-    { type: "Карта", rarity: "common", name: "Карта 9", image: "testCard/00034-1896478820.png" },
-    { type: "Карта", rarity: "common", name: "Карта 10", image: "testCard/00035-1474796013.png" },
-    { type: "Карта", rarity: "common", name: "Карта 11", image: "testCard/00036-257346408.png" },
-    { type: "Карта", rarity: "common", name: "Карта 12", image: "testCard/00037-989509602.png" },
-    { type: "Карта", rarity: "common", name: "Карта 13", image: "testCard/00038-1734537472.png" },
-    { type: "Карта", rarity: "common", name: "Карта 14", image: "testCard/00039-1085920090.png" },
+    { type: "Карта", rarity: "common", name: "Карта #1", image: "testCard/00023-3026824156.png" },
+    { type: "Карта", rarity: "common", name: "Карта #2", image: "testCard/00025-4229486176.png" },
+    { type: "Карта", rarity: "common", name: "Карта #3", image: "testCard/00026-1337542961.png" },
+    { type: "Карта", rarity: "common", name: "Карта #4", image: "testCard/00027-3625868725.png" },
+    { type: "Карта", rarity: "common", name: "Карта #5", image: "testCard/00028-2279620003.png" },
+    { type: "Карта", rarity: "common", name: "Карта #6", image: "testCard/00029-3056698738.png" },
+    { type: "Карта", rarity: "common", name: "Карта #7", image: "testCard/00031-44396804.png" },
+    { type: "Карта", rarity: "common", name: "Карта #8", image: "testCard/00033-1623883453.png" },
+    { type: "Карта", rarity: "common", name: "Карта #9", image: "testCard/00034-1896478820.png" },
+    { type: "Карта", rarity: "common", name: "Карта #10", image: "testCard/00035-1474796013.png" },
+    { type: "Карта", rarity: "common", name: "Карта #11", image: "testCard/00036-257346408.png" },
+    { type: "Карта", rarity: "common", name: "Карта #12", image: "testCard/00037-989509602.png" },
+    { type: "Карта", rarity: "common", name: "Карта #13", image: "testCard/00038-1734537472.png" },
+    { type: "Карта", rarity: "common", name: "Карта #14", image: "testCard/00039-1085920090.png" },
+
+
+    { type: "Карта", rarity: "epic", name:"sword", image: "testCard/sword.png"},
+    { type: "Карта", rarity: "epic", name:"the madness", image: "testCard/the madness.png"},
+    { type: "Карта", rarity: "epic", name:"the mirror", image: "testCard/the mirror.png"},
+    { type: "Карта", rarity: "epic", name:"The skull", image: "testCard/The skull.png"},
+    { type: "Карта", rarity: "epic", name:"book", image: "testCard/book.png"},
+    { type: "Карта", rarity: "epic", name:"cover", image: "testCard/cover.png"},
+
+    { type: "Карта", rarity: "rare", name:"the seven", image: "testCard/the seven.png"},
+    { type: "Карта", rarity: "rare", name:"the six", image: "testCard/the mirror6.png"},
+    { type: "Карта", rarity: "rare", name:"the five", image: "testCard/the five.png"},
+    { type: "Карта", rarity: "rare", name:"the four", image: "testCard/the four.png"},
+    { type: "Карта", rarity: "rare", name:"The three", image: "testCard/The three.png"},
+    { type: "Карта", rarity: "rare", name:"the two", image: "testCard/the two.png"},
+    { type: "Карта", rarity: "rare", name:"the one", image: "testCard/the one.png"},
+    
     { type: "Карта", rarity: "legendary", name: "The Devil", image: "testCard/The Devil.png" },
     { type: "Карта", rarity: "legendary", name: "The Hanged Man", image: "testCard/The Hanged Man.png" },
     { type: "Карта", rarity: "legendary", name: "The Emperor", image: "testCard/The Emperor.png" },
     { type: "Карта", rarity: "legendary", name: "the empress", image: "testCard/the empress.png" },
-    { type: "Карта", rarity: "epic", name: "the fool", image: "testCard/the fool.png" },
-    { type: "Карта", rarity: "epic", name: "Death", image: "testCard/Death.png" },
-    { type: "Карта", rarity: "epic", name: "The Hermit", image: "testCard/The Hermit.png" },
-    { type: "Карта", rarity: "epic", name: "the hight priestess", image: "testCard/the hight priestess.png" },
-    { type: "Карта", rarity: "rare", name: "The Lovers", image: "testCard/The Lovers.png" },
-    { type: "Карта", rarity: "rare", name: "the magician", image: "testCard/the magician.png" },
-    { type: "Карта", rarity: "rare", name: "The Wheel of Fortune", image: "testCard/The Wheel of Fortune.png" },
-    { type: "Карта", rarity: "rare", name: "Temperance", image: "testCard/Temperance.png" },
+    { type: "Карта", rarity: "legendary", name:"the fool", image: "testCard/the fool.png" },
+    { type: "Карта", rarity: "legendary", name:"Death", image: "testCard/Death.png" },
+    { type: "Карта", rarity: "legendary", name:"The Hermit", image: "testCard/The Hermit.png" },
+    { type: "Карта", rarity: "legendary", name:"the hight priestess", image: "testCard/the hight priestess.png" },
+    { type: "Карта", rarity: "legendary", name:"The Lovers", image: "testCard/The Lovers.png" },
+    { type: "Карта", rarity: "legendary", name:"the magician", image: "testCard/the magician.png" },
+    { type: "Карта", rarity: "legendary", name:"The Wheel of Fortune", image: "testCard/The Wheel of Fortune.png" },
+    { type: "Карта", rarity: "legendary", name:"Temperance", image: "testCard/Temperance.png" },
     { type: "Карта", rarity: "legendary", name: "The Moon", image: "testCard/The Moon.png" },
     { type: "Карта", rarity: "legendary", name: "The Star", image: "testCard/The Star.png" },
     { type: "Карта", rarity: "legendary", name: "The Sun", image: "testCard/The Sun.png" },
@@ -101,42 +118,25 @@ const rewards = [
 
     updateCollectionDisplay(filteredCollection);
 }
-        // Функция для выбивания случайных наград
+       
+
+// Функция для открытия сундука
 function openChest() {
     currentFilter = document.getElementById("filterDropdown").value;
     const selectedRewards = [];
     let emptyRewardAdded = false; // Переменная для отслеживания добавления пустой награды
 
-    for (let i = 0; i < 5; i++) {
-        let randomIndex;
+    for (let i = 0; i < 6; i++) {
+        let randomIndex = Math.floor(Math.random() * 100); // Генерируем случайное число от 0 до 99
 
-        // Гарантируем, что пустая награда будет добавлена минимум один раз
-        if (!emptyRewardAdded && i === 4) { // Добавляем пустую награду в последней итерации цикла
+        // Если случайное число меньше или равно 1, добавляем пустую награду
+        if (randomIndex <= 1 && !emptyRewardAdded) {
             selectedRewards.push({ type: "empty" });
             emptyRewardAdded = true;
             continue;
         }
 
-        randomIndex = Math.floor(Math.random() * 100); // Генерируем случайное число от 0 до 99
-
-        // Если случайное число меньше или равно 4, добавляем пустую награду
-        if (randomIndex <= 4 && !emptyRewardAdded) {
-            selectedRewards.push({ type: "empty" });
-            emptyRewardAdded = true;
-            continue;
-        }
-
-     
-        let selectedReward;
-        if (randomIndex < 3) { // 3% шанс на легендарную награду
-            selectedReward = getRandomRewardByRarity("legendary");
-        } else if (randomIndex < 8) { // 5% шанс на эпическую награду
-            selectedReward = getRandomRewardByRarity("epic");
-        } else if (randomIndex < 18) { // 10% шанс на редкую награду
-            selectedReward = getRandomRewardByRarity("rare");
-        } else { // 82% шанс на обычную награду
-            selectedReward = getRandomRewardByRarity("common");
-        }
+        let selectedReward = getRandomRewardByRarity();
         selectedRewards.push(selectedReward);
 
         // Добавляем новые карты в коллекцию после каждой новой открытой
@@ -147,15 +147,28 @@ function openChest() {
 
     showPopup(selectedRewards);
 }
+        
+function getRandomRewardByRarity() {
+    const randomIndex = Math.random() * 100; // Генерируем случайное число от 0 до 99
 
-
-
-// Function to get a random reward by rarity
-function getRandomRewardByRarity(rarity) {
-    const filteredRewards = rewards.filter(reward => reward.type === "Карта" && reward.rarity === rarity);
-    const randomIndex = Math.floor(Math.random() * filteredRewards.length);
-    return filteredRewards[randomIndex];
+    if (randomIndex < 1) { // 1% шанс на легендарную награду
+        const legendaryRewards = rewards.filter(reward => reward.rarity === "legendary");
+        return legendaryRewards[Math.floor(Math.random() * legendaryRewards.length)];
+    } else if (randomIndex < 6) { // 5% шанс на эпическую награду
+        const epicRewards = rewards.filter(reward => reward.rarity === "epic");
+        return epicRewards[Math.floor(Math.random() * epicRewards.length)];
+    } else if (randomIndex < 13) { // 7% шанс на редкую награду
+        const rareRewards = rewards.filter(reward => reward.rarity === "rare");
+        return rareRewards[Math.floor(Math.random() * rareRewards.length)];
+    } else if (randomIndex < 37) { // 37% шанс на обычную награду
+        const commonRewards = rewards.filter(reward => reward.rarity === "common");
+        return commonRewards[Math.floor(Math.random() * commonRewards.length)];
+    } else { // Остальное шанс на пустышки
+        const emptyRewards = rewards.filter(reward => reward.type === "empty");
+        return emptyRewards[Math.floor(Math.random() * emptyRewards.length)];
+    }
 }
+
 // Функция для показа popup с наградами
 function showPopup(rewards) {
     const popup = document.getElementById("rewardPopup");
@@ -184,10 +197,10 @@ function showPopup(rewards) {
     });
 
     // Добавляем кнопку "Открыть ещё"
-    const openMoreButton = document.createElement("button");
-    openMoreButton.textContent = "Открыть ещё";
-    openMoreButton.addEventListener("click", openChest);
-    rewardItemsContainer.appendChild(openMoreButton);
+    //const openMoreButton = document.createElement("button");
+    //openMoreButton.textContent = "Открыть ещё";
+    //openMoreButton.addEventListener("click", openChest);
+    //rewardItemsContainer.appendChild(openMoreButton);
 
     popup.style.display = "block"; // Отображаем popup
 }
@@ -245,26 +258,14 @@ function getStrengthByRarity(rarity) {
         case "legendary":
             return 40;
         default:
-            return 1; // По умолчанию устанавливаем силу 1
+            return 0; // По умолчанию устанавливаем силу 0
     }
 }
 
 function saveCollectionData() {
     localStorage.setItem("collection", JSON.stringify(collection));
 }
-document.addEventListener("DOMContentLoaded", function() {
-    loadCollectionData(); // Загружаем данные о коллекции
-});
 
-function loadCollectionData() {
-    const savedCollection = localStorage.getItem("collection");
-    if (savedCollection) {
-        collection = JSON.parse(savedCollection);
-        totalCardsCount = collection.reduce((total, card) => total + card.count, 0);
-        updateCollectionDisplay();
-        updateCollectionCounter();
-    }
-}
 function clearCollection() {
     localStorage.removeItem("collection");
     collection = [];
@@ -273,13 +274,6 @@ function clearCollection() {
     updateCollectionCounter();
 }
 
-function clearSavedData() {
-    localStorage.clear();
-    collection = [];
-    totalCardsCount = 0;
-    updateCollectionDisplay();
-    updateCollectionCounter();
-}
 
 // Функция для обновления отображения коллекции
 function updateCollectionDisplay(cards) {
@@ -318,7 +312,12 @@ function createCardElement(card) {
     imageElement.alt = card.name;
     cardElement.appendChild(imageElement);
 
-    const countElement = document.createElement("span");
+    const countElement = document.createElement("div");
+    countElement.style.flexDirection = 'row';
+    countElement.style.flexWrap = 'wrap';
+    countElement.style.justifyContent = 'space-around';
+    countElement.style.alignItems = 'center';
+    countElement.style.paddingTop ='10px'
     countElement.classList.add("count");
     countElement.textContent = `x${card.count}`;
     cardElement.appendChild(countElement);

@@ -22,12 +22,13 @@ const upgrades = [
 { cost: 1000, level: 0, clickIncrease: 0, multiplier: 1.25, opened: false},
     { cost: 1110, level: 0, clickIncrease: 0, multiplier: 1.35, opened: false},
     { cost: 2000, level: 0, clickIncrease: 0, multiplier: 1.45, opened: false},
-    { cost: 5000000, level: 0, clickIncrease: 100000, multiplier: 11, opened: false }
+    { cost: 5000000, level: 0, clickIncrease: 100000, multiplier: 11, opened: false },
+    { cost: 500, level: 0, clickIncrease: 0, multiplier: 1, opened: false }
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.85, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
 let clickCount = 0; // сколько сейчас
 let clickValue = 1; //сколько за клик
-const UPGRADE_COUNT = 24; //сколько всего улутшений
+const UPGRADE_COUNT = 25; //сколько всего улутшений
 let catCount = 5; //сколько котов в поселении
 
 let wheatCount = 0;  
@@ -718,6 +719,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             // If the player chooses not to load saved data, continue with the new game
             showNotification('info', 'New game started!');
+            clearCollection()
         }
     }
 

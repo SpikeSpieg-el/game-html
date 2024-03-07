@@ -57,6 +57,18 @@ function loadGame() {
     document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
     document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
 
+document.addEventListener("DOMContentLoaded", function() {
+    loadCollectionData(); // Загружаем данные о коллекции
+});
+const savedCollection = localStorage.getItem("collection");
+    if (savedCollection) {
+        collection = JSON.parse(savedCollection);
+        totalCardsCount = collection.reduce((total, card) => total + card.count, 0);
+        updateCollectionDisplay();
+        updateCollectionCounter();
+    }
+
+
     // Обновление доступности апгрейдов
     for (let index = 0; index < UPGRADE_COUNT; index++) {
         upgrades[index].level = savedUpgrades[index].level;
@@ -91,3 +103,5 @@ function loadGame() {
     // Обновление доступности апгрейдов
     checkUpgradeAvailability();
 }
+
+

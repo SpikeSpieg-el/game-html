@@ -232,7 +232,7 @@ h2 {
     position: relative;
     width: 60px;
 }
-.up8,.up7, .up9, .up10, .up11, .up12, .up13 {
+.up8,.up7, .up9, .up10, .up11, .up12, .up13,.up14,.up25  {
     border-radius: 20px;
     display: flex;
     flex: none;
@@ -247,7 +247,7 @@ h2 {
 
 .hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7, .hidden8,
  .hidden9, .hidden10, .hidden11, .hidden12, .hidden13, .hidden14, .hidden15,
- .hidden16,.hidden17,.hidden18, .hidden19,.hidden20,.hidden21,.hidden22,.hidden23,.hidden24{
+ .hidden16,.hidden17,.hidden18, .hidden19,.hidden20,.hidden21,.hidden22,.hidden23,.hidden24,.hidden25{
     display: none;
     
 }
