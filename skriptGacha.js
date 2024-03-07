@@ -80,11 +80,8 @@ const rewards = [
         case "descending":
             filteredCollection = collection.slice().sort((a, b) => b.count - a.count);
             break;
-        case "new":
-            filteredCollection = collection.slice().sort((a, b) => b.dateAdded - a.dateAdded);
-            break;
-        case "old":
-            filteredCollection = collection.slice().sort((a, b) => a.dateAdded - b.dateAdded);
+            case "descendingPower":
+            filteredCollection = collection.slice().sort((a, b) => b.strength - a.strength);
             break;
         case "common":
         case "rare":
@@ -95,18 +92,6 @@ const rewards = [
         case "legendary-epic-rare-common":
             filteredCollection = collection.slice().sort((a, b) => {
                 const rarityOrder = { "common": 0, "rare": 1, "epic": 2, "legendary": 3 };
-                return rarityOrder[b.rarity] - rarityOrder[a.rarity];
-            });
-            break;
-        case "epic-rare-common":
-            filteredCollection = collection.slice().sort((a, b) => {
-                const rarityOrder = { "common": 0, "rare": 1, "epic": 2 };
-                return rarityOrder[b.rarity] - rarityOrder[a.rarity];
-            });
-            break;
-        case "rare-common":
-            filteredCollection = collection.slice().sort((a, b) => {
-                const rarityOrder = { "common": 0, "rare": 1 };
                 return rarityOrder[b.rarity] - rarityOrder[a.rarity];
             });
             break;
@@ -254,11 +239,11 @@ function getStrengthByRarity(rarity) {
         case "common":
             return 1;
         case "rare":
-            return 2;
+            return 5;
         case "epic":
-            return 3;
+            return 6;
         case "legendary":
-            return 4;
+            return 40;
         default:
             return 1; // По умолчанию устанавливаем силу 1
     }
@@ -370,6 +355,28 @@ function showCardDetails(card) {
     strengthElement.textContent = `Сила: ${card.strength}`;
     cardDetailsContainer.appendChild(strengthElement);
 
+    // Добавляем отображение того, насколько увеличится сила после прокачки
+    const upgradeStrength = document.createElement("p");
+    let upgradeAmount = 1; // По умолчанию сила увеличивается на 1
+    switch (card.rarity) {
+        case "common":
+            upgradeAmount = 1;
+            break;
+        case "rare":
+            upgradeAmount = 2;
+            break;
+        case "epic":
+            upgradeAmount = card.strength; // В случае эпической карты сила удваивается
+            break;
+        case "legendary":
+            upgradeAmount = card.strength * 4; // В случае легендарной карты сила увеличивается в 5 раз
+            break;
+        default:
+            upgradeAmount = 1; // По умолчанию сила увеличивается на 1
+    }
+    upgradeStrength.textContent = `После прокачки увеличится на: ${upgradeAmount}`;
+    cardDetailsContainer.appendChild(upgradeStrength);
+
     // Добавляем кнопку прокачки карты с обработчиком события
     const upgradeButton = document.createElement("button");
     upgradeButton.textContent = "Прокачать карту";
@@ -389,8 +396,25 @@ function upgradeCard(card) {
     if (card.count >= upgradeCost) {
         // Уменьшаем количество копий карты
         card.count -= upgradeCost;
-        // Увеличиваем силу карты
-        card.strength++;
+        
+        // Увеличиваем силу карты в зависимости от редкости
+        switch (card.rarity) {
+            case "common":
+                card.strength += 1;
+                break;
+            case "rare":
+                card.strength += 2;
+                break;
+            case "epic":
+                card.strength *= 2;
+                break;
+            case "legendary":
+                card.strength *= 5;
+                break;
+            default:
+                card.strength += 1; // По умолчанию увеличиваем силу на 1
+        }
+        
         // Обновляем счетчик коллекции
         updateCollectionCounter();
         // Обновляем отображение коллекции
