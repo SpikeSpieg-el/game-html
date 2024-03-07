@@ -149,18 +149,18 @@ function openChest() {
 }
         
 function getRandomRewardByRarity() {
-    const randomIndex = Math.random() * 100; // Генерируем случайное число от 0 до 99
+    const randomIndex = Math.random() * 1000; // Генерируем случайное число от 0 до 999
 
-    if (randomIndex < 1) { // 1% шанс на легендарную награду
+    if (randomIndex < 5) { 
         const legendaryRewards = rewards.filter(reward => reward.rarity === "legendary");
         return legendaryRewards[Math.floor(Math.random() * legendaryRewards.length)];
-    } else if (randomIndex < 6) { // 5% шанс на эпическую награду
+    } else if (randomIndex < 45) { 
         const epicRewards = rewards.filter(reward => reward.rarity === "epic");
         return epicRewards[Math.floor(Math.random() * epicRewards.length)];
-    } else if (randomIndex < 13) { // 7% шанс на редкую награду
+    } else if (randomIndex < 130) { 
         const rareRewards = rewards.filter(reward => reward.rarity === "rare");
         return rareRewards[Math.floor(Math.random() * rareRewards.length)];
-    } else if (randomIndex < 37) { // 37% шанс на обычную награду
+    } else if (randomIndex < 370) { 
         const commonRewards = rewards.filter(reward => reward.rarity === "common");
         return commonRewards[Math.floor(Math.random() * commonRewards.length)];
     } else { // Остальное шанс на пустышки
@@ -168,6 +168,7 @@ function getRandomRewardByRarity() {
         return emptyRewards[Math.floor(Math.random() * emptyRewards.length)];
     }
 }
+
 
 function showPopup(rewards) {
     const popup = document.getElementById("rewardPopup");
