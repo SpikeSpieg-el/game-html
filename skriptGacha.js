@@ -174,6 +174,39 @@ function getRandomRewardByRarity() {
         return emptyRewards[Math.floor(Math.random() * emptyRewards.length)];
     }
 }
+function openChestOnlyOne(rarity) {
+    currentFilter = document.getElementById("filterDropdown").value;
+    const selectedRewards = [];
+
+    for (let i = 0; i < 1; i++) {
+        let selectedReward = getCardByRarity(rarity);
+        selectedRewards.push(selectedReward);
+
+        // Добавляем новые карты в коллекцию после каждой новой открытой
+        if (selectedReward.type === "Карта") {
+            addToCollection(selectedReward);
+        }
+    }
+
+    showPopup(selectedRewards);
+}
+        
+function getCardByRarity(rarity) {
+    const randomIndex = Math.random() * 1000; // Генерируем случайное число от 0 до 999
+
+    if (randomIndex < 1000) { 
+        const rewardsByRarity = rewards.filter(reward => reward.rarity === rarity);
+        return rewardsByRarity[Math.floor(Math.random() * rewardsByRarity.length)];
+    } else { // Возвращаем пустую награду для остальных случаев
+        const emptyRewards = rewards.filter(reward => reward.type === "empty");
+        return emptyRewards[Math.floor(Math.random() * emptyRewards.length)];
+    }
+}
+
+// Использование функции для открытия сундуков разных редкостей
+//openChestOnlyOne("rare");
+//openChestOnlyOne("epic");
+//openChestOnlyOne("legendary");
 
 
 function showPopup(rewards) {
