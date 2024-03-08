@@ -2,7 +2,7 @@ var currentColumn = 1;
 
         function showColumn(columnNumber) {
             // Hide all columns
-            for (var i = 1; i <= 6; i++) {
+            for (var i = 1; i <= 5; i++) {
                 document.getElementById('column' + i).style.display = 'none';
                 document.getElementById('column' + i + 'Btn').classList.remove('highlight');
             }
@@ -23,7 +23,7 @@ var currentColumn = 1;
                 column.style.justifyContent = 'center';
                 column.style.alignItems = 'center';
             }
-            else if (columnNumber === 3 || columnNumber === 4 || columnNumber === 5 || columnNumber === 6) {
+            else if (columnNumber === 3 || columnNumber === 4 || columnNumber === 5 ) {
                 column.style.flexDirection = 'column';
                 column.style.justifyContent = 'center';
                 column.style.alignItems = 'center';
@@ -40,7 +40,7 @@ var currentColumn = 1;
             currentColumn++;
 
             // If the current column exceeds the total number of columns, reset to the first column
-            if (currentColumn > 6) {
+            if (currentColumn > 5) {
                 currentColumn = 1;
             }
 

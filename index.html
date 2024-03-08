@@ -366,6 +366,8 @@
 
                     <div id="rewardInfo" class="reward-info"></div>
                     <button id="closePopupButton">Собрать ресурсы</button>
+
+                   
                         </div>
                     </div>
                 </div>
@@ -394,11 +396,32 @@
                     </div>
                     
                 </div>
+
+                <div class="hidden25">        
+                    <button id="upgrade25" onclick="buyUpgrade25(); openChest()">
+       
+                        <div class="up25">
+                            <div class="TextComplex">
+                             <div class="TextHad_cover">Открыть набор карт</div>
+                            <div сlass="TextMid">Стоимость: <span class="upgradeCost25" id="upgradeCost25">бесплатно</span></div>
+                            </div>
+                            <div class="imgInBild"> <img src="testCard/cover.png" alt="acat" class="img-size-cover"> </div>
+                            </div>
+                    </button>
+                </div>
+                <!-- Popup для отображения наград -->
+        <div id="rewardPopup" class="popup">
+            <h2>Награды</h2>
+            <div id="rewardItems"></div>
+            <button onclick="claimRewards()">Забрать награду</button>
+        </div>
+    
+       
             
             </div>
         </div>
     </div>
-        <div id="column5" class="column">Content for column 5
+        <!--<div id="column5" class="column">Content for column 5
             <div class="bodyStyleMap">
                 <div class="map" id="map"></div>
                 </div>
@@ -414,22 +437,13 @@
                     </div>
                     <div id="log"></div>
                     
-                        <button id="continueButton">Продолжить</button>
+                        <button id="continueButton">Продолжить</button> 
                     </div>
                 </div>
-        </div>
-        <div class="hidden25">
-    <div id="column6" class="column">
-        <button id="upgrade25" onclick="buyUpgrade25(); openChest()">
-       
-            <div class="up25">
-                <div class="TextComplex">
-                 <div class="TextHad_cover">Открыть набор карт</div>
-                <div сlass="TextMid">Стоимость: <span class="upgradeCost25" id="upgradeCost25">бесплатно</span></div>
-                </div>
-                <div class="imgInBild"> <img src="testCard/cover.png" alt="acat" class="img-size-cover"> </div>
-                </div>
-        </button>
+        </div>-->
+        
+    <div id="column5" class="column">
+        
     
         <h2>Фильтр коллекции
     
@@ -456,25 +470,15 @@
         <button onclick="clearCollection()">Очистить коллекцию</button>
         
         </div>
-    
-    
-        <!-- Popup для отображения наград -->
-        <div id="rewardPopup" class="popup">
-            <h2>Награды</h2>
-            <div id="rewardItems"></div>
-            <button onclick="claimRewards()">Забрать награду</button>
-        </div>
-    
-        <!-- Второй Popup для отображения карты поближе -->
-        <div id="cardDetailsPopup" class="popup">
+         <!-- Второй Popup для отображения карты поближе -->
+         <div id="cardDetailsPopup" class="popup">
             <h2>Подробная информация о карте</h2>
             <div id="cardDetails"></div>
             <button onclick="closeCardDetails()">Закрыть</button>
-            
+        </div>
     
-        </div>
     </div>
-        </div>
+        
          
          
         <div class="clickButton">
@@ -484,26 +488,26 @@
             
             <button class="clicker" id="clickButton" onclick="incrementClick()">Click me!</button>
             
-              
-        
-            <div id="notifications-container">
-                <!-- Уведомления будут добавляться сюда -->
-                </div>
             <div class="pages">
             <span><button id="column1Btn" onclick="showColumn(1)">Upgrade<a id="upgradeMarker1" class="upgrade-marker">^</a></button></span>
             <span><button id="column2Btn" onclick="showColumn(2)">Buildings</button></span>
             <span><button id="column3Btn" onclick="showColumn(3)">Village</button></span>
             <span><button id="column4Btn" onclick="showColumn(4)">Shop</button></span>
-            <button id="column6Btn" onclick="showColumn(6)">Cards Shop</button>
-            <button id="column5Btn" onclick="showColumn(5)">нет</button>
+            <button id="column5Btn" onclick="showColumn(5)">Cards</button>
             </div>
+        
+            <div id="notifications-container">
+                <!-- Уведомления будут добавляться сюда -->
+                </div>
+            
         </div> 
+       
         
         
         
 
 <!-- Подключение скрипты  -->  
-<script src="tail.js"></script>
+<!--<script src="tail.js"></script>-->
 <script src="script.js"></script>
 <script src="saveLoad.js"></script>            
 <script src="showColumn.js"></script>
