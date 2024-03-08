@@ -54,7 +54,6 @@ const rewards = [
     { type: "Карта", rarity: "epic", name:"the mirror", image: "testCard/the mirror.png"},
     { type: "Карта", rarity: "epic", name:"The skull", image: "testCard/The skull.png"},
     { type: "Карта", rarity: "epic", name:"book", image: "testCard/book.png"},
-    { type: "Карта", rarity: "epic", name:"cover", image: "testCard/cover.png"},
 
     { type: "Карта", rarity: "rare", name:"the seven", image: "testCard/the seven.png"},
     { type: "Карта", rarity: "rare", name:"the six", image: "testCard/the mirror6.png"},
@@ -184,18 +183,24 @@ function showPopup(rewards) {
 
     rewards.forEach((reward, index) => {
         const rewardItem = document.createElement("div");
-        rewardItem.classList.add("card");
+        rewardItem.classList.add("cardReward");
         if (reward.type === "Карта") {
             const cardImage = document.createElement("img");
             cardImage.src = reward.image;
             cardImage.alt = reward.name;
+            cardImage.style.width = '80%'; // например, картинка будет занимать 50% ширины родительского контейнера
+            cardImage.style.height = '80%'; 
             rewardItem.appendChild(cardImage);
+
             // Добавляем класс редкости карты
             rewardItem.classList.add(reward.rarity);
         } else if (reward.type === "empty") {
             const emptyImage = document.createElement("img");
             emptyImage.src = `testCard/empty${index}.png`; // Замените "path/to/empty" на путь к папке с изображениями для пустых наград
             emptyImage.alt = "Empty Reward";
+            emptyImage.style.width = '80%'; // например, картинка будет занимать 50% ширины родительского контейнера
+            emptyImage.style.height = '80%';
+
             rewardItem.appendChild(emptyImage);
         } else {
             rewardItem.textContent = "Unknown Reward";

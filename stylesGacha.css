@@ -15,6 +15,16 @@
         display: inline-block;
         transition: transform 0.3s ease; /* Добавляем анимацию */
     }
+    .cardReward{
+        width: 30%;
+        height: 100%;
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        display: inline-block;
+        transition: transform 0.3s ease; /* Добавляем анимацию */
+    }
     .headerCard{
         padding: 20px;
     }
@@ -30,11 +40,11 @@
 
     #rewardItems {
         display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-content: center;
-    width: 301px;
-    justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: center;
+        width: 301px;
+        justify-content: center;
     }
 
     @keyframes slideIn {
@@ -53,13 +63,15 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #290303;
-        padding: 20px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 15px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         z-index: 9999;
         display: none;
         color: black;
+        
     }
+    
 
     .popup img {
         max-width: 100px;
