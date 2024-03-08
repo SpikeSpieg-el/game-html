@@ -148,7 +148,7 @@ h2 {
 
 .clicker-container {
     text-align: center;
-    margin-bottom: 200px;
+    margin-bottom: 360px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -260,6 +260,14 @@ h2 {
     100% { transform: translateX(0); }
     100% { transform: translateY(0); }
 }
+.pages{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
 
 /* Display notifications initially with fadeInOut animation */
 .notification {
@@ -327,9 +335,10 @@ button:active {
     bottom: 50px;
     text-align: center;
     margin-bottom: -15px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: column;
-    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 
