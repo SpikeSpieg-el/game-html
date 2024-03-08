@@ -365,7 +365,10 @@ function showCardDetails(card) {
     const cardImage = document.createElement("img");
     cardImage.src = card.image;
     cardImage.alt = card.name;
+    cardImage.style.width = '80%'; // например, картинка будет занимать 50% ширины родительского контейнера
+    cardImage.style.height = '80%'; 
     cardDetailsContainer.appendChild(cardImage);
+    
 
     const cardName = document.createElement("p");
     cardName.textContent = `Название карты: ${card.name}`;
@@ -406,7 +409,9 @@ function showCardDetails(card) {
     };
     cardDetailsContainer.appendChild(upgradeButton);
 
-    cardDetailsPopup.style.display = "block"; // Отображаем popup
+    cardDetailsPopup.style.display = "flex"; // Отображаем popup
+    cardDetailsPopup.style.flexDirection = 'column';
+    cardDetailsPopup.style.flexWrap = 'nowrap';    
     cardDetailsPopup.style.background = getBackgroundColorByRarity(card.rarity); // Устанавливаем фон в зависимости от редкости карты
 }
 

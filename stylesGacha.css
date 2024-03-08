@@ -41,6 +41,7 @@
         0% {  opacity: 0; }
         100% {  opacity: 1; }
     }
+  
     
     
     
@@ -80,7 +81,7 @@
 
     #cardDetailsPopup img {
         max-width: 403px;
-    max-height: 493px;
+        max-height: 493px;
     margin: 5px;
     border-radius: 45px;
     border: 4px solid #000000bf;
