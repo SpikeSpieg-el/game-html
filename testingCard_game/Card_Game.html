@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карточная игра</title>
+<style>
+.card {
+  border: 1px solid black;
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+  float: left;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<div id="cards-container">
+  <!-- Здесь будут карточки -->
+</div>
+<button onclick="startRound()">Начать раунд</button>
+
+<script>
+const cards = [
+  { name: "Карта 1", strength: 5, health: 10 },
+  { name: "Карта 2", strength: 7, health: 8 },
+  { name: "Карта 3", strength: 6, health: 9 },
+  { name: "Карта 4", strength: 0, health: 1 },
+  { name: "Карта 5", strength: 1, health: 2 },
+  { name: "Карта 6", strength: 2, health: 3 },
+  // Добавьте остальные карточки здесь
+];
+let roundCounter = 0;
+
+function startRound() {
+  if (roundCounter < 10) {
+    roundCounter++;
+    const cardsContainer = document.getElementById("cards-container");
+    cardsContainer.innerHTML = ""; // Очистка контейнера перед началом игры
+
+    // Перетасовываем карты
+    const shuffledCards = shuffleArray(cards);
+
+    // Выбираем первые 3 карты
+    const selectedCards = shuffledCards.slice(0, 3);
+
+    // Создаем HTML для каждой карты и добавляем их в контейнер
+    selectedCards.forEach(card => {
+      const cardElement = document.createElement("div");
+      cardElement.classList.add("card");
+      cardElement.innerHTML = `
+        <h3>${card.name}</h3>
+        <p>Сила: ${card.strength}</p>
+        <p>Здоровье: ${card.health}</p>
+      `;
+      cardsContainer.appendChild(cardElement);
+    });
+  } else {
+    alert("Игра завершена. Достигнуто максимальное количество раундов.");
+  }
+}
+
+// Функция для перемешивания массива (алгоритм Фишера-Йетса)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+</script>
+
+</body>
+</html>

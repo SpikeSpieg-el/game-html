@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуальная новелла</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .scene {
+            margin-bottom: 20px;
+        }
+        .character {
+            width: 300px;
+            height: auto;
+            margin: 0 auto 10px;
+            display: block;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .text {
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="scene">
+            <img src="character4.png" alt="Персонаж 1" class="character">
+            <div class="text">Привет! это игра кликер и ты попал в обучение</div>
+            <button class="button" onclick="nextScene()">Продолжить</button>
+        </div>
+        <div class="scene" style="display: none;">
+            <img src="character2.png" alt="Персонаж 2" class="character">
+            <div class="text">Давай начнём с простого, нажми на кнопку кликать</div>
+            <button class="button" onclick="nextScene()">Продолжить</button>
+        </div>
+        <!-- Добавляем дополнительные сцены и реплики -->
+        <div class="scene" style="display: none;">
+            <img src="character1.png" alt="Персонаж 1" class="character">
+            <div class="text">Молодец, ты собрал свой первый клик, это успех</div>
+            <button class="button" onclick="nextScene()">Продолжить</button>
+        </div>
+        <div class="scene" style="display: none;">
+            <img src="character2.png" alt="Персонаж 2" class="character">
+            <div class="text">Теперь накопи 20 кликов!</div>
+            <button class="button" onclick="nextScene()">Продолжить</button>
+        </div>
+        <!-- Добавьте здесь еще сцены и реплики по вашему желанию -->
+    </div>
+
+    <script>
+        function nextScene() {
+            var scenes = document.getElementsByClassName('scene');
+            for (var i = 0; i < scenes.length; i++) {
+                if (scenes[i].style.display !== 'none') {
+                    scenes[i].style.display = 'none';
+                    if (i < scenes.length - 1) {
+                        scenes[i + 1].style.display = 'block';
+                    }
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
