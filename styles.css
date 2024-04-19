@@ -328,6 +328,7 @@ button {
     
     border: none;
     cursor: pointer;
+    touch-action: manipulation;
 }
 
 
@@ -351,6 +352,7 @@ button:active {
     flex-direction: column;
     align-content: center;
     align-items: center;
+    touch-action: manipulation;
 }
 
 
