@@ -1,5 +1,5 @@
 body {
-    
+    touch-action: manipulation;
     margin-left: 5%;
     margin-right: 5%;
     color: rgb(255 255 255);
@@ -358,7 +358,7 @@ button:active {
 
 .clickButton .clicker {
     padding: 20px 60px;
-    
+    touch-action: manipulation;
     margin-bottom: 25px;
     background-color: #000000c7;
     color: #fff;
