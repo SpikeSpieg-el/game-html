@@ -166,6 +166,14 @@ function formatNumber(number, notation) {
                 return; // Already handled above
             }
         
+            if (upgrade.home) {
+                hoseTotalCount += upgrade.home;
+                goldCount += upgrade.home;
+        
+                document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+                document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
+            }
+        
             document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
             document.getElementById("catCount").innerText = catCount;
             document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
@@ -187,6 +195,7 @@ function formatNumber(number, notation) {
             checkUpgradeAvailability();
             saveGame();
         }
+        
                   
 function updateUpgradeProgress(index) {
     const upgrade = upgrades[index - 1];
