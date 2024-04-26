@@ -102,6 +102,7 @@ const savedCollection = localStorage.getItem("collection");
 
     // Обновление доступности апгрейдов
     checkUpgradeAvailability();
+    updateAllUpgradeProgress();
 }
 
 

@@ -16,6 +16,30 @@ body {
  
     
 }
+.progress-container {
+    width: 156px;
+    height: 12px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    margin-top: 6px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.progress-bar-wrapper {
+    height: 100%;
+    width: 100%; /* Чтобы ограничить полосу прогресса внутри родительского контейнера */
+    overflow: hidden; /* Обрезаем части полосы, выходящие за границы родительского контейнера */
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}
+
 .title{
 
 /* Автолейаут */
@@ -325,7 +349,7 @@ button {
     transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
     border-radius: 40px;
     color: #000000;
-    
+    pointer-events: auto;
     border: none;
     cursor: pointer;
     touch-action: manipulation;
@@ -353,6 +377,7 @@ button:active {
     align-content: center;
     align-items: center;
     touch-action: manipulation;
+    pointer-events: none; /* предотвращает события указателя для этого div */
 }
 
 
@@ -364,6 +389,7 @@ button:active {
     color: #fff;
     border: 2px solid #2980b9;
     transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
+    pointer-events: auto;
 }
 
 .clickButton .clicker:hover {
@@ -380,14 +406,14 @@ button:active {
     color: white;
     text-shadow: 1px 2px 0px black;
     margin-left: 20px;
-    
+    pointer-events: none;
     
     display: block;
 }
 .animated-number-container {
     display: block;
     z-index: 1; /* Ensure it's above other elements */
-    
+    pointer-events: none;
    
 }
     
