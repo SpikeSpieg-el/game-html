@@ -85,7 +85,7 @@ function formatNumber(number, notation) {
         //woodTotalCount -=5;
         //document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
         //document.getElementById("woodTotalCount").innerText = woodTotalCount;
-        function buyUpgrade(index) {
+function buyUpgrade(index) {
             const upgrade = upgrades[index - 1];
         
             if (clickCount < upgrade.cost) {
@@ -114,7 +114,7 @@ function formatNumber(number, notation) {
                         wheatTotalCount = upgrade.level;
                     } else {
                         window[`${resource}TotalCount`] += increase;
-                        if (resource === 'wheat') updateWheatText();
+                        
                     }
                     document.getElementById(`${resource}TotalCount`).innerText = formatNumber(roundCost(window[`${resource}TotalCount`]));
                 }
