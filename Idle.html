@@ -7,23 +7,47 @@
             display: flex;
             justify-content: space-between;
         }
+        .progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: green;
+        }
     </style>
 </head>
 <body>
     <div id="resources">
-        <div id="resource1">Resource 1: 0</div>
-        <div id="resource2">Resource 2: 0</div>
-        <div id="resource3">Resource 3: 0</div>
-        <div id="resource4">Resource 4: 0</div>
-        <div id="resource5">Resource 5: 0</div>
+        <div>
+            <div id="resource1">Resource 1: 0</div>
+            <div id="timer1">Time left: 3</div>
+        </div>
+        <div>
+            <div id="resource2">Resource 2: 0</div>
+            <div id="timer2">Time left: 6</div>
+        </div>
+        <div>
+            <div id="resource3">Resource 3: 0</div>
+            <div id="timer3">Time left: 9</div>
+        </div>
+        <div>
+            <div id="resource4">Resource 4: 0</div>
+            <div id="timer4">Time left: 12</div>
+        </div>
+        <div>
+            <div id="resource5">Resource 5: 0</div>
+            <div id="timer5">Time left: 15</div>
+        </div>
     </div>
     <div id="experience">Experience: 0</div>
     <div id="level">Level: 0</div>
+    <div id="level-bar">
+        <div class="progress-bar"></div>
+    </div>
 
     <script>
         let resources = [0, 0, 0, 0, 0];
         let experience = 0;
         let level = 0;
+        let timers = [3, 6, 9, 12, 15];
 
         function updateResources() {
             for (let i = 0; i < resources.length; i++) {
@@ -37,6 +61,17 @@
 
         function updateLevel() {
             document.getElementById('level').innerText = Level: ${level};
+        }
+
+        function updateTimers() {
+            for (let i = 0; i < timers.length; i++) {
+                document.getElementById(timer${i + 1}).innerText = Time left: ${timers[i]};
+            }
+        }
+
+        function updateProgressBar() {
+            let progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = ${(experience / 20) * 100}%;
         }
 
         function gainResources(resourceIndex) {
@@ -55,11 +90,18 @@
             updateResources();
             updateExperience();
             updateLevel();
+            updateProgressBar();
         }
 
         for (let i = 0; i < resources.length; i++) {
-            setInterval(() => gainResources(i), 3000 * (i + 1));
+            setInterval(() => {
+                gainResources(i);
+                timers[i] = 3 * (i + 1);
+                updateTimers();
+            }, 3000 * (i + 1));
         }
+
+        setInterval(updateTimers, 1000);
     </script>
 </body>
 </html>
