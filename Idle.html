@@ -38,22 +38,27 @@
         <div class="resource-container">
             <div id="resource1">Resource 1: 0</div>
             <div id="timer1">Time left: 3</div>
+            <button id="upgrade1" disabled>Upgrade Resource 1</button>
         </div>
         <div class="resource-container">
             <div id="resource2">Resource 2: 0</div>
             <div id="timer2">Time left: 6</div>
+            <button id="upgrade2" disabled>Upgrade Resource 2</button>
         </div>
         <div class="resource-container">
             <div id="resource3">Resource 3: 0</div>
             <div id="timer3">Time left: 9</div>
+            <button id="upgrade3" disabled>Upgrade Resource 3</button>
         </div>
         <div class="resource-container">
             <div id="resource4">Resource 4: 0</div>
             <div id="timer4">Time left: 12</div>
+            <button id="upgrade4" disabled>Upgrade Resource 4</button>
         </div>
         <div class="resource-container">
             <div id="resource5">Resource 5: 0</div>
             <div id="timer5">Time left: 15</div>
+            <button id="upgrade5" disabled>Upgrade Resource 5</button>
         </div>
     </div>
     <div id="experience">Experience: 0</div>
@@ -67,6 +72,7 @@
         let experience = 0;
         let level = 0;
         let timers = [3, 6, 9, 12, 15];
+        let upgrades = [0, 0, 0, 0, 0];
 
         function updateResources() {
             for (let i = 0; i < resources.length; i++) {
@@ -95,11 +101,7 @@
         }
 
         function gainResources(resourceIndex) {
-            if (resourceIndex === 0) {
-                resources[0] += level;
-            } else {
-                resources[resourceIndex] += resources[resourceIndex - 1];
-            }
+            resources[resourceIndex] += 1 + upgrades[resourceIndex];
             if (resourceIndex === 4) {
                 experience += resources[4];
                 if (experience >= 20) {
@@ -112,12 +114,15 @@
             updateExperience();
             updateLevel();
             updateProgressBar();
+            updateUpgradeButtons();
         }
 
-        for (let i = 0; i < resources.length; i++) {
-            setInterval(() => {
-                gainResources(i);
-            }, 3000 * (i + 1));
+        function updateUpgradeButtons() {
+            document.getElementById('upgrade1').disabled = resources[0] < 10;
+            document.getElementById('upgrade2').disabled = resources[1] < 20;
+                        document.getElementById(upgrade${i + 1}).addEventListener('click', () => {
+                upgradeResource(i);
+            });
         }
 
         setInterval(updateTimers, 1000);
