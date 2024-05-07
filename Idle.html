@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Idle Game</title>
+    <style>
+        #resources {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div id="resources">
+        <div id="resource1">Resource 1: 0</div>
+        <div id="resource2">Resource 2: 0</div>
+        <div id="resource3">Resource 3: 0</div>
+        <div id="resource4">Resource 4: 0</div>
+        <div id="resource5">Resource 5: 0</div>
+    </div>
+    <div id="experience">Experience: 0</div>
+    <div id="level">Level: 0</div>
+
+    <script>
+        let resources = [0, 0, 0, 0, 0];
+        let experience = 0;
+        let level = 0;
+
+        function updateResources() {
+            for (let i = 0; i < resources.length; i++) {
+                document.getElementById(resource${i + 1}).innerText = Resource ${i + 1}: ${resources[i]};
+            }
+        }
+
+        function updateExperience() {
+            document.getElementById('experience').innerText = Experience: ${experience};
+        }
+
+        function updateLevel() {
+            document.getElementById('level').innerText = Level: ${level};
+        }
+
+        function gainResources(resourceIndex) {
+            if (resourceIndex === 0) {
+                resources[0] += level;
+            } else {
+                resources[resourceIndex] += resources[resourceIndex - 1];
+            }
+            if (resourceIndex === 4) {
+                experience += resources[4];
+                if (experience >= 20) {
+                    experience -= 20;
+                    level++;
+                }
+            }
+            updateResources();
+            updateExperience();
+            updateLevel();
+        }
+
+        for (let i = 0; i < resources.length; i++) {
+            setInterval(() => gainResources(i), 3000 * (i + 1));
+        }
+    </script>
+</body>
+</html>
