@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,54 +63,62 @@
         </div>
     </div>
     <div id="experience">Experience: 0</div>
+    <div id="level
+
+Извините за прерывание. Вот продолжение скрипта:
+
+```html
     <div id="level">Level: 0</div>
     <div id="level-bar">
         <div class="progress-bar"></div>
     </div>
 
     <script>
-        let resources = [0, 0, 0, 0, 0];
+        let resources = 0, 0, 0, 0, 0;
         let experience = 0;
         let level = 0;
-        let timers = [3, 6, 9, 12, 15];
-        let upgrades = [0, 0, 0, 0, 0];
+        let timers = 3, 6, 9, 12, 15;
+        let upgrades = 0, 0, 0, 0, 0;
 
         function updateResources() {
             for (let i = 0; i < resources.length; i++) {
-                document.getElementById(`resource${i + 1}`).innerText = `Resource ${i + 1}: ${resources[i]}`;
+                document.getElementById(resource${i + 1}).innerText = Resource ${i + 1}: ${resources[i]};
             }
         }
 
         function updateExperience() {
-            document.getElementById('experience').innerText = `Experience: ${experience}`;
+            document.getElementById('experience').innerText = Experience: ${experience};
         }
 
         function updateLevel() {
-            document.getElementById('level').innerText = `Level: ${level}`;
+            document.getElementById('level').innerText = Level: ${level};
         }
 
         function updateTimers() {
             for (let i = 0; i < timers.length; i++) {
-                timers[i]--;
-                document.getElementById(`timer${i + 1}`).innerText = `Time left: ${timers[i]}`;
+                timersi--;
+                document.getElementById(timer${i + 1}).innerText = Time left: ${timers[i]};
+                if (timersi === 0) {
+                    gainResources(i);
+                    timersi = 3 * (i + 1);
+                }
             }
         }
 
         function updateProgressBar() {
             let progressBar = document.querySelector('.progress-bar');
-            progressBar.style.width = `${(experience / 20) * 100}%`;
+            progressBar.style.width = ${(experience / 20) * 100}%;
         }
 
         function gainResources(resourceIndex) {
-            resources[resourceIndex] += 1 + upgrades[resourceIndex];
+            resourcesresourceIndex += 1 + upgradesresourceIndex;
             if (resourceIndex === 4) {
-                experience += resources[4];
+                experience += resources4;
                 if (experience >= 20) {
                     experience -= 20;
                     level++;
                 }
             }
-            timers[resourceIndex] = 3 * (resourceIndex + 1);
             updateResources();
             updateExperience();
             updateLevel();
@@ -118,9 +127,23 @@
         }
 
         function updateUpgradeButtons() {
-            document.getElementById('upgrade1').disabled = resources[0] < 10;
-            document.getElementById('upgrade2').disabled = resources[1] < 20;
-                        document.getElementById(upgrade${i + 1}).addEventListener('click', () => {
+            document.getElementById('upgrade1').disabled = resources0 < 10;
+            document.getElementById('upgrade2').disabled = resources1 < 20;
+            document.getElementById('upgrade3').disabled = resources2 < 20;
+            document.getElementById('upgrade4').disabled = resources3 < 10;
+            document.getElementById('upgrade5').disabled = resources4 < 10;
+        }
+
+        function upgradeResource(resourceIndex) {
+            upgrades[resource
+                            upgrades[resourceIndex]++;
+            resources[resourceIndex] -= resourceIndex === 0 ? 10 : 20;
+            updateResources();
+            updateUpgradeButtons();
+        }
+
+        for (let i = 0; i < resources.length; i++) {
+            document.getElementById(upgrade${i + 1}).addEventListener('click', () => {
                 upgradeResource(i);
             });
         }
