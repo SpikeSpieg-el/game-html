@@ -69,79 +69,79 @@
 
     <script>
         let resources = 0, 0, 0, 0, 0;
-        let experience = 0;
-        let level = 0;
-        let timers = 3, 6, 9, 12, 15;
-        let upgrades = 0, 0, 0, 0, 0;
+let experience = 0;
+let level = 0;
+let timers = 3, 6, 9, 12, 15;
+let upgrades = 0, 0, 0, 0, 0;
 
-        function updateResources() {
-            for (let i = 0; i < resources.length; i++) {
-                document.getElementById(resource${i + 1}).innerText = Resource ${i + 1}: ${resources[i]};
-            }
+function updateResources() {
+    for (let i = 0; i < resources.length; i++) {
+        document.getElementById(resource${i + 1}).innerText = Resource ${i + 1}: ${resources[i]};
+    }
+}
+
+function updateExperience() {
+    document.getElementById('experience').innerText = Experience: ${experience};
+}
+
+function updateLevel() {
+    document.getElementById('level').innerText = Level: ${level};
+}
+
+function updateTimers() {
+    for (let i = 0; i < timers.length; i++) {
+        timersi--;
+        document.getElementById(timer${i + 1}).innerText = Time left: ${timers[i]};
+        if (timersi === 0) {
+            gainResources(i);
+            timersi = 3 * (i + 1);
         }
+    }
+}
 
-        function updateExperience() {
-            document.getElementById('experience').innerText = Experience: ${experience};
+function updateProgressBar() {
+    let progressBar = document.querySelector('.progress-bar');
+    progressBar.style.width = ${(experience / 20) * 100}%;
+}
+
+function gainResources(resourceIndex) {
+    resourcesresourceIndex += 1 + upgradesresourceIndex;
+    if (resourceIndex === 4) {
+        experience += resources4;
+        if (experience >= 20) {
+            experience -= 20;
+            level++;
         }
+    }
+    updateResources();
+    updateExperience();
+    updateLevel();
+    updateProgressBar();
+    updateUpgradeButtons();
+}
 
-        function updateLevel() {
-            document.getElementById('level').innerText = Level: ${level};
-        }
+function updateUpgradeButtons() {
+    document.getElementById('upgrade1').disabled = resources0 < 10;
+    document.getElementById('upgrade2').disabled = resources1 < 20;
+    document.getElementById('upgrade3').disabled = resources2 < 20;
+    document.getElementById('upgrade4').disabled = resources3 < 10;
+    document.getElementById('upgrade5').disabled = resources4 < 10;
+}
 
-        function updateTimers() {
-            for (let i = 0; i < timers.length; i++) {
-                timersi--;
-                document.getElementById(timer${i + 1}).innerText = Time left: ${timers[i]};
-                if (timersi === 0) {
-                    gainResources(i);
-                    timersi = 3 * (i + 1);
-                }
-            }
-        }
+function upgradeResource(resourceIndex) {
+    upgradesresourceIndex++;
+    resourcesresourceIndex -= resourceIndex === 0 ? 10 : 20;
+    updateResources();
+    updateUpgradeButtons();
+}
 
-        function updateProgressBar() {
-            let progressBar = document.querySelector('.progress-bar');
-            progressBar.style.width = ${(experience / 20) * 100}%;
-        }
+for (let i = 0; i < resources.length; i++) {
+        document.getElementById(upgrade${i + 1}).addEventListener('click', () => {
+        upgradeResource(i);
+    });
+}
 
-        function gainResources(resourceIndex) {
-            resourcesresourceIndex += 1 + upgradesresourceIndex;
-            if (resourceIndex === 4) {
-                experience += resources4;
-                if (experience >= 20) {
-                    experience -= 20;
-                    level++;
-                }
-            }
-            updateResources();
-            updateExperience();
-            updateLevel();
-            updateProgressBar();
-            updateUpgradeButtons();
-        }
-
-        function updateUpgradeButtons() {
-            document.getElementById('upgrade1').disabled = resources0 < 10;
-            document.getElementById('upgrade2').disabled = resources1 < 20;
-            document.getElementById('upgrade3').disabled = resources2 < 20;
-            document.getElementById('upgrade4').disabled = resources3 < 10;
-            document.getElementById('upgrade5').disabled = resources4 < 10;
-        }
-
-        function upgradeResource(resourceIndex) {
-                        upgrades[resourceIndex]++;
-            resources[resourceIndex] -= resourceIndex === 0 ? 10 : 20;
-            updateResources();
-            updateUpgradeButtons();
-        }
-
-        for (let i = 0; i < resources.length; i++) {
-            document.getElementById(upgrade${i + 1}).addEventListener('click', () => {
-                upgradeResource(i);
-            });
-        }
-
-        setInterval(updateTimers, 1000);
-    </script>
+setInterval(updateTimers, 1000);
+            </script>
 </body>
 </html>
