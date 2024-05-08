@@ -93,6 +93,7 @@ function formatNumber(number, notation) {
         //woodTotalCount -=5;
         //document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
         //document.getElementById("woodTotalCount").innerText = woodTotalCount;
+
 function buyUpgrade(index) {
             const upgrade = upgrades[index - 1];
         
@@ -100,37 +101,46 @@ function buyUpgrade(index) {
                 console.log("Not enough resources to buy this upgrade!");
                 return;
             }
-        
+            
             clickCount -= upgrade.cost;
             upgrade.level++;
             clickValue += upgrade.clickIncrease;
             upgrade.cost = Math.round(upgrade.cost * upgrade.multiplier);
             updateAllUpgradeProgress();
         
-            if (upgrade.resourceIncrease) {
-                if (upgrade.level > 5) {
-                    wheatTotalCount = upgrade.level;
-                } else {
-                    
-                    wheatTotalCount += upgrade.resourceIncrease;
-                    
-                } 
+            if (upgrade.resourceIncrease) { 
+                clearInterval(timeWheatInterval);
+                timeWheatInterval = setInterval(function() {
+                    timeWheatPlus(upgrade);
+                   
+                }, 5000); // run every 5 seconds
+                // Start updating progress bar every second
+                
+                updateProgressBarWheat(progressBarWidth = 0);
+                
+                if (upgrade.level > 1){
+                    upgrade.resourceIncrease +=1;
+                }
+                if (upgrade.level ==1){
+                    setInterval(updateProgressBarWheat, 50);
+                }
                 // Обновление значения на странице
-                document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
-                  
+                document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));   
             }
 
-             // Check if the upgrade affects woodCount
+             // Check if the upgrade affects woodCount лес
         if (upgrade.resourceIncrease_wood) {
             woodTotalCount += upgrade.resourceIncrease_wood;
             if (upgrade.level > 2) {
                 woodTotalCount += upgrade.level;
             } else {
                 woodTotalCount += upgrade.resourceIncrease_wood;
+                
             }
     
             // Обновление значения на странице
             document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
+                
             }
             if (upgrade.resourceIncrease_stone) {
             stoneTotalCount += upgrade.resourceIncrease_stone;
@@ -209,6 +219,7 @@ function buyUpgrade(index) {
             document.getElementById("catCount").innerText = catCount; // Update catCount
             document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
             document.getElementById(`upgradeCost${index}`).innerText = formatNumber(roundCost(upgrade.cost));
+
             if (upgrade.image) {
                 const upgradeContainer = document.getElementById(`hiddenimg${index}`);
                 if (upgradeContainer) {
@@ -225,7 +236,37 @@ function buyUpgrade(index) {
             checkUpgradeAvailability();
             saveGame();
         }
+
+        var timeWheatInterval;
+        var timeWheatInterval;
+        var timeWheatEnable = false;
+        var progressBarWidth = 0;
         
+        function timeWheatPlus(upgrade) {
+            wheatTotalCount += upgrade.resourceIncrease;
+            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+        }
+        
+        function timeWheat(upgrade) {
+            if (!timeWheatEnable) {
+                
+                timeWheatEnable = true;
+           
+                
+            }
+            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+        }
+        
+        function updateProgressBarWheat() {
+            progressBarWidth += (50 / (5000 / 100)); // Increase width by 30/3000 per millisecond
+            if (progressBarWidth > 100) {
+                progressBarWidth = 0; // Reset progress bar to 0 when it reaches 100%
+            }
+            document.getElementById("progressBarWheat").style.width = progressBarWidth + "%";
+        }
+        
+
+
                   
 function updateUpgradeProgress(index) {
     const upgrade = upgrades[index - 1];
@@ -244,6 +285,7 @@ function updateAllUpgradeProgress() {
     }
     // Для улучшения с индексом 24
     updateUpgradeProgress(24);
+    
 }
 
 
