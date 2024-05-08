@@ -47,6 +47,7 @@
                 flex-basis: 30%;
             }
         }
+    
     </style>
 </head>
 <body>
@@ -83,6 +84,60 @@
     <div id="level-bar">
         <div class="progress-bar"></div>
     </div>
+    <div id="threejs-container">
+        
+    </div>
+   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Create a scene
+        const scene = new THREE.Scene();
+
+        // Create a camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 500);
+        camera.position.z = 5;
+
+       
+        // Create a renderer
+const renderer = new THREE.WebGLRenderer();
+const width = window.innerWidth * 0.2; // Adjust the width as needed
+const height = window.innerHeight * 0.2; // Adjust the height as needed
+renderer.setSize(width, height);
+document.getElementById('threejs-container').appendChild(renderer.domElement);
+
+
+        // Create cubes
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube1 = new THREE.Mesh(geometry, material);
+        const cube2 = new THREE.Mesh(geometry, material);
+        const cube3 = new THREE.Mesh(geometry, material);
+
+        // Set positions for each cube
+        cube1.position.x = -2;
+        cube2.position.x = 0;
+        cube3.position.x = 2;
+
+        // Add cubes to the scene
+        scene.add(cube1);
+        scene.add(cube2);
+        scene.add(cube3);
+
+        // Create a render function
+        function animate() {
+            requestAnimationFrame(animate);
+            cube1.rotation.x += 0.01;
+            cube1.rotation.y += 0.01;
+            cube2.rotation.x += 0.01;
+            cube2.rotation.y += 0.01;
+            cube3.rotation.x += 0.01;
+            cube3.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
 
     <script>
         let resources = [0, 0, 0, 0, 0];
@@ -216,5 +271,6 @@
 
         setInterval(updateTimers, 1000);
     </script>
+    
 </body>
 </html>
