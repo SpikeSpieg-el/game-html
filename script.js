@@ -26,17 +26,25 @@ const upgrades = [
     { cost: 500, level: 0, clickIncrease: 0, multiplier: 1, opened: false }
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.85, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
-const resources = {
-    wheat: { count: 0, totalCount: 0 },
-    wood: { count: 0, totalCount: 0 },
-    stone: { count: 0, totalCount: 0 },
-    house: { count: 0, totalCount: 0 },
-    metall: { count: 0, totalCount: 0 },
-    gold: 10
-};
 
+let wheatCount = 0;  
+let wheatTotalCount = 0; //количества пшена
+
+let woodCount = 0; 
+let woodTotalCount = 0; //количества деревьев
+
+let stoneCount = 0;
+let stoneTotalCount = 0; //количества камня
+
+let hoseCount = 0;
+let hoseTotalCount= 0; //домики 
+
+let metallCount =0;
+let metallTotalCount=0; //metall 
+
+let goldCount = 10;
 let clickCount = 0;
-let clickValue = 1;
+let clickValue = 51;
 const UPGRADE_COUNT = upgrades.length;
 let catCount = 5;
 
@@ -99,86 +107,108 @@ function buyUpgrade(index) {
             upgrade.cost = Math.round(upgrade.cost * upgrade.multiplier);
             updateAllUpgradeProgress();
         
-            const resourceChanges = {
-                'wheat': upgrade.resourceIncrease,
-                'wood': upgrade.resourceIncrease_wood,
-                'stone': upgrade.resourceIncrease_stone,
-                'metall': upgrade.resourceIncrease_metall,
-                'hose': upgrade.home,
-                'cat': upgrade.catCountIncrease
-            };
-        
-            for (const [resource, increase] of Object.entries(resourceChanges)) {
-                if (increase) {
-                    if (resource === 'wheat' && upgrade.level > 5) {
-                        wheatTotalCount = upgrade.level;
-                    } else {
-                        window[`${resource}TotalCount`] += increase;
-                        
-                    }
-                    document.getElementById(`${resource}TotalCount`).innerText = formatNumber(roundCost(window[`${resource}TotalCount`]));
-                }
-            }
-        
-            if (index === 21 || index === 22 || index === 23) {
-                const goldCost = index === 21 ? 1 : (index === 22 ? 2 : 3);
-                if (goldCount < goldCost) {
-                    console.log("Not enough gold to buy this upgrade!");
-                    return;
-                }
-                goldCount -= goldCost;
-                document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
-            }
-        
-            if (index === 10 || index === 11 || index === 13) {
-                const wheatCosts = { 10: 10, 11: 10, 13: 20 };
-                const woodCosts = { 11: 5, 13: 15 };
-                const stoneCost = { 13: 5 };
-        
-                if (wheatTotalCount < wheatCosts[index] || woodTotalCount < (woodCosts[index] || 0) || stoneTotalCount < (stoneCost[index] || 0)) {
-                    console.log("Not enough resources to buy this upgrade!");
-                    return;
-                }
-        
-                wheatTotalCount -= wheatCosts[index];
-                if (index !== 10) woodTotalCount -= woodCosts[index];
-                if (index === 13) stoneTotalCount -= stoneCost[index];
-                if (index === 13) clickValue *= 1.2;
-        
+            if (upgrade.resourceIncrease) {
+                if (upgrade.level > 5) {
+                    wheatTotalCount = upgrade.level;
+                } else {
+                    
+                    wheatTotalCount += upgrade.resourceIncrease;
+                    
+                } 
+                // Обновление значения на странице
                 document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
-                document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
-                document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
-                document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
+                  
             }
+
+             // Check if the upgrade affects woodCount
+        if (upgrade.resourceIncrease_wood) {
+            woodTotalCount += upgrade.resourceIncrease_wood;
+            if (upgrade.level > 2) {
+                woodTotalCount += upgrade.level;
+            } else {
+                woodTotalCount += upgrade.resourceIncrease_wood;
+            }
+    
+            // Обновление значения на странице
+            document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
+            }
+            if (upgrade.resourceIncrease_stone) {
+            stoneTotalCount += upgrade.resourceIncrease_stone;
+    
+            // Обновление значения на странице
+            document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
+            }
+            if (upgrade.resourceIncrease_metall) {
+            metallTotalCount += upgrade.resourceIncrease_metall;
+    
+            // Обновление значения на странице
+            document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
+            }
+            if (upgrade.home) {
+                hoseTotalCount += upgrade.home;
+                // Add 1 gold for each house built
+                goldCount += upgrade.home;
         
-            if (index === 7 && hoseTotalCount >= 3 + 1) {
+                // Update the displayed gold count on the page
+                document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+            
+            // Обновление значения на странице
+            document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
+            }
+            if (index === 7 && hoseTotalCount >= 3+1) {
                 catCount += upgrade.catCountIncrease;
                 wheatTotalCount -= 5;
                 document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
-            }
-        
+                }
+    
+            // Уменьшаем пшено только для лесопилки 
             if (index === 10) {
-                wheatTotalCount -= 10;
-                document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            wheatTotalCount -= 10;
+            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
             }
-        
-            if (index === 21 || index === 22 || index === 23) {
-                return; // Already handled above
-            }
-        
-            if (upgrade.home) {
-                hoseTotalCount += upgrade.home;
-                goldCount += upgrade.home;
-        
+            if (index === 21) {
+                goldCount -=1;
                 document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
-                document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
+    
             }
-        
+            if (index === 22) {
+                goldCount -=2;
+                document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+    
+            }
+            if (index === 23) {
+                goldCount -=3;
+                document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+    
+            }
+    
+            if (index === 11) {
+            wheatTotalCount -= 10;
+            woodTotalCount -=5;
+            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            document.getElementById("woodTotalCount").innerText = woodTotalCount;
+            }
+    
+            if (index === 13) {
+            wheatTotalCount -= 20;
+            woodTotalCount -=15;
+            stoneTotalCount -=5;
+            clickValue = clickValue *1.2;
+            document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
+            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            document.getElementById("woodTotalCount").innerText = woodTotalCount; 
+            document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
             document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
-            document.getElementById("catCount").innerText = catCount;
+            }
+    
+            if (clickCount < 0) {
+            clickCount = 0;
+            }
+    
+            document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
+            document.getElementById("catCount").innerText = catCount; // Update catCount
             document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
             document.getElementById(`upgradeCost${index}`).innerText = formatNumber(roundCost(upgrade.cost));
-        
             if (upgrade.image) {
                 const upgradeContainer = document.getElementById(`hiddenimg${index}`);
                 if (upgradeContainer) {
