@@ -8,7 +8,7 @@ let savedUpgrades = [
     { cost: 5000, level: 0, clickIncrease: 50, multiplier: 6.10, opened: false },
 { cost: 100, level: 0, clickIncrease: 0, multiplier: 1.1, opened: false, catCountIncrease: 1 },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 8, opened: false, image: "OIG.3NJJoFBIJGj4Z.png"},
-    { cost: 100, level: 0, clickIncrease: 1.5, multiplier: 1.1, opened: false, resourceIncrease: 1, image: "Pole.png"},
+    { cost: 100, level: 0, clickIncrease: 1.5, multiplier: 1.1, opened: false, resourceIncrease: 0.1, image: "Pole.png"},
     { cost: 200, level: 0, clickIncrease: 0, multiplier: 1.4, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"},
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 5.25, opened: false, home: 1, image: " dom1.png"}, 
@@ -27,26 +27,33 @@ let savedUpgrades = [
 ];
 
 
+function loadGame(upgrade) {
+    const savedTimeWheatInterval = localStorage.getItem("timeWheatInterval");
+    if (savedTimeWheatInterval) {
+        clearInterval(timeWheatInterval); // Clear existing interval
+        timeWheatInterval = setInterval(function() {
+            timeWheatPlus(upgrade); // Pass the upgrade object here if needed
+            updateProgressBarWheat();
+        }, 5000); // run every 5 seconds
+    }
 
-function loadGame() {
-    // Загрузка всех значений из localStorage
-
+    // Load all values from localStorage
     numberFormat = localStorage.getItem("numberFormat") || 'decimal';
-
     clickCount = parseInt(localStorage.getItem("clickCount")) || 0;
     clickValue = parseInt(localStorage.getItem("clickValue")) || 1;
     catCount = parseInt(localStorage.getItem("catCount")) || 0;
     wheatTotalCount = parseInt(localStorage.getItem("wheatTotalCount")) || 0;
+    wheatCount = parseInt(localStorage.getItem("wheatCount")) || 0;
     woodTotalCount = parseInt(localStorage.getItem("woodTotalCount")) || 0;
     stoneTotalCount = parseInt(localStorage.getItem("stoneTotalCount")) || 0;
     hoseTotalCount = parseInt(localStorage.getItem("hoseTotalCount")) || 0;
     metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
     goldCount = parseInt(localStorage.getItem("goldCount")) || 0;
-
+    progressBarWheat = parseInt(localStorage.getItem("progressBarWheat")) || 0;
     const savedUpgradesJSON = localStorage.getItem("upgrades");
     savedUpgrades = savedUpgradesJSON ? JSON.parse(savedUpgradesJSON) : savedUpgrades;
 
-    // Обновление HTML элементов согласно загруженным значениям
+    // Update HTML elements according to loaded values
     document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
     document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
     document.getElementById("catCount").innerText = formatNumber(roundCost(catCount));
@@ -57,23 +64,12 @@ function loadGame() {
     document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
     document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
 
-document.addEventListener("DOMContentLoaded", function() {
-    loadCollectionData(); // Загружаем данные о коллекции
-});
-const savedCollection = localStorage.getItem("collection");
-    if (savedCollection) {
-        collection = JSON.parse(savedCollection);
-        totalCardsCount = collection.reduce((total, card) => total + card.count, 0);
-        updateCollectionDisplay();
-        updateCollectionCounter();
-    }
-
-
-    // Обновление доступности апгрейдов
+    // Update upgrade availability and progress
     for (let index = 0; index < UPGRADE_COUNT; index++) {
         upgrades[index].level = savedUpgrades[index].level;
         upgrades[index].cost = savedUpgrades[index].cost;
         upgrades[index].opened = savedUpgrades[index].opened;
+        upgrades[index].resourceIncrease = savedUpgrades[index].resourceIncrease;
 
         const upgradeContainer = document.querySelector(`.hidden${index + 1}`);
         const upgradeCostSpan = document.getElementById(`upgradeCost${index + 1}`);
@@ -100,9 +96,7 @@ const savedCollection = localStorage.getItem("collection");
         upgradeCostSpan.innerText = formatNumber(roundCost(upgrades[index].cost));
     }
 
-    // Обновление доступности апгрейдов
     checkUpgradeAvailability();
     updateAllUpgradeProgress();
 }
-
 
