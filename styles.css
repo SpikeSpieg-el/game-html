@@ -201,6 +201,7 @@ h2 {
    
 }
 
+
 .container-popup {
     display: none;
     position: fixed;
@@ -282,13 +283,11 @@ h2 {
     width: min-content;
     align-items: center;
 }
-
-.hidden1, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7, .hidden8,
- .hidden9, .hidden10, .hidden11, .hidden12, .hidden13, .hidden14, .hidden15,
- .hidden16,.hidden17,.hidden18, .hidden19,.hidden20,.hidden21,.hidden22,.hidden23,.hidden24,.hidden25{
-    display: none;
-    
+[class^="hidden"] {
+    opacity: 0; /* Начальная прозрачность */
+    transition: opacity 0.5s ease; /* Анимация перехода прозрачности */  
 }
+
 .container{
     padding-bottom: 10px;
 }

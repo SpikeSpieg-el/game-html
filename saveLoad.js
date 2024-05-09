@@ -81,7 +81,7 @@ function loadGame() {
         const upgradeCostSpan = document.getElementById(`upgradeCost${index + 1}`);
 
         if (upgrades[index].opened) {
-            upgradeContainer.style.display = "block";
+            upgradeContainer.style.opacity = "1";
 
             const upgradeImageContainer = document.getElementById(`hiddenimg${index + 1}`);
             if (upgradeImageContainer) {

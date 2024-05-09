@@ -44,7 +44,7 @@ let metallTotalCount=0; //metall
 
 let goldCount = 10;
 let clickCount = 0;
-let clickValue = 1;
+let clickValue = 25;
 const UPGRADE_COUNT = upgrades.length;
 let catCount = 5;
 
@@ -237,12 +237,11 @@ function buyUpgrade(index) {
             checkUpgradeAvailability();
             saveGame();
         }
+    
 
        
         var timeWheatInterval;
-        var timeWheatEnable = false;
         var progressBarWidth = 0;
-        
         function timeWheatPlus(upgrade) {
             if (upgrade && typeof upgrade === 'object' && 'resourceIncrease' in upgrade) {
                 wheatTotalCount += upgrade.resourceIncrease;
@@ -250,24 +249,6 @@ function buyUpgrade(index) {
                 
             }
             
-        }
-        
-        function timeWheat(upgrade) {
-            if (!timeWheatEnable) {
-                timeWheatEnable = true;
-                
-                updateProgressBarWheat(progressBarWidth = 0);
-                if (typeof loadGame === 'function' && loadGame()) { // Check if loadGame exists and if it returns true
-                    clearInterval(timeWheatInterval);
-                    timeWheatInterval = setInterval(function() {
-                        timeWheatPlus(upgrade);
-                    }, 5000);
-                }
-                
-                
-            }
-
-            document.getElementById("wheatTotalCount").innerText = formatNumber(wheatTotalCount);
         }
         
         function updateProgressBarWheat() {
@@ -327,7 +308,7 @@ function saveGame() {
     localStorage.setItem("wheatTotalCount", wheatTotalCount.toString());
     
 
-    localStorage.setItem("savedTimeWheatEnable", timeWheatEnable);
+    
 
     localStorage.setItem("woodTotalCount", woodTotalCount);
     localStorage.setItem("stoneTotalCount", stoneTotalCount);
@@ -389,16 +370,17 @@ function incrementClick() {
         const upgradeContainer = document.querySelector(`.hidden${i}`);
         const upgradeCostSpan = document.getElementById(`upgradeCost${i}`);
         updateAllUpgradeProgress(); // прогресс бар index 1(пока что)
-
+    
         // Если счетчик кликов достаточно велик и апгрейд еще не открыт, открываем его
         if (clickCount >= upgrade.cost && !upgrade.opened) {
-            upgradeContainer.style.display = "block";
+            upgradeContainer.style.opacity = "1"; // Изменяем прозрачность для анимации
             upgradeCostSpan.innerText = upgrade.cost;
             upgrade.opened = true;
             // Показываем уведомление о доступности апгрейда
             showNotification('success', `Upgrade ${i} is now available!`);
         }
     }
+    
 
     // Обновляем счетчики ресурсов, если соответствующий апгрейд доступен
     if (upgrades[UPGRADE_COUNT + 1]) {
