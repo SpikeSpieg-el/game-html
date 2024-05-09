@@ -1,0 +1,785 @@
+body {
+    touch-action: manipulation;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: rgb(255 255 255);
+    background-color: black;
+   
+    
+
+    background-image: url('OIG.nEJp58LK_kMl.jpg');
+    
+    
+   
+    background-position: center; /* Выравниваем изображение по центру */
+
+ 
+    
+}
+.progress-container {
+    width: 156px;
+    height: 12px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    margin-top: 6px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.progress-bar-wrapper {
+    height: 100%;
+    width: 100%; /* Чтобы ограничить полосу прогресса внутри родительского контейнера */
+    overflow: hidden; /* Обрезаем части полосы, выходящие за границы родительского контейнера */
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}
+#progressBarContainerWheat {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progressBarWheat {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%; /* начальная ширина 0% */
+}
+
+
+.title{
+
+/* Автолейаут */
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+padding: 12px;
+
+
+}
+.TopAppBar{
+    display: flex;
+    justify-content: space-around;
+    
+    padding: 48px 0px 0px 0px;
+    flex-direction: column;
+ 
+}
+h1{
+    
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: left;
+    margin: 0px 16px;
+    color: rgb(255, 255, 255);
+
+   
+}
+.highlight {
+    background-color: rgb(8, 57, 8);
+    color: white;
+}
+
+.name{
+
+    background: linear-gradient(to top, #a3a3a34f, #ffffff00);
+
+    
+    
+}
+/*.image-container {
+    width: 681px;
+    height: auto;
+    
+}
+
+.clipped-image {
+    width: 248px;
+    height: auto;
+    display: block;
+}*/
+
+.imageMIDLE{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    
+   
+   
+}
+.upgrade-marker{
+    float: right;
+    color: #4CAF50;
+    font-size: 30px;
+    margin-bottom: -7px;
+    margin-right: -9px;
+    margin-top: -13px;
+    margin-left: -40px;
+    display: none;
+   
+}
+
+.img-sizeBG{
+    width: 240px;
+    height: auto;
+}
+.img-sizeBGG{
+    width: 211px;
+    height: auto;
+    padding-top: 10px;
+}
+.top{
+    display: flex;
+    background: #a3a3a34f;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+
+h2 {
+    color: aquamarine;
+    font-family: 'Montserrat';
+    font-size: medium;
+    text-shadow: 1px 2px 0px black;
+    border: 2px solid #78beed;
+    background-color: #00000047;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+#clickCount{
+    font-size: 20px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+.img-size {
+    width: 80px;
+    height: 80px;
+}
+.img-sizeCAT {
+    width: 55px;
+    height: 55px;
+    float: right;
+    
+}
+.img-sizeCAT_top{
+    width: 50px;
+    height: 50px;
+    
+}
+
+
+.clicker-container {
+    text-align: center;
+    margin-bottom: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+#upgradeContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+   
+}
+
+
+.container-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.775);
+    z-index: 9999; /* Отображается поверх всех окон */
+}
+
+.container-popup-content {
+    background-color: rgba(31, 31, 31, 0.542);
+    border-radius: 43px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+}
+
+
+.pod1{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+
+.ContOne_three{
+    display: block;
+}
+.TextComplex{
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 4px;
+    height: min-content;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    width: min-content;
+    align-items: flex-start;
+}
+.TextHad{
+    font-family: "Roboto";
+    font-size: 24px;
+    letter-spacing: 0px;
+    color: rgba(27, 28, 23, 1);
+    width: 115px;
+    text-align: start;
+}
+.TextComplex .MidText {
+    font-family: "Roboto";
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    color: rgb(110, 114, 95);
+    align-items: flex-start;
+
+}
+.imgInBild{
+    flex: none;
+    height: 60px;
+    position: relative;
+    width: 60px;
+}
+.up8,.up7, .up9, .up10, .up11, .up12, .up13,.up14,.up25  {
+    border-radius: 20px;
+    display: flex;
+    flex: none;
+    gap: 20px;
+    height: min-content;
+    overflow: visible;
+    padding: 16px 20px 16px 24px;
+    position: relative;
+    width: min-content;
+    align-items: center;
+}
+[class^="hidden"] {
+    opacity: 0; /* Начальная прозрачность */
+    transition: opacity 0.5s ease; /* Анимация перехода прозрачности */  
+}
+
+.container{
+    padding-bottom: 10px;
+}
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes slideDown {
+    0% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+    100% { transform: translateY(0); }
+}
+.pages{
+    display: flex;
+    
+    
+    text-align: center;
+   
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+
+}
+#column1Btn,  #column2Btn, #column3Btn, #column4Btn, #column5Btn{
+    padding: 14px 29px;
+    margin-bottom: 2px;
+    border-radius: 10px;
+}
+/* Анимация для перехода между колонками */
+@keyframes fadeInOut {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Применение анимации к колонкам */
+.column {
+    animation: fadeInOut 0.5s ease forwards;
+}
+
+/* Display notifications initially with fadeInOut animation */
+.notification {
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 1s ease-in-out, slideDown 0.5s ease-in-out;;
+}
+
+/* Apply fade-out animation when hiding notifications */
+.notification.fadeOut {
+    animation: fadeOut 0.5s ease-in-out;
+}
+
+.success { background-color: #4CAF50; }
+.info { background-color: #3498db; }
+.warning { background-color: #f39c12; }
+.error { background-color: #e74c3c; }
+.custom { background-color: #9b59b6; }
+
+
+.catIMG{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+#catCount{
+    font-size: 24px;
+}
+
+button {
+    padding: 11px 11px;
+    margin: 2px;
+    transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
+    border-radius: 40px;
+    color: #000000;
+    pointer-events: auto;
+    border: none;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+
+
+
+button:hover {
+    transform: translate(-5px, -5px); /* Смещаем кнопку на 5 пикселей влево и вверх при наведении */
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+.clickButton{
+    display: flex;
+    position: fixed;
+    bottom: 50px;
+    text-align: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    touch-action: manipulation;
+    pointer-events: none; /* предотвращает события указателя для этого div */
+}
+
+
+.clickButton .clicker {
+    padding: 20px 60px;
+    touch-action: manipulation;
+    margin-bottom: 25px;
+    background-color: #000000c7;
+    color: #fff;
+    border: 2px solid #2980b9;
+    transition: transform 0.3s cubic-bezier(0.46, 0.56, 0.08, 1.07);
+    pointer-events: auto;
+}
+
+.clickButton .clicker:hover {
+    transform: scale(1.1); /* Уменьшаем элемент при нажатии */
+}
+
+.clickButton .clicker:active {
+    transform: scale(0.9); /* Уменьшаем элемент при нажатии */
+}
+
+/* Style the animated number */
+#animatedNumber {
+    font-size: 24px;
+    color: white;
+    text-shadow: 1px 2px 0px black;
+    margin-left: 20px;
+    pointer-events: none;
+    
+    display: block;
+}
+.animated-number-container {
+    display: block;
+    z-index: 1; /* Ensure it's above other elements */
+    pointer-events: none;
+   
+}
+    
+.Count{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    background: linear-gradient(to bottom, #a3a3a34f, #a3a3a300);
+
+}
+.Count h2 .first-part{
+    margin-right: 25px;
+}
+.Count h2 .th-part {
+    margin-left: 25px; /* значение отступа */
+}
+.sity{
+    padding-bottom: 200px;
+   
+    position: relative;
+    background-color: rgba(76, 175, 79, 0.807);
+
+
+
+    /*background-image:url('OIG (11).jpg');
+    background-size: cover;*/
+    
+    
+}
+
+.caption {
+    
+    background-color: rgba(255, 255, 255, 0.7); /* Прозрачный белый фон для текста */
+    
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+}
+.img-sity{
+    width: 55px;
+    height: 55px;
+    margin-left: 0px;
+    margin-right: 0px;
+   
+}
+.img-sity_home_one{
+    width: 55px;
+    height: 55px;
+    
+}
+.img-sity_tl{
+    width: 55px;
+    height: 55px;
+
+}
+
+.img-sity_tl_br{
+    width: 55px;
+    height: auto;
+}
+
+
+
+/* слайд бар*/
+#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+#sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover {
+    color: #f1f1f1;
+}
+
+#sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    
+}
+
+.openbtn:hover {
+    background-color: #444;
+    transform: rotate(90dgr);
+}
+
+@media screen and (max-width: 700px) {
+    #sidebar {
+        padding-top: 15px;
+    }
+    #sidebar a {
+        font-size: 16px;
+    }
+    #sidebar .closebtn {
+        font-size: 30px;
+    }
+}
+
+
+
+
+.result-container {
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+.item img {
+    width: 24px;
+    height: 24px;
+   
+}
+.item.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .item.elite {
+    background-color: #ffc107; /* Highlight color for elite items */
+    border: 2px solid #ffc107; /* Border color for elite items */
+    box-shadow: 0 0 10px #ffc107; /* Shadow for elite items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for elite items */
+  }
+
+  .item.legendary {
+    background-color: #ff5722; /* Highlight color for legendary items */
+    border: 2px solid #ff5722; /* Border color for legendary items */
+    box-shadow: 0 0 10px #ff5722; /* Shadow for legendary items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for legendary items */
+  }
+
+  .item.epic {
+    background-color: #9c27b0; /* Highlight color for epic items */
+    border: 2px solid #9c27b0; /* Border color for epic items */
+    box-shadow: 0 0 10px #9c27b0; /* Shadow for epic items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for epic items */
+  }
+
+  .item.golden {
+    background-color: #ffeb3b; /* Highlight color for golden items */
+    border: 2px solid #ffeb3b; /* Border color for golden items */
+    box-shadow: 0 0 10px #ffeb3b; /* Shadow for golden items */
+    transition: transform 0.7s ease-in-out; /* Scale animation for golden items */
+  }
+
+  .result-container {
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+  }
+  .result-container5{
+  margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+  .result-container10 {
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: stretch;
+  }
+
+.legendary { background-color: #ff5900; }
+.epic { background-color: #9400D3; }
+.golden { background-color: #FFD700; }
+.silver { background-color: #C0C0C0; }
+.common { background-color: #6a6a6a; }
+.elite { background-color: #87CEEB; }
+
+.st1 { background-color: #666666; }
+.st2 { background-color: #9c9c9c; }
+
+
+.bodyStyleMap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+
+
+   /* background-image: url('OIG1.pHl.png');
+   
+     background-position: center; Позиционирование изображения по центру */
+  /*  background-repeat: no-repeat;  Запрет повторения изображения */
+    /* height: 100vh; Занимаем всю высоту видимой области экрана */
+   /* display: flex;  Используем flexbox для центрирования содержимого */
+   /* justify-content: center;  Центрируем содержимое по горизонтали */
+   /* align-items: center;  Центрируем содержимое по вертикали*/
+} 
+
+     .map {
+        display: grid;
+        grid-template-columns: repeat(10, 60px);
+        grid-template-rows: repeat(10, 60px);
+        justify-content: center;
+        justify-items: center;
+        background-size: contain;
+        align-items: center;
+       /* transform: rotateX(45deg) rotateZ(45deg) scale(1); */
+        
+    
+    background-size: cover; /* Растягивает изображение на всю область элемента */
+    background-position: center; /* Выравнивает изображение по центру */
+    position: relative;
+    }
+    .tile {
+        width: 15px; /* Уменьшаем размер точки */
+        height: 15px; /* Уменьшаем размер точки */
+        background-color: #444444; /* Цвет точки */
+        border-radius: 25%; /* Делаем точку круглой */
+        position: relative;
+    }
+    .player {
+        background-color: #007bff;
+        width: 30px; /* Размер игрока */
+        height: 30px; /* Размер игрока */
+        border-radius: 90%; /* Делаем игрока круглым */
+        z-index: 1; /* Поднимаем игрока над точками */
+    }
+    .enemy {
+        background-color: red; /* Цвет врага */
+        width: 30px; /* Размер врага */
+        height: 30px; /* Размер врага */
+        border-radius: 0%; /* Делаем врага круглым */
+        z-index: 1; /* Поднимаем врага над точками */
+    }
+    
+    .inactive {
+        opacity: 0.5; /* делаем неактивные ячейки менее видимыми */
+        pointer-events: none; /* отключаем возможность клика по неактивным ячейкам */
+    }
+    #output {
+            background-color: #343434;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #actions {
+            display: flex;
+            justify-content: space-around;
+        }
+        #log {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+    @keyframes movePlayerAnimation {
+    0% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.battle-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.battle-modal-content {
+    background-color: rgb(21, 21, 21);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.hiddenimg_Dom{
+    display: flex;
+}
