@@ -26,44 +26,50 @@ let savedUpgrades = [
     { cost: 5000000, level: 0, clickIncrease: 100000, multiplier: 11, opened: false }
 ];
 
-
-function loadGame(upgrade) {
-    const savedTimeWheatInterval = localStorage.getItem("timeWheatInterval");
-    if (savedTimeWheatInterval) {
-        clearInterval(timeWheatInterval); // Clear existing interval
-        timeWheatInterval = setInterval(function() {
-            timeWheatPlus(upgrade); // Pass the upgrade object here if needed
-            updateProgressBarWheat();
-        }, 5000); // run every 5 seconds
-    }
-
+// в положительное time wheat
+function loadGame() {
+   
     // Load all values from localStorage
     numberFormat = localStorage.getItem("numberFormat") || 'decimal';
     clickCount = parseInt(localStorage.getItem("clickCount")) || 0;
     clickValue = parseInt(localStorage.getItem("clickValue")) || 1;
     catCount = parseInt(localStorage.getItem("catCount")) || 0;
-    wheatTotalCount = parseInt(localStorage.getItem("wheatTotalCount")) || 0;
-    wheatCount = parseInt(localStorage.getItem("wheatCount")) || 0;
+    wheatTotalCount = parseFloat(localStorage.getItem("wheatTotalCount")) || 0;
+    
+
     woodTotalCount = parseInt(localStorage.getItem("woodTotalCount")) || 0;
     stoneTotalCount = parseInt(localStorage.getItem("stoneTotalCount")) || 0;
     hoseTotalCount = parseInt(localStorage.getItem("hoseTotalCount")) || 0;
     metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
     goldCount = parseInt(localStorage.getItem("goldCount")) || 0;
-    progressBarWheat = parseInt(localStorage.getItem("progressBarWheat")) || 0;
+    
+
     const savedUpgradesJSON = localStorage.getItem("upgrades");
     savedUpgrades = savedUpgradesJSON ? JSON.parse(savedUpgradesJSON) : savedUpgrades;
-
+    
     // Update HTML elements according to loaded values
     document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
     document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
     document.getElementById("catCount").innerText = formatNumber(roundCost(catCount));
-    document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+    document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
+   
+
     document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
     document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
     document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
     document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
     document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
 
+        document.addEventListener("DOMContentLoaded", function() {
+            loadCollectionData(); // Загружаем данные о коллекции
+        });
+        const savedCollection = localStorage.getItem("collection");
+            if (savedCollection) {
+                collection = JSON.parse(savedCollection);
+                totalCardsCount = collection.reduce((total, card) => total + card.count, 0);
+                updateCollectionDisplay();
+                updateCollectionCounter();
+            }
     // Update upgrade availability and progress
     for (let index = 0; index < UPGRADE_COUNT; index++) {
         upgrades[index].level = savedUpgrades[index].level;
@@ -95,8 +101,36 @@ function loadGame(upgrade) {
 
         upgradeCostSpan.innerText = formatNumber(roundCost(upgrades[index].cost));
     }
+    const upgradeIndex = 9; // Индекс апгрейда, для которого нужно выполнить код
+    const upgrade = upgrades[upgradeIndex - 1]; // Получаем апгрейд по индексу (предполагается, что upgrades - массив всех апгрейдов)
+    
+    if (upgrade.level > 0 && upgrade.resourceIncrease){ 
+        clearInterval(timeWheatInterval);
+        timeWheatInterval = setInterval(function() {
+            timeWheatPlus(upgrade);
+            saveGame();
+        }, 5000);
+        updateProgressBarWheat(progressBarWidth = 0);
+        
+        if (upgrade.level > 1){
+            upgrade.resourceIncrease += 0.1;
+            document.getElementById("upgradeResourceIncrease").innerText = formatNumber(roundCost(upgrade.resourceIncrease));
+            saveGame();
+        }   
+        if (upgrade.level == 1){
+            setInterval(updateProgressBarWheat, 50);
+        }
+        
+        // Обновление значения на странице
+        document.getElementById("wheatTotalCount").innerText = formatNumber(wheatTotalCount); 
+        setInterval(updateProgressBarWheat, 50);
+    }
 
     checkUpgradeAvailability();
     updateAllUpgradeProgress();
+    saveGame();
 }
+// Перебираем сохранённые апгрейды
+   
+
 

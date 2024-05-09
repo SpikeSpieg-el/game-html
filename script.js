@@ -27,7 +27,7 @@ const upgrades = [
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.85, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
 
-let wheatCount = 0;  
+let wheatCount = 0; 
 let wheatTotalCount = 0; //количества пшена
 
 let woodCount = 0; 
@@ -111,23 +111,22 @@ function buyUpgrade(index) {
             if (upgrade.resourceIncrease) { 
                 clearInterval(timeWheatInterval);
                 timeWheatInterval = setInterval(function() {
-                    timeWheatPlus(upgrade);
-                   
-                }, 5000); // run every 5 seconds
-                // Start updating progress bar every second
-                
+                    timeWheatPlus(upgrade); 
+                }, 5000);
                 updateProgressBarWheat(progressBarWidth = 0);
                 saveGame();
-                
                 if (upgrade.level > 1){
                     upgrade.resourceIncrease +=0.1;
                 }
                 if (upgrade.level ==1){
                     setInterval(updateProgressBarWheat, 50);
                 }
+                
                 // Обновление значения на странице
-                document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount)); 
-                document.getElementById("upgrade.resourceIncrease").innerText = formatNumber(roundCost(upgrade.resourceIncrease));   
+                document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount)); 
+                document.getElementById("upgradeResourceIncrease").innerText = formatNumber(roundCost(upgrade.resourceIncrease));
+
+                saveGame();
             }
 
              // Check if the upgrade affects woodCount лес
@@ -170,13 +169,13 @@ function buyUpgrade(index) {
             if (index === 7 && hoseTotalCount >= 3+1) {
                 catCount += upgrade.catCountIncrease;
                 wheatTotalCount -= 5;
-                document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+                document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
                 }
     
             // Уменьшаем пшено только для лесопилки 
             if (index === 10) {
             wheatTotalCount -= 10;
-            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
             }
             if (index === 21) {
                 goldCount -=1;
@@ -197,7 +196,7 @@ function buyUpgrade(index) {
             if (index === 11) {
             wheatTotalCount -= 10;
             woodTotalCount -=5;
-            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
             document.getElementById("woodTotalCount").innerText = woodTotalCount;
             }
     
@@ -207,7 +206,7 @@ function buyUpgrade(index) {
             stoneTotalCount -=5;
             clickValue = clickValue *1.2;
             document.getElementById("clickValue").innerText = formatNumber(roundCost(clickValue));
-            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+            document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
             document.getElementById("woodTotalCount").innerText = woodTotalCount; 
             document.getElementById("stoneTotalCount").innerText = stoneTotalCount;
             document.getElementById("clickCount").innerText = formatNumber(roundCost(clickCount));
@@ -247,21 +246,28 @@ function buyUpgrade(index) {
         function timeWheatPlus(upgrade) {
             if (upgrade && typeof upgrade === 'object' && 'resourceIncrease' in upgrade) {
                 wheatTotalCount += upgrade.resourceIncrease;
-                document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
-            } else {
-                console.error("Invalid upgrade object or missing resourceIncrease property.");
+                document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
+                
             }
+            
         }
-        
         
         function timeWheat(upgrade) {
             if (!timeWheatEnable) {
-                
                 timeWheatEnable = true;
-                saveGame();
+                
+                updateProgressBarWheat(progressBarWidth = 0);
+                if (typeof loadGame === 'function' && loadGame()) { // Check if loadGame exists and if it returns true
+                    clearInterval(timeWheatInterval);
+                    timeWheatInterval = setInterval(function() {
+                        timeWheatPlus(upgrade);
+                    }, 5000);
+                }
+                
                 
             }
-            document.getElementById("wheatTotalCount").innerText = formatNumber(roundCost(wheatTotalCount));
+
+            document.getElementById("wheatTotalCount").innerText = formatNumber(wheatTotalCount);
         }
         
         function updateProgressBarWheat() {
@@ -270,7 +276,7 @@ function buyUpgrade(index) {
                 progressBarWidth = 0; // Reset progress bar to 0 when it reaches 100%
             }
             document.getElementById("progressBarWheat").style.width = progressBarWidth + "%";
-            saveGame();
+         
         }
         
 
@@ -313,16 +319,16 @@ function updateUpgradeMarker(index) {
 
 //добавляем localStorage.setItem("stoneTotalCount", stoneTotalCount);
 function saveGame() {
-    if (timeWheatInterval !== undefined) {
-        localStorage.setItem("timeWheatInterval", timeWheatInterval.toString());
-    }
+    
     localStorage.setItem("clickCount", clickCount);
     localStorage.setItem("clickValue", clickValue);
     localStorage.setItem("catCount", catCount);
 
-    localStorage.setItem("wheatTotalCount", wheatTotalCount);
+    localStorage.setItem("wheatTotalCount", wheatTotalCount.toString());
     
-    
+
+    localStorage.setItem("savedTimeWheatEnable", timeWheatEnable);
+
     localStorage.setItem("woodTotalCount", woodTotalCount);
     localStorage.setItem("stoneTotalCount", stoneTotalCount);
     localStorage.setItem("hoseTotalCount", hoseTotalCount);
