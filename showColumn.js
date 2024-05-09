@@ -1,15 +1,17 @@
 var currentColumn = 1;
 
-        function showColumn(columnNumber) {
-            // Hide all columns
-            for (var i = 1; i <= 5; i++) {
-                document.getElementById('column' + i).style.display = 'none';
-                document.getElementById('column' + i + 'Btn').classList.remove('highlight');
-            }
+function showColumn(columnNumber) {
+    // Hide all columns
+    for (var i = 1; i <= 5; i++) {
+        document.getElementById('column' + i).style.display = 'none';
+        document.getElementById('column' + i).classList.remove('column'); // Удаление класса
+        document.getElementById('column' + i + 'Btn').classList.remove('highlight');
+    }
 
-            // Show the selected column
-            var column = document.getElementById('column' + columnNumber);
-            column.style.display = 'flex';
+    // Show the selected column
+    var column = document.getElementById('column' + columnNumber);
+    column.style.display = 'flex';
+    column.classList.add('column'); // Добавление класса для анимации
 
             // Apply flex styles only to certain columns
             if (columnNumber === 2) {
