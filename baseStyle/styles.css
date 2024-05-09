@@ -4,17 +4,8 @@ body {
     margin-right: 5%;
     color: rgb(255 255 255);
     background-color: black;
-   
-    
-
-    background-image: url('OIG.nEJp58LK_kMl.jpg');
-    
-    
-   
+    background-image: url('photo_2024-05-10_03-49-23.jpg');
     background-position: center; /* Выравниваем изображение по центру */
-
- 
-    
 }
 .progress-container {
     width: 156px;
