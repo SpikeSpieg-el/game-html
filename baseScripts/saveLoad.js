@@ -101,23 +101,23 @@ function loadGame() {
 
         upgradeCostSpan.innerText = formatNumber(roundCost(upgrades[index].cost));
     }
-    const upgradeIndex = 9; // Индекс апгрейда, для которого нужно выполнить код
-    const upgrade = upgrades[upgradeIndex - 1]; // Получаем апгрейд по индексу (предполагается, что upgrades - массив всех апгрейдов)
-    
-    if (upgrade.level > 0 && upgrade.resourceIncrease){ 
+    const upgradeIndex = 9; // Индекс апгрейда для пшеницы
+    const upgradeWheat = upgrades[upgradeIndex - 1]; // Получаем апгрейд для пшеницы по индексу
+
+    if (upgradeWheat.level > 0 && upgradeWheat.resourceIncrease){ 
         clearInterval(timeWheatInterval);
         timeWheatInterval = setInterval(function() {
-            timeWheatPlus(upgrade);
+            timeWheatPlus(upgradeWheat);
             saveGame();
         }, 5000);
         updateProgressBarWheat(progressBarWidth = 0);
         
-        if (upgrade.level > 1){
-            upgrade.resourceIncrease += 0.1;
-            document.getElementById("upgradeResourceIncrease").innerText = formatNumber(roundCost(upgrade.resourceIncrease));
+        if (upgradeWheat.level > 1){
+            upgradeWheat.resourceIncrease += 0.1;
+            document.getElementById("upgradeResourceIncrease").innerText = formatNumber(roundCost(upgradeWheat.resourceIncrease));
             saveGame();
         }   
-        if (upgrade.level == 1){
+        if (upgradeWheat.level == 1){
             setInterval(updateProgressBarWheat, 50);
         }
         
@@ -125,6 +125,31 @@ function loadGame() {
         document.getElementById("wheatTotalCount").innerText = formatNumber(wheatTotalCount); 
         setInterval(updateProgressBarWheat, 50);
     }
+    const upgradeIndexWood = 10; // Индекс апгрейда для дерева
+    const upgradeWood = upgrades[upgradeIndexWood - 1]; // Получаем апгрейд для дерева по индексу
+
+     if (upgradeWood.level > 0 && upgradeWood.resourceIncrease_wood) {
+        clearInterval(timeWoodInt);
+        timeWoodInt = setInterval(function(){
+            timeWoodPlus(upgradeWood);
+        }, 6000);
+        updateprogressBarWood(BarWood = 0);
+        saveGame();
+        if (upgradeWood.level > 1){
+            upgradeWood.resourceIncrease_wood +=1;
+            document.getElementById("upgradeResourceIncrease_wood").innerText = formatNumber(roundCost(upgradeWood.resourceIncrease_wood));
+            saveGame();
+        }
+        if (upgradeWood.level ==1){
+            setInterval(updateprogressBarWood, 60);
+        }
+
+        // Обновление значения на странице
+        document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
+        
+        setInterval(updateprogressBarWood, 60);
+        
+        }
 
     checkUpgradeAvailability();
     updateAllUpgradeProgress();

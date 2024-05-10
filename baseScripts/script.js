@@ -131,17 +131,23 @@ function buyUpgrade(index) {
 
              // Check if the upgrade affects woodCount лес
         if (upgrade.resourceIncrease_wood) {
-            woodTotalCount += upgrade.resourceIncrease_wood;
-            if (upgrade.level > 2) {
-                woodTotalCount += upgrade.level;
-            } else {
-                woodTotalCount += upgrade.resourceIncrease_wood;
-                
+            clearInterval(timeWoodInt);
+            timeWoodInt = setInterval(function(){
+                timeWoodPlus(upgrade);
+            }, 6000);
+            updateprogressBarWood(BarWood = 0);
+            saveGame();
+            if (upgrade.level > 1){
+                upgrade.resourceIncrease_wood +=1;
+            }
+            if (upgrade.level ==1){
+                setInterval(updateprogressBarWood, 60);
             }
     
             // Обновление значения на странице
             document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
-                
+            document.getElementById("upgradeResourceIncrease_wood").innerText = formatNumber(roundCost(upgrade.resourceIncrease_wood));
+            saveGame();
             }
             if (upgrade.resourceIncrease_stone) {
             stoneTotalCount += upgrade.resourceIncrease_stone;
@@ -242,22 +248,38 @@ function buyUpgrade(index) {
        
         var timeWheatInterval;
         var progressBarWidth = 0;
+        var progressBarWheat;
+
         function timeWheatPlus(upgrade) {
             if (upgrade && typeof upgrade === 'object' && 'resourceIncrease' in upgrade) {
                 wheatTotalCount += upgrade.resourceIncrease;
                 document.getElementById("wheatTotalCount").innerText = formatNumber((wheatTotalCount));
                 
             }
-            
         }
-        
         function updateProgressBarWheat() {
             progressBarWidth += (50 / (5000 / 100)); // Increase width by 30/3000 per millisecond
             if (progressBarWidth > 100) {
                 progressBarWidth = 0; // Reset progress bar to 0 when it reaches 100%
             }
             document.getElementById("progressBarWheat").style.width = progressBarWidth + "%";
-         
+        }
+
+        var timeWoodInt;
+        var BarWood = 0;
+        var progressBarWood;
+        function timeWoodPlus(upgrade){
+            if (upgrade && typeof upgrade === 'object' && 'resourceIncrease_wood' in upgrade){
+                woodTotalCount += upgrade.resourceIncrease_wood;
+                document.getElementById("woodTotalCount").innerText = formatNumber((woodTotalCount));
+            }
+        }
+        function updateprogressBarWood() {
+            BarWood += (60 / (6000 / 100)); // Increase width by 30/3000 per millisecond
+            if (BarWood > 100) {
+                BarWood = 0; // Reset progress bar to 0 when it reaches 100%
+            }
+            document.getElementById("progressBarWood").style.width = BarWood + "%";
         }
         
 
