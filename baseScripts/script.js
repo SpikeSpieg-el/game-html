@@ -44,7 +44,7 @@ let metallTotalCount=0; //metall
 
 let goldCount = 10;
 let clickCount = 0;
-let clickValue = 25;
+let clickValue = 1;
 const UPGRADE_COUNT = upgrades.length;
 let catCount = 5;
 
