@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.main {
+    padding: 15px;
+    background-color: #f0f0f0;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+.card:hover{
+    background-color:#696969;
+}
+
+.card img {
+    width: 90px;
+    height: 90px;
+    margin-right: 10px;
+}
+/* Стили для вида списка */
+.list .card {
+    flex-direction: row;
+}
+
+/* Стили для вида плитки */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.grid .card {
+    flex-direction: column;
+    width: 185px;
+    height: 260px;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    
+    bottom: 0;
+    width: 100%;
+}
+.toggleViewButton{
+margin: 10px;
+padding: 10px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+transition: background-color 0.3s ease;
+}
+
+.toggleViewButton:hover {
+background-color: #696969;
+color: rgb(255, 255, 255);
+}
+a {
+color: black;
+margin: 0px !important;
+
+text-decoration: none;
+transition: color 0.3s ease;
+}
+a:hover{
+color: rgb(255, 255, 255);
+}
