@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFK Reward System</title>
+    <style>
+        body {
+            color: rgb(227, 227, 227);
+            background-color: black;
+        }
+        
+        #popup {
+            color: aliceblue;
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(130, 130, 130, 0.298);
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        #popup.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the AFK Reward System</h1>
+    <p>Your current coins: <span id="coinDisplay"></span></p>
+    <p>Time on page: <span id="timer">0</span> seconds</p>
+    <button id="collectButtonMain">Collect Reward</button>
+    <div id="popup">
+        <p>You were absent for <span id="absenceTime"></span> seconds and have earned <span id="rewardAmount"></span> coins!</p>
+        <button id="collectButton">Collect</button>
+    </div>
+    <script >document.addEventListener("DOMContentLoaded", function () {
+        const popup = document.getElementById("popup");
+        const rewardAmountSpan = document.getElementById("rewardAmount");
+        const absenceTimeSpan = document.getElementById("absenceTime");
+        const collectButton = document.getElementById("collectButton");
+        const collectButtonMain = document.getElementById("collectButtonMain");
+        const coinDisplay = document.getElementById("coinDisplay");
+        const timerDisplay = document.getElementById("timer");
+        
+        let lastTimeSeen = localStorage.getItem("lastTimeSeen");
+        let coins = Number(localStorage.getItem("coins")) || 0;
+        let timeOnPage = 0;
+    
+        coinDisplay.textContent = coins;
+    
+        if (lastTimeSeen) {
+            const currentTime = Date.now();
+            const timeElapsed = Math.floor((currentTime - lastTimeSeen) / 1000); // in seconds
+            const reward = timeElapsed;
+    
+            if (reward > 0) {
+                rewardAmountSpan.textContent = reward;
+                absenceTimeSpan.textContent = timeElapsed;
+                popup.classList.add("visible");
+                coins += reward;
+                localStorage.setItem("coins", coins);
+                coinDisplay.textContent = coins;
+            }
+        }
+    
+        function updateTimeOnPage() {
+            timeOnPage++;
+            timerDisplay.textContent = timeOnPage;
+        }
+    
+        setInterval(updateTimeOnPage, 1000);
+    
+        function collectReward() {
+            coins += timeOnPage;
+            localStorage.setItem("coins", coins);
+            coinDisplay.textContent = coins;
+            timeOnPage = 0;
+            timerDisplay.textContent = timeOnPage;
+        }
+    
+        collectButton.addEventListener("click", function () {
+            popup.classList.remove("visible");
+            localStorage.setItem("lastTimeSeen", Date.now());
+        });
+    
+        collectButtonMain.addEventListener("click", function () {
+            collectReward();
+        });
+    
+        window.addEventListener("beforeunload", function () {
+            localStorage.setItem("lastTimeSeen", Date.now());
+        });
+    });
+    </script>
+</body>
+</html>
