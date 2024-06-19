@@ -57,6 +57,19 @@ body {
     background-color: #4caf50;
     width: 0%; /* начальная ширина 0% */
 }
+#progressBarContainerStone {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progressBarStone {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%; /* начальная ширина 0% */
+}
 
 
 .title{

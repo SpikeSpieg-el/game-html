@@ -12,7 +12,7 @@ let savedUpgrades = [
     { cost: 200, level: 0, clickIncrease: 0, multiplier: 1.4, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"},
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 5.25, opened: false, home: 1, image: " dom1.png"}, 
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_metall: 1, image: "OIG.bFY9BU.jpeg" },
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_metall: 1, image: "OIG.bFY9BU.png" },
 { cost: 10000, level: 0, clickIncrease: 100, multiplier: 8.5, opened: false },
     { cost: 20000, level: 0, clickIncrease: 200, multiplier: 10, opened: false },
     { cost: 50000, level: 0, clickIncrease: 500, multiplier: 10.15, opened: false },
@@ -148,6 +148,31 @@ function loadGame() {
         document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
         
         setInterval(updateprogressBarWood, 60);
+        
+        }
+        const upgradeIndexStone = 11; // Индекс апгрейда для дерева
+    const upgradeStone = upgrades[upgradeIndexStone - 1]; // Получаем апгрейд для дерева по индексу
+
+     if (upgradeStone.level > 0 && upgradeStone.resourceIncrease_stone) {
+        clearInterval(timeStoneInt);
+        timeStoneInt = setInterval(function(){
+            timeStonePlus(upgradeStone);
+        }, 8000);
+        updateprogressBarStone(BarStone = 0);
+        saveGame();
+        if (upgradeStone.level > 1){
+            upgradeStone.resourceIncrease_stone +=1;
+            document.getElementById("upgradeResourceIncrease_stone").innerText = formatNumber(roundCost(upgradeStone.resourceIncrease_stone));
+            saveGame();
+        }
+        if (upgradeStone.level ==1){
+            setInterval(updateprogressBarStone, 80);
+        }
+
+        // Обновление значения на странице
+        document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
+        
+        setInterval(updateprogressBarStone, 80);
         
         }
 

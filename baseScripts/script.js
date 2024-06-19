@@ -11,7 +11,7 @@ const upgrades = [
     { cost: 200, level: 0, clickIncrease: 0, multiplier: 1.4, opened: false, resourceIncrease_wood: 1, image: " forest_pilka.png"},
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" },
     { cost: 300, level: 0, clickIncrease: 0, multiplier: 5.25, opened: false, home: 1, image: " dom1.png"}, 
-    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_metall: 1, image: "OIG.bFY9BU.jpeg" },
+    { cost: 300, level: 0, clickIncrease: 0, multiplier: 1.8, opened: false, resourceIncrease_metall: 1, image: "OIG.bFY9BU.png" },
 { cost: 10000, level: 0, clickIncrease: 100, multiplier: 8.5, opened: false },
     { cost: 20000, level: 0, clickIncrease: 200, multiplier: 10, opened: false },
     { cost: 50000, level: 0, clickIncrease: 500, multiplier: 10.15, opened: false },
@@ -150,16 +150,29 @@ function buyUpgrade(index) {
             saveGame();
             }
             if (upgrade.resourceIncrease_stone) {
-            stoneTotalCount += upgrade.resourceIncrease_stone;
+                clearInterval(timeStoneInt);
+                timeStoneInt = setInterval(function(){
+                    timeStonePlus(upgrade);
+                }, 8000);
+                updateprogressBarStone(BarStone = 0);
+                saveGame();
+                if (upgrade.level > 1){
+                    upgrade.resourceIncrease_stone +=1;
+                }
+                if (upgrade.level ==1){
+                    setInterval(updateprogressBarStone, 80);
+                }
     
             // Обновление значения на странице
             document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
+            document.getElementById("upgradeResourceIncrease_stone").innerText = formatNumber(roundCost(upgrade.resourceIncrease_stone));
             }
             if (upgrade.resourceIncrease_metall) {
             metallTotalCount += upgrade.resourceIncrease_metall;
     
             // Обновление значения на странице
             document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
+            
             }
             if (upgrade.home) {
                 hoseTotalCount += upgrade.home;
@@ -280,6 +293,23 @@ function buyUpgrade(index) {
                 BarWood = 0; // Reset progress bar to 0 when it reaches 100%
             }
             document.getElementById("progressBarWood").style.width = BarWood + "%";
+        }
+
+        var timeStoneInt;
+        var BarStone = 0;
+        var progressBarStone;
+        function timeStonePlus(upgrade){
+            if (upgrade && typeof upgrade === 'object' && 'resourceIncrease_stone' in upgrade){
+                stoneTotalCount += upgrade.resourceIncrease_stone;
+                document.getElementById("stoneTotalCount").innerText = formatNumber((stoneTotalCount));
+            }
+        }
+        function updateprogressBarStone() {
+            BarStone += (80 / (8000 / 100)); // Increase width by 30/3000 per millisecond
+            if (BarStone > 100) {
+                BarStone = 0; // Reset progress bar to 0 when it reaches 100%
+            }
+            document.getElementById("progressBarStone").style.width = BarStone + "%";
         }
         
 
