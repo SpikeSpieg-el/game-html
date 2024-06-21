@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="card_fight.css">
+</head>
+<body>
+    <div class="game-container">
+        <div id="player2" class="player">
+            <h2>Computer</h2>
+            <div id="player2-cards" class="cards"></div>
+        </div>
+        <div id="battlefield" class="battlefield">
+            <h2>Battlefield</h2>
+            <div id="player2-battle-card" class="battle-card"></div>
+            <div id="player1-battle-card" class="battle-card"></div>
+        </div>
+        <div id="player1" class="player">
+            <h2>Player</h2>
+            <div id="player1-cards" class="cards"></div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="fight-btn" disabled>Fight!</button>
+        <button id="restart-btn">Restart</button>
+    </div>
+    <div id="result"></div>
+    <div id="scoreboard">
+        <h3>Scoreboard</h3>
+        <p id="player1-score">Player 1: 0</p>
+        <p id="player2-score">Computer: 0</p>
+    </div>
+    <script src="card_fight.js"></script>
+</body>
+</html>

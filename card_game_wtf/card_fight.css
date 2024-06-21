@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #2e2e2e;
+    color: white;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.player {
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card, .battle-card {
+    width: 80px;
+    height: 120px;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.battlefield {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.battle-card {
+    width: 80px;
+    height: 120px;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: default;
+}
+
+.selected {
+    border: 2px solid red;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+#result {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#scoreboard {
+    text-align: center;
+}
+
+#scoreboard h3 {
+    margin-bottom: 5px;
+}
+
+#scoreboard p {
+    margin: 0;
+}
