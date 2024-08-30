@@ -74,6 +74,16 @@ vkBridge.send('VKWebAppScroll', {
       // Ошибка
       console.log(error);
     });
+    bridge.send('VKWebAppScrollTopStart')
+  .then((data) => { 
+    if (data.result) {
+      // События отправляются
+    }
+  })
+  .catch((error) => {
+    // Ошибка
+    console.log(error);
+  });
     vkBridge.send('VKWebAppShowBannerAd', {
         banner_location: 'bottom'
         })
@@ -87,7 +97,6 @@ vkBridge.send('VKWebAppScroll', {
           console.log(error);
         });
     vkBridge.send('VKWebAppGetUserInfo', {
-            user_id: 743784474
             })
             .then((data) => { 
               if (data.id) {
