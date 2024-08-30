@@ -444,7 +444,7 @@ function autoClick() {
 // Функция для включения автоклика на 10 минут
 function startAutoClick() {
     autoClickInterval = setInterval(autoClick, 1000); // Запускаем автоклик каждую секунду
-    document.getElementById('toggleAutoClickButton').innerText = 'Автоклик активен';
+    document.getElementById('toggleAutoClickButton').innerText = 'Автоклик активен 💫';
     autoClickEnabled = true;
 
     setTimeout(stopAutoClick, autoClickDuration); // Останавливаем автоклик через 10 минут
