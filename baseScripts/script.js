@@ -62,6 +62,7 @@ vkBridge.send("VKWebAppInit", {})
         console.error('Ошибка инициализации VK Bridge:', error);
 })
 
+
     
   
 let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
