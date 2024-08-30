@@ -84,7 +84,14 @@ function loadGame() {
 
         if (upgrades[index].opened) {
             upgradeContainer.style.opacity = "1";
+            // Сначала меняем display на block
+            upgradeContainer.style.display = 'block';
 
+            // Небольшая задержка, чтобы дать время браузеру применить display: block
+            setTimeout(() => {
+                upgradeContainer.classList.add('visible');
+            }, 10); // 10 мс достаточно для запуска анимации
+            
             const upgradeImageContainer = document.getElementById(`hiddenimg${index + 1}`);
             if (upgradeImageContainer) {
                 upgradeImageContainer.innerHTML = "";
