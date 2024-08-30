@@ -57,22 +57,11 @@ let upgradeMarkers = Array(UPGRADE_COUNT).fill(false);
 vkBridge.send("VKWebAppInit", {})
         .then(() => {
             console.log('VK Bridge инициализирован');
-        })
+    })
     .catch((error) => {
-            console.error('Ошибка инициализации VK Bridge:', error);
-});
-    bridge.send('VKWebAppShowBannerAd', {
-            banner_location: 'bottom'
-            })
-           .then((data) => { 
-              if (data.result) {
-                // Баннерная реклама отобразилась
-              }
-        })
-        .catch((error) => {
-          // Ошибка
-          console.log(error);
-    });
+        console.error('Ошибка инициализации VK Bridge:', error);
+})
+
     
   
 let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
