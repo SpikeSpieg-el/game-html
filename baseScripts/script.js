@@ -476,7 +476,7 @@ function showAutoClickPopup() {
                 console.log(error); // Ошибка
             });
     }
-
+}
 
 // Обработчик события для кнопки автоклика
 document.getElementById('toggleAutoClickButton').addEventListener('click', function () {
@@ -499,7 +499,7 @@ function incrementClick() {
     if (clickCount < 0) {
         clickCount = 0;
     }
-}
+
 
 
 // Проверяем доступность апгрейдов и отображаем их на странице
