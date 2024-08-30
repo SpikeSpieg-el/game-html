@@ -27,6 +27,7 @@ const upgrades = [
 ];//1{ cost: 300, level: 0, clickIncrease: 0, multiplier: 1.85, opened: false, resourceIncrease_stone: 1, image: "OIG.zBJ2V.png" }
 
 
+
 let wheatCount = 0; 
 let wheatTotalCount = 0; //количества пшена
 
