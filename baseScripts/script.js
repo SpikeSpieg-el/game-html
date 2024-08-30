@@ -475,8 +475,8 @@ function showAutoClickPopup() {
             .catch((error) => {
                 console.log(error); // Ошибка
             });
+        }
     }
-}
 
 // Обработчик события для кнопки автоклика
 document.getElementById('toggleAutoClickButton').addEventListener('click', function () {
@@ -485,7 +485,7 @@ document.getElementById('toggleAutoClickButton').addEventListener('click', funct
     } else {
         stopAutoClick(); // Остановить автоклик
     }
-});
+})
 
 //4добавляем if (upgrades[UPGRADE_COUNT + 1]) {
     //__TotalCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
@@ -499,6 +499,7 @@ function incrementClick() {
     if (clickCount < 0) {
         clickCount = 0;
     }
+
 
 
 
