@@ -86,6 +86,19 @@ vkBridge.send('VKWebAppScroll', {
           // Ошибка
           console.log(error);
         });
+    vkBridge.send('VKWebAppGetUserInfo', {
+            user_id: 743784474
+            })
+            .then((data) => { 
+              if (data.id) {
+                // Данные пользователя получены
+                console.log(data);
+              }    
+            })
+            .catch((error) => {
+              // Ошибка
+              console.log(error);
+            });
 
  
   
