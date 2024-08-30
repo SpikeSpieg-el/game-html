@@ -432,34 +432,65 @@ function saveGame() {
 
 
 // автоклик
-        var autoClickInterval; // Переменная для хранения интервала автоклика
-        var autoClickEnabled = false; // Флаг, указывающий, включен ли автоклик
-        
-        // Функция, которая будет выполнять клик
-        function autoClick() {
-            incrementClick();
-        }
-        
-        // Функция для включения/выключения автоклика
-        function toggleAutoClick() {
-            if (!autoClickEnabled) {
-                autoClickInterval = setInterval(autoClick, 1000); // Запускаем автоклик каждую секунду
-                document.getElementById('toggleAutoClickButton').innerText = 'Выключить автоклик';
-                showClikNotification();
-            } else {
-                clearInterval(autoClickInterval); // Останавливаем автоклик
-                document.getElementById('toggleAutoClickButton').innerText = 'Включить автоклик';
-            }
-            autoClickEnabled = !autoClickEnabled; // Инвертируем состояние флага
-        }
-        
-        // Добавляем обработчик события к кнопке
-        document.getElementById('toggleAutoClickButton').addEventListener('click', toggleAutoClick);
-        
+var autoClickInterval; // Переменная для хранения интервала автоклика
+var autoClickEnabled = false; // Флаг, указывающий, включен ли автоклик
+var autoClickDuration = 10 * 60 * 1000; // Длительность автоклика (10 минут)
+
+// Функция, которая будет выполнять клик
+function autoClick() {
+    incrementClick();
+}
+
+// Функция для включения автоклика на 10 минут
+function startAutoClick() {
+    autoClickInterval = setInterval(autoClick, 1000); // Запускаем автоклик каждую секунду
+    document.getElementById('toggleAutoClickButton').innerText = 'Автоклик активен';
+    autoClickEnabled = true;
+
+    setTimeout(stopAutoClick, autoClickDuration); // Останавливаем автоклик через 10 минут
+}
+
+// Функция для остановки автоклика
+function stopAutoClick() {
+    clearInterval(autoClickInterval); // Останавливаем автоклик
+    document.getElementById('toggleAutoClickButton').innerText = 'Запустить автоклик';
+    autoClickEnabled = false;
+}
+
+// Функция для показа поп-апа с предложением запустить автоклик за просмотр рекламы
+function showAutoClickPopup() {
+    // Здесь можно вставить код для показа кастомного поп-апа
+
+    if (confirm('Запустить автоклик на 10 минут за просмотр рекламы?')) {
+        // Показать рекламу
+        vkBridge.send('VKWebAppShowNativeAds', { ad_format: 'reward' })
+            .then((data) => {
+                if (data.result) { // Успех
+                    console.log('Реклама показана');
+                    startAutoClick(); // Запускаем автоклик после успешного просмотра рекламы
+                } else { // Ошибка 
+                    console.log('Ошибка при показе');
+                }
+            })
+            .catch((error) => {
+                console.log(error); // Ошибка
+            });
+    }
+
+
+// Обработчик события для кнопки автоклика
+document.getElementById('toggleAutoClickButton').addEventListener('click', function () {
+    if (!autoClickEnabled) {
+        showAutoClickPopup(); // Показать поп-ап перед запуском автоклика
+    } else {
+        stopAutoClick(); // Остановить автоклик
+    }
+});
+
 //4добавляем if (upgrades[UPGRADE_COUNT + 1]) {
-        //__TotalCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
-        //__TotalCount += upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
-        // Обновление значения на странице
+    //__TotalCount += upgrades[UPGRADE_COUNT + 1].level * upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
+    //__TotalCount += upgrades[UPGRADE_COUNT + 1].resourceIncrease_---;
+    // Обновление значения на странице
 function incrementClick() {
     // Увеличиваем счетчик кликов на значение clickValue
     clickCount += clickValue;
@@ -468,6 +499,8 @@ function incrementClick() {
     if (clickCount < 0) {
         clickCount = 0;
     }
+}
+
 
 // Проверяем доступность апгрейдов и отображаем их на странице
 for (let i = 1; i <= UPGRADE_COUNT; i++) {
