@@ -58,9 +58,21 @@ vkBridge.send("VKWebAppInit", {})
         .then(() => {
             console.log('VK Bridge инициализирован');
         })
-        .catch((error) => {
+    .catch((error) => {
             console.error('Ошибка инициализации VK Bridge:', error);
-        });
+});
+    bridge.send('VKWebAppShowBannerAd', {
+            banner_location: 'bottom'
+            })
+           .then((data) => { 
+              if (data.result) {
+                // Баннерная реклама отобразилась
+              }
+        })
+        .catch((error) => {
+          // Ошибка
+          console.log(error);
+    });
     
   
 let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
