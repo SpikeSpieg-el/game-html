@@ -60,10 +60,8 @@ vkBridge.send("VKWebAppInit", {})
     })
     .catch((error) => {
         console.error('Ошибка инициализации VK Bridge:', error);
-})
-
-
-    
+});
+ 
   
 let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 function roundCost(cost) {
