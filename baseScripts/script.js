@@ -74,7 +74,7 @@ vkBridge.send('VKWebAppScroll', {
       // Ошибка
       console.log(error);
     });
-    bridge.send('VKWebAppScrollTopStart')
+    vkBridge.send('VKWebAppScrollTopStart')
   .then((data) => { 
     if (data.result) {
       // События отправляются
