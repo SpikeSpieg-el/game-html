@@ -107,7 +107,7 @@ vkBridge.send('VKWebAppScroll', {
             .catch((error) => {
               // Ошибка
               console.log(error);
-            });
+    });
 
  
   
