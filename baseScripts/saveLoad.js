@@ -72,6 +72,8 @@ function loadGame() {
             }
     // Update upgrade availability and progress
     for (let index = 0; index < UPGRADE_COUNT; index++) {
+        //при загрузки сейва проверка на состояние видимости обьекта true 
+        
         upgrades[index].level = savedUpgrades[index].level;
         upgrades[index].cost = savedUpgrades[index].cost;
         upgrades[index].opened = savedUpgrades[index].opened;

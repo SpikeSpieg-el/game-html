@@ -303,7 +303,14 @@ h2 {
 }
 [class^="hidden"] {
     opacity: 0; /* Начальная прозрачность */
+    
+    display: none; /* Показываем элемент */
+
     transition: opacity 0.5s ease; /* Анимация перехода прозрачности */  
+}
+.visible {
+    display: block; /* Показываем элемент */
+    opacity: 1; /* Полная непрозрачность */
 }
 
 .container{

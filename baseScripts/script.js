@@ -54,11 +54,15 @@ let upgradeMarkers = Array(UPGRADE_COUNT).fill(false);
 // updateAllUpgradeProgress();
 
 
-
-
-
-
+vkBridge.send("VKWebAppInit", {})
+        .then(() => {
+            console.log('VK Bridge инициализирован');
+        })
+        .catch((error) => {
+            console.error('Ошибка инициализации VK Bridge:', error);
+        });
     
+  
 let numberFormat = localStorage.getItem("numberFormat") || 'decimal';
 function roundCost(cost) {
     return Math.round(cost * 10) / 10;
@@ -95,6 +99,7 @@ function formatNumber(number, notation) {
         //document.getElementById("woodTotalCount").innerText = woodTotalCount;
 
 function buyUpgrade(index) {
+    
             const upgrade = upgrades[index - 1];
         
             if (clickCount < upgrade.cost) {
@@ -313,7 +318,6 @@ function buyUpgrade(index) {
         }
         
 
-
                   
 function updateUpgradeProgress(index) {
     const upgrade = upgrades[index - 1];
@@ -416,22 +420,32 @@ function incrementClick() {
         clickCount = 0;
     }
 
-    // Проверяем доступность апгрейдов и отображаем их на странице
-    for (let i = 1; i <= UPGRADE_COUNT; i++) {
-        const upgrade = upgrades[i - 1];
-        const upgradeContainer = document.querySelector(`.hidden${i}`);
-        const upgradeCostSpan = document.getElementById(`upgradeCost${i}`);
-        updateAllUpgradeProgress(); // прогресс бар index 1(пока что)
-    
-        // Если счетчик кликов достаточно велик и апгрейд еще не открыт, открываем его
-        if (clickCount >= upgrade.cost && !upgrade.opened) {
-            upgradeContainer.style.opacity = "1"; // Изменяем прозрачность для анимации
-            upgradeCostSpan.innerText = upgrade.cost;
-            upgrade.opened = true;
-            // Показываем уведомление о доступности апгрейда
-            showNotification('success', `Upgrade ${i} is now available!`);
-        }
+// Проверяем доступность апгрейдов и отображаем их на странице
+for (let i = 1; i <= UPGRADE_COUNT; i++) {
+    const upgrade = upgrades[i - 1];
+    const upgradeContainer = document.querySelector(`.hidden${i}`);
+    const upgradeCostSpan = document.getElementById(`upgradeCost${i}`);
+    updateAllUpgradeProgress(); // Прогресс бар index 1 (пока что)
+
+    // Если счетчик кликов достаточно велик и апгрейд еще не открыт, открываем его
+    if (clickCount >= upgrade.cost && !upgrade.opened) {
+        // Сначала меняем display на block
+        upgradeContainer.style.display = 'block';
+
+        // Небольшая задержка, чтобы дать время браузеру применить display: block
+        setTimeout(() => {
+            upgradeContainer.classList.add('visible');
+        }, 10); // 10 мс достаточно для запуска анимации
+
+        upgradeCostSpan.innerText = upgrade.cost;
+        upgrade.opened = true;
+        // Показываем уведомление о доступности апгрейда
+        showNotification('success', `Upgrade ${i} is now available!`);
     }
+    saveGame();
+}
+
+
     
 
     // Обновляем счетчики ресурсов, если соответствующий апгрейд доступен
@@ -711,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             // If the player chooses not to load saved data, continue with the new game
             showNotification('info', 'New game started!');
-            clearCollection()
+            clearCollection();           
         }
     }
 
