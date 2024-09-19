@@ -789,6 +789,7 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 }
 
+//yfuhfls за отсутствие и проверка а сохранение, от 3 до 30 мин
 document.addEventListener('DOMContentLoaded', function () {
     const savedGameExists = localStorage.getItem("clickCount") !== null;
     const popup = document.getElementById("popup_rev");
@@ -820,14 +821,21 @@ document.addEventListener('DOMContentLoaded', function () {
         if (lastTimeSeen) {
             const currentTime = Date.now();
             const timeElapsed = Math.floor((currentTime - lastTimeSeen) / 1000); // в секундах
-            const reward = timeElapsed;
-
-            if (reward > 0) {
-                rewardAmountSpan.textContent = reward;
-                absenceTimeSpan.textContent = timeElapsed;
-                popup.classList.add("visible");
-                clickCount += reward; // Добавляем вознаграждение к clickCount
+            const minRewardTime = 180; // 3 минуты
+            const maxRewardTime = Math.min(timeElapsed, 1800); // ограничение до 30 минут
+            
+            if (timeElapsed >= minRewardTime) {
+                const randomClicks = Array.from({ length: maxRewardTime }, () => Math.floor(Math.random() * (17 - 2 + 1)) + 2);
+                const totalReward = randomClicks.reduce((acc, curr) => acc + curr, 0);
+                
+                absenceTimeSpan.textContent = `${Math.floor(maxRewardTime / 60)} минут(ы)`;
+                rewardAmountSpan.textContent = totalReward;
+                clickCount += totalReward; // Добавляем вознаграждение к clickCount
                 coinDisplay.textContent = clickCount; // Обновляем отображение кликов
+                
+                if (totalReward > 0) {
+                    popup.classList.add("visible");
+                }
             }
         }
     });
