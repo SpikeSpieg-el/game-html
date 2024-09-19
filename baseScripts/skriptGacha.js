@@ -403,22 +403,22 @@ function showCardDetails(card) {
     const cardImage = document.createElement("img");
     cardImage.src = card.image;
     cardImage.alt = card.name;
-    cardImage.style.width = '80%'; // например, картинка будет занимать 50% ширины родительского контейнера
+    cardImage.style.width = '60%'; // например, картинка будет занимать 50% ширины родительского контейнера
     cardImage.style.height = '80%'; 
     cardDetailsContainer.appendChild(cardImage);
     
 
-    const cardName = document.createElement("p");
+    const cardName = document.createElement("div");
     cardName.textContent = `Название карты: ${card.name}`;
     cardDetailsContainer.appendChild(cardName);
 
     // Добавляем отображение силы карты
-    const strengthElement = document.createElement("p");
+    const strengthElement = document.createElement("div");
     strengthElement.textContent = `Сила: ${card.strength}`;
     cardDetailsContainer.appendChild(strengthElement);
 
     // Добавляем отображение того, насколько увеличится сила после прокачки
-    const upgradeStrength = document.createElement("p");
+    const upgradeStrength = document.createElement("div");
     let upgradeAmount = 1; // По умолчанию сила увеличивается на 1
     switch (card.rarity) {
         case "common":
