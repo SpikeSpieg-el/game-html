@@ -66,7 +66,10 @@
                 <span class="first-part">Gold: <span id="goldCount">10</span></span>
                 <span class="first-part">For click: <span id="clickValue">0</span></span>
                 <span class="second-part">Clicks count: <span id="clickCount">0</span></span>
-      
+                <div>
+                    <p>На странице: <span id="timer">0</span> секунд</p>
+                    <button id="collectButtonMain">Забрать бонус кликов</button>
+                    </div>
             </h2>
         </div>
         
@@ -633,16 +636,16 @@
                         
                     </div>
                 </div>
-    <p>На странице: <span id="timer">0</span> секунд</p>
-    <button id="collectButtonMain">Забрать бонус кликов</button>
+                <div id="popup_rev">
+                    <p>Ты отсутствовал <span id="absenceTime"></span> секунд и в качестве бонуса получаешь <span id="rewardAmount"></span> кликов!</p>
+                    <button id="collectButton">Забрать</button>
+                </div>
+    
     
                 
         </div>
         
-        <div id="popup_rev">
-        <p>Ты отсутствовал <span id="absenceTime"></span> секунд и в качестве бонуса получаешь <span id="rewardAmount"></span> кликов!</p>
-        <button id="collectButton">Забрать</button>
-    </div>
+       
     </div>
        
         

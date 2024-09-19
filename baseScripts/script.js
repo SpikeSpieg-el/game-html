@@ -789,20 +789,47 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 }
 
-// предупреждение о найденной игры в прошлом при попадании на стр
-
 document.addEventListener('DOMContentLoaded', function () {
     const savedGameExists = localStorage.getItem("clickCount") !== null;
+    const popup = document.getElementById("popup_rev");
+    const rewardAmountSpan = document.getElementById("rewardAmount");
+    const absenceTimeSpan = document.getElementById("absenceTime");
+    const collectButton = document.getElementById("collectButton");
+    const collectButtonMain = document.getElementById("collectButtonMain");
+    const coinDisplay = document.getElementById("clickCount");
+    const timerDisplay = document.getElementById("timer");
 
+    let lastTimeSeen = localStorage.getItem("lastTimeSeen");
+    let timeOnPage = 0;
+
+    // Инициализация счетчика кликов
+    coinDisplay.textContent = clickCount; // Обновляем отображение кликов
+
+    // Проверяем, если сохраненная игра существует
     if (savedGameExists) {
-        showModal(); // Показать кастомный поп-ап
+        showLoadModal(); // Показать поп-ап для загрузки игры
     }
 
-    // Слушатели событий для кнопок внутри поп-апа
+    // Слушатели событий для кнопок внутри поп-апа загрузки
     document.getElementById('confirm-load').addEventListener('click', function () {
         loadGame();
         showLoadNotification();
         hideModal();
+
+        // После загрузки проверяем время отсутствия
+        if (lastTimeSeen) {
+            const currentTime = Date.now();
+            const timeElapsed = Math.floor((currentTime - lastTimeSeen) / 1000); // в секундах
+            const reward = timeElapsed;
+
+            if (reward > 0) {
+                rewardAmountSpan.textContent = reward;
+                absenceTimeSpan.textContent = timeElapsed;
+                popup.classList.add("visible");
+                clickCount += reward; // Добавляем вознаграждение к clickCount
+                coinDisplay.textContent = clickCount; // Обновляем отображение кликов
+            }
+        }
     });
 
     document.getElementById('cancel-load').addEventListener('click', function () {
@@ -811,21 +838,35 @@ document.addEventListener('DOMContentLoaded', function () {
         hideModal();
     });
 
-    const saveButton = document.querySelector('.top button:nth-child(1)');
-    const loadButton = document.querySelector('.top button:nth-child(2)');
+    function updateTimeOnPage() {
+        timeOnPage++;
+        timerDisplay.textContent = timeOnPage;
+    }
 
-    saveButton.addEventListener('click', function () {
-        showSaveNotification();
-        saveGame();
+    setInterval(updateTimeOnPage, 1000);
+
+    function collectReward() {
+        clickCount += timeOnPage; // Добавляем время на странице к clickCount
+        coinDisplay.textContent = clickCount; // Обновляем отображение кликов
+        timeOnPage = 0;
+        timerDisplay.textContent = timeOnPage;
+    }
+
+    collectButton.addEventListener("click", function () {
+        popup.classList.remove("visible");
+        localStorage.setItem("lastTimeSeen", Date.now());
     });
 
-    loadButton.addEventListener('click', function () {
-        showLoadNotification();
-        loadGame();
+    collectButtonMain.addEventListener("click", function () {
+        collectReward();
     });
-    
+
+    window.addEventListener("beforeunload", function () {
+        localStorage.setItem("lastTimeSeen", Date.now());
+    });
+
     // Функции для показа и скрытия модального окна
-    function showModal() {
+    function showLoadModal() {
         document.getElementById('popup-modal').classList.remove('hidden');
     }
 
@@ -833,6 +874,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('popup-modal').classList.add('hidden');
     }
 });
+
 
 
 
