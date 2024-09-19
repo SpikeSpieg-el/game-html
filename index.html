@@ -620,7 +620,29 @@
                     <button onclick="claimRewards()">Забрать награду</button>
                 </div>
             
+                <div id="popup-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h3>C возвращением</h1>
+                            
+                            <div>
+                                <img src="444.png" alt="cat" class="img-sizeCAT_top2">
+                            </div>
+                        <p>У вас есть сохранённые данные, загрузить прошлый сеанс игры?</p>
+                        <button id="cancel-load">Начать новую игру</button>
+                        <button id="confirm-load">Загрузить</button>
+                        
+                    </div>
+                </div>
+    <p>На странице: <span id="timer">0</span> секунд</p>
+    <button id="collectButtonMain">Забрать бонус кликов</button>
+    
+                
         </div>
+        
+        <div id="popup_rev">
+        <p>Ты отсутствовал <span id="absenceTime"></span> секунд и в качестве бонуса получаешь <span id="rewardAmount"></span> кликов!</p>
+        <button id="collectButton">Забрать</button>
+    </div>
     </div>
        
         
@@ -635,6 +657,7 @@
 <script src="baseScripts/saveLoad.js"></script>            
 <script src="baseScripts/showColumn.js"></script>
 <script src="baseScripts/skriptGacha.js"></script>
+<script src="revard/revard.js"></script>
 
 <!--<script src="gacha/gacha.js"></script>--> 
 

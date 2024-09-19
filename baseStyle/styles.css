@@ -2,11 +2,24 @@ body {
     touch-action: manipulation;
     margin-left: 5%;
     margin-right: 5%;
-    color: rgb(255 255 255);
+    color: rgb(255, 255, 255);
     background-color: black;
     background-image: url('photo_2024-05-10_03-49-23.jpg');
     background-position: center; /* Выравниваем изображение по центру */
 }
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(7 18 14 / 49%);
+
+    z-index: -1; /* Размещаем за содержимым */
+}
+
 .progress-container {
     width: 156px;
     height: 12px;
@@ -98,6 +111,16 @@ h1{
     font-weight: 400;
     text-align: left;
     margin: 0px 16px;
+    color: rgb(255, 255, 255);
+
+   
+}
+h3{
+    
+    font-family: Roboto;
+    font-size: 30px;
+    font-weight: 400;
+    
     color: rgb(255, 255, 255);
 
    
@@ -199,6 +222,10 @@ h2 {
     width: 50px;
     height: 50px;
     
+}
+.img-sizeCAT_top2{
+    width: 70px;
+    height: 70px;
 }
 
 
@@ -576,7 +603,7 @@ button:active {
 .openbtn {
     font-size: 20px;
     cursor: pointer;
-    background-color: #111;
+    background-color: #8d8d8d7d;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -812,4 +839,47 @@ button:active {
 
 .hiddenimg_Dom{
     display: flex;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(2 2 2 / 67%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: rgb(16 81 85);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    
+}
+
+.hidden {
+    display: none;
+}
+#confirm-load{
+    background: #4CAF50;
+}
+
+#popup_rev {
+    color: aliceblue;
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(130, 130, 130, 0.298);
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+#popup_rev.visible {
+    display: block;
 }

@@ -792,27 +792,25 @@ function closeNav() {
 // предупреждение о найденной игры в прошлом при попадании на стр
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if there are saved local data
     const savedGameExists = localStorage.getItem("clickCount") !== null;
 
-    
-
     if (savedGameExists) {
-        // If saved data exists, show a warning window
-        const confirmation = window.confirm("У вас есть сохранённые данные, загрузить прошлый сеанс игры?");
-        
-        if (confirmation) {
-            // If the player chooses to load saved data, call the loadGame function
-            loadGame();
-            showLoadNotification();
-        } else {
-            // If the player chooses not to load saved data, continue with the new game
-            showNotification('info', 'New game started!');
-            clearCollection();           
-        }
+        showModal(); // Показать кастомный поп-ап
     }
 
-    // Add your existing event listeners and other initialization code here
+    // Слушатели событий для кнопок внутри поп-апа
+    document.getElementById('confirm-load').addEventListener('click', function () {
+        loadGame();
+        showLoadNotification();
+        hideModal();
+    });
+
+    document.getElementById('cancel-load').addEventListener('click', function () {
+        showNotification('info', 'New game started!');
+        clearCollection();
+        hideModal();
+    });
+
     const saveButton = document.querySelector('.top button:nth-child(1)');
     const loadButton = document.querySelector('.top button:nth-child(2)');
 
@@ -825,7 +823,17 @@ document.addEventListener('DOMContentLoaded', function () {
         showLoadNotification();
         loadGame();
     });
+    
+    // Функции для показа и скрытия модального окна
+    function showModal() {
+        document.getElementById('popup-modal').classList.remove('hidden');
+    }
+
+    function hideModal() {
+        document.getElementById('popup-modal').classList.add('hidden');
+    }
 });
+
 
 
 
