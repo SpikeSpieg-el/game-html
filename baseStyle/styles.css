@@ -453,7 +453,7 @@ button:active {
 .clickButton{
     display: flex;
     position: fixed;
-    bottom: 0px;
+    bottom: 10px;
     text-align: center;
     margin-bottom: 15px;
     flex-wrap: wrap;
