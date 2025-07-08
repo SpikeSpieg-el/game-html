@@ -43,6 +43,8 @@ function loadGame() {
     metallTotalCount = parseInt(localStorage.getItem("metallTotalCount")) || 0;
     goldCount = parseInt(localStorage.getItem("goldCount")) || 0;
     
+    fishTotalCount = parseInt(localStorage.getItem("fishTotalCount")) || 0;
+    
 
     const savedUpgradesJSON = localStorage.getItem("upgrades");
     savedUpgrades = savedUpgradesJSON ? JSON.parse(savedUpgradesJSON) : savedUpgrades;
@@ -59,6 +61,8 @@ function loadGame() {
     document.getElementById("hoseTotalCount").innerText = formatNumber(roundCost(hoseTotalCount));
     document.getElementById("metallTotalCount").innerText = formatNumber(roundCost(metallTotalCount));
     document.getElementById("goldCount").innerText = formatNumber(roundCost(goldCount));
+    document.getElementById("fishTotalCountPond").innerText = formatNumber(fishTotalCount);
+    document.getElementById("fishTotalCountTop").innerText = formatNumber(fishTotalCount);
 
         document.addEventListener("DOMContentLoaded", function() {
             loadCollectionData(); // Загружаем данные о коллекции
@@ -114,76 +118,59 @@ function loadGame() {
     const upgradeWheat = upgrades[upgradeIndex - 1]; // Получаем апгрейд для пшеницы по индексу
 
     if (upgradeWheat.level > 0 && upgradeWheat.resourceIncrease){ 
-        clearInterval(timeWheatInterval);
-        timeWheatInterval = setInterval(function() {
-            timeWheatPlus(upgradeWheat);
-            saveGame();
-        }, 5000);
-        updateProgressBarWheat(progressBarWidth = 0);
-        
+        startWheatProduction(upgradeWheat);
         if (upgradeWheat.level > 1){
             upgradeWheat.resourceIncrease += 0.1;
             document.getElementById("upgradeResourceIncrease").innerText = formatNumber(roundCost(upgradeWheat.resourceIncrease));
             saveGame();
         }   
-        if (upgradeWheat.level == 1){
-            setInterval(updateProgressBarWheat, 50);
-        }
-        
         // Обновление значения на странице
         document.getElementById("wheatTotalCount").innerText = formatNumber(wheatTotalCount); 
-        setInterval(updateProgressBarWheat, 50);
     }
     const upgradeIndexWood = 10; // Индекс апгрейда для дерева
     const upgradeWood = upgrades[upgradeIndexWood - 1]; // Получаем апгрейд для дерева по индексу
 
      if (upgradeWood.level > 0 && upgradeWood.resourceIncrease_wood) {
-        clearInterval(timeWoodInt);
-        timeWoodInt = setInterval(function(){
-            timeWoodPlus(upgradeWood);
-        }, 6000);
-        updateprogressBarWood(BarWood = 0);
+        startWoodProduction(upgradeWood);
         saveGame();
         if (upgradeWood.level > 1){
             upgradeWood.resourceIncrease_wood +=1;
             document.getElementById("upgradeResourceIncrease_wood").innerText = formatNumber(roundCost(upgradeWood.resourceIncrease_wood));
             saveGame();
         }
-        if (upgradeWood.level ==1){
-            setInterval(updateprogressBarWood, 60);
-        }
-
+        
         // Обновление значения на странице
         document.getElementById("woodTotalCount").innerText = formatNumber(roundCost(woodTotalCount));
-        
-        setInterval(updateprogressBarWood, 60);
         
         }
         const upgradeIndexStone = 11; // Индекс апгрейда для дерева
     const upgradeStone = upgrades[upgradeIndexStone - 1]; // Получаем апгрейд для дерева по индексу
 
      if (upgradeStone.level > 0 && upgradeStone.resourceIncrease_stone) {
-        clearInterval(timeStoneInt);
-        timeStoneInt = setInterval(function(){
-            timeStonePlus(upgradeStone);
-        }, 8000);
-        updateprogressBarStone(BarStone = 0);
+        startStoneProduction(upgradeStone);
         saveGame();
         if (upgradeStone.level > 1){
             upgradeStone.resourceIncrease_stone +=1;
             document.getElementById("upgradeResourceIncrease_stone").innerText = formatNumber(roundCost(upgradeStone.resourceIncrease_stone));
             saveGame();
         }
-        if (upgradeStone.level ==1){
-            setInterval(updateprogressBarStone, 80);
-        }
-
+        
         // Обновление значения на странице
         document.getElementById("stoneTotalCount").innerText = formatNumber(roundCost(stoneTotalCount));
         
-        setInterval(updateprogressBarStone, 80);
-        
         }
+
+    const upgradeIndexFish = 26; // Индекс апгрейда для пруда
+    const upgradeFish = upgrades[upgradeIndexFish - 1];
+    if (upgradeFish.level > 0 && upgradeFish.resourceIncrease_fish) {
+        startFishProduction(upgradeFish);
+        if (upgradeFish.level > 1){
+            upgradeFish.resourceIncrease_fish += 1;
+            document.getElementById("upgradeResourceIncrease_fish").innerText = formatNumber(upgradeFish.resourceIncrease_fish);
+            saveGame();
+        }
+        document.getElementById("fishTotalCountPond").innerText = formatNumber(fishTotalCount);
+    }
 
     checkUpgradeAvailability();
     updateAllUpgradeProgress();

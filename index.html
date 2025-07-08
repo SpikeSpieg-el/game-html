@@ -59,8 +59,9 @@
             
                      
                 <div>Посеселение Cat:<img src="333.png" alt="cat" class="img-sizeCAT_top">
-                <span id="catCount"> 5 </span>
+                <span id="catCount"> 5 </span> / <span id="catLimit">5</span>
                 </div>
+                <div>Дома: <span id="hoseTotalCount">0</span> (каждый вмещает 5 котиков)</div>
                 
                 <div><span class="first-part">Gold: <span id="goldCount">10</span></span></div>
                 <div><span class="first-part">For click: <span id="clickValue">0</span></span></div>
@@ -69,6 +70,7 @@
                     <p>На странице: <span id="timer">0</span> секунд</p>
                     <button id="collectButtonMain">Забрать бонус кликов</button>
                     </div>
+                <div>Рыба: <span id="fishTotalCountTop">0</span></div>
             </h2>
         </div>
         
@@ -271,6 +273,26 @@
                     </button>
                 </div>
                 
+                <div class="hidden26">
+                  <button id="upgrade26" onclick="buyUpgrade26()">
+                    <div class="up9">
+                      <div class="TextComplex">
+                        <div class="TextHad">Пруд</div>
+                        <div class="TextMid">Стоимость: <span class="upgradeCost" id="upgradeCost26">100</span></div>
+                        <div class="TextMid"><a>Бонус +1</a></div>
+                        <div class="TextMid">Cбор +<span id="upgradeResourceIncrease_fish">1</span></div>
+                      </div>
+                      <div class="imgInBild">
+                        <img src="fishpond.png" alt="Пруд" class="img-sizeCAT">
+                      </div>
+                    </div>
+                    <div class="TextMid">Рыба: <a id="fishTotalCountPond">0</a></div>
+                    <div id="progressBarContainerFish">
+                      <div id="progressBarFishPond"></div>
+                    </div>
+                  </button>
+                </div>
+                
                 <div class="hidden10">
                     <button id="upgrade10" onclick="buyUpgrade10()">
                         <div class="up10">
@@ -414,6 +436,7 @@
                         <div>
                             <img  src="тайлы/Слой 5.png" alt="acat" class="img-sity_tl">
                         <a id= "hiddenimg11"></a>
+                        <a id="hiddenimg26"></a>
                         <img  src="тайлы/Слой 5.png" alt="acat" class="img-sity_tl">
                     </div>
                     
@@ -495,7 +518,7 @@
                             </div>
                     </button>
 
-                    <button id="upgrade25" onclick="buyUpgrade25(); openChestOnlyOne('rare')">
+                    <button id="upgrade25-rare" onclick="buyUpgrade25(); openChestOnlyOne('rare')">
                         <div class="up25">
                             <div class="TextComplex">
                                 <div class="TextHad_cover">Открыть набор карт</div>
@@ -506,7 +529,7 @@
                         </div>
                     </button>
                     
-                    <button id="upgrade25" onclick="buyUpgrade25(); openChestOnlyOne('epic')">
+                    <button id="upgrade25-epic" onclick="buyUpgrade25(); openChestOnlyOne('epic')">
        
                         <div class="up25">
                             <div class="TextComplex">
@@ -517,7 +540,7 @@
                             <div class="imgInBild"> <img src="testCard/cover.png" alt="acat" class="img-size-cover"> </div>
                             </div>
                     </button>
-                    <button id="upgrade25" onclick="buyUpgrade25(); openChestOnlyOne('legendary')">
+                    <button id="upgrade25-legendary" onclick="buyUpgrade25(); openChestOnlyOne('legendary')">
                         <div class="up25">
                             <div class="TextComplex">
                              <div class="TextHad_cover">Открыть набор карт</div>
@@ -662,9 +685,6 @@
 <script src="revard/revard.js"></script>
 
 <!--<script src="gacha/gacha.js"></script>--> 
-
-
-
 
 </body>
 </html>
